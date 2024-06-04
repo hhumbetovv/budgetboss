@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BudgetBoss</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="save">Save</string>
+    <string name="income">Income</string>
+    <string name="expense">Expense</string>
+    <string name="add_income">Add income</string>
+    <string name="select_categories">Select categories</string>
+    <string name="select_accounts">Select accounts</string>
+    <string name="select_account">Select account</string>
+    <string name="add_expense">Add expense</string>
+    <string name="add_amount">Add amount</string>
+    <string name="date">Date</string>
+    <string name="total_balance">Total balance</string>
+    <string name="incomes">Incomes</string>
+    <string name="expenses">Expenses</string>
+    <string name="add_note">Add Note</string>
+    <string name="home">Home</string>
+    <string name="transfer_from">Transfer From</string>
+    <string name="transfer_to">Transfer To</string>
+    <string name="add_account">Add Account</string>
+    <string name="add_account_name">Add account name</string>
+    <string name="account_name">Account name</string>
+    <string name="balance">Balance</string>
+    <string name="note">Note</string>
+    <string name="reports">Reports</string>
+    <string name="financial_records">Financial Records</string>
+    <string name="accounts">Accounts</string>
+    <string name="take_charge_nof_your_finances">Take Charge\nof Your Finances</string>
+    <string name="category_details">Category Details</string>
+    <string name="account_details">Account Details</string>
+    <string name="empty_note">empty note</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
+</resources>

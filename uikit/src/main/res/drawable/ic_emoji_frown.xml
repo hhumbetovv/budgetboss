@@ -1,0 +1,107 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+  <aapt:attr name="android:drawable">
+    <vector
+        android:name="vector"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24"
+        android:viewportHeight="24">
+      <path
+          android:name="circle"
+          android:pathData="M 12 3 C 7.029 3 3 7.029 3 12 C 3 16.971 7.029 21 12 21 C 16.971 21 21 16.971 21 12 C 21 7.029 16.971 3 12 3 Z"
+          android:strokeColor="@color/danger"
+          android:strokeAlpha="1"
+          android:strokeWidth="1"
+          android:trimPathStart="1"
+          android:strokeLineCap="round"/>
+      <path
+          android:name="left_eye"
+          android:pathData="M 8 9.5 C 8 9.898 8.105 10.279 8.293 10.561 C 8.48 10.842 8.735 11 9 11 C 9.265 11 9.52 10.842 9.707 10.561 C 9.895 10.279 10 9.898 10 9.5 C 10 9.102 9.895 8.721 9.707 8.439 C 9.52 8.158 9.265 8 9 8 C 8.735 8 8.48 8.158 8.293 8.439 C 8.105 8.721 8 9.102 8 9.5 Z"
+          android:fillColor="@color/danger"
+          android:fillAlpha="0"/>
+      <path
+          android:name="right_eye"
+          android:pathData="M 14 9.5 C 14 9.898 14.105 10.279 14.293 10.561 C 14.48 10.842 14.735 11 15 11 C 15.265 11 15.52 10.842 15.707 10.561 C 15.895 10.279 16 9.898 16 9.5 C 16 9.102 15.895 8.721 15.707 8.439 C 15.52 8.158 15.265 8 15 8 C 14.735 8 14.48 8.158 14.293 8.439 C 14.105 8.721 14 9.102 14 9.5 Z"
+          android:fillColor="@color/danger"
+          android:fillAlpha="0"/>
+      <path
+          android:name="mouth"
+          android:pathData="M 16 16 C 15.5 15 14.209 14 12 14 C 9.791 14 8.5 15 8 16"
+          android:strokeColor="@color/danger"
+          android:strokeAlpha="1"
+          android:strokeWidth="1"
+          android:trimPathStart="1"
+          android:strokeLineCap="round"/>
+    </vector>
+  </aapt:attr>
+  <target android:name="circle">
+    <aapt:attr name="android:animation">
+      <set>
+        <objectAnimator
+            android:propertyName="trimPathStart"
+            android:startOffset="0"
+            android:duration="500"
+            android:valueFrom="1"
+            android:valueTo="0"
+            android:valueType="floatType"
+            />
+        <objectAnimator
+            android:propertyName="strokeAlpha"
+            android:startOffset="0"
+            android:duration="500"
+            android:valueFrom="0"
+            android:valueTo="1"
+            android:valueType="floatType"
+            />
+      </set>
+    </aapt:attr>
+  </target>
+  <target android:name="left_eye">
+    <aapt:attr name="android:animation">
+      <objectAnimator
+          android:propertyName="fillAlpha"
+          android:startOffset="600"
+          android:duration="200"
+          android:valueFrom="0"
+          android:valueTo="1"
+          android:valueType="floatType"
+          />
+    </aapt:attr>
+  </target>
+  <target android:name="right_eye">
+    <aapt:attr name="android:animation">
+      <objectAnimator
+          android:propertyName="fillAlpha"
+          android:startOffset="800"
+          android:duration="200"
+          android:valueFrom="0"
+          android:valueTo="1"
+          android:valueType="floatType"
+          />
+    </aapt:attr>
+  </target>
+  <target android:name="mouth">
+    <aapt:attr name="android:animation">
+      <set>
+        <objectAnimator
+            android:propertyName="trimPathStart"
+            android:startOffset="1000"
+            android:duration="200"
+            android:valueFrom="1"
+            android:valueTo="0"
+            android:valueType="floatType"
+            />
+        <objectAnimator
+            android:propertyName="strokeAlpha"
+            android:startOffset="1000"
+            android:duration="200"
+            android:valueFrom="0"
+            android:valueTo="1"
+            android:valueType="floatType"
+            />
+      </set>
+    </aapt:attr>
+  </target>
+</animated-vector>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="ripple">#40FFFFFF</color>
+    <color name="transparent">#00000000</color>
+    <color name="background">#121212</color>
+    <color name="frame">#252525</color>
+    <color name="container">#323232</color>
+    <color name="primary">#0EDE7E</color>
+    <color name="warning">#DEA30E</color>
+    <color name="danger">#DE0E0E</color>
+    <color name="hint">#ABABAB</color>
+    <color name="balance">#A4A2A2</color>
+    <color name="divider">#A4A2A2</color>
+</resources>

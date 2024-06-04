@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reports_nav_graph"
+    app:startDestination="@id/reportsFragment">
+
+    <fragment
+        android:id="@+id/reportsFragment"
+        android:name="com.theternal.reports.ReportsFragment"
+        android:label="ReportsFragment" >
+        <action
+            android:id="@+id/to_category_details"
+            app:destination="@id/categoryDetailsFragment" />
+        <action
+            android:id="@+id/to_account_details"
+            app:destination="@id/accountDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryDetailsFragment"
+        android:name="com.theternal.category_details.CategoryDetailsFragment"
+        android:label="CategoryDetailsFragment" >
+        <argument
+            android:name="category"
+            app:argType="string" />
+        <argument
+            android:name="isExpense"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountDetailsFragment"
+        android:name="com.theternal.account_details.AccountDetailsFragment"
+        android:label="AccountDetailsFragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+</navigation>

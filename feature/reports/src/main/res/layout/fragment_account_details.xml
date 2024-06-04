@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="16dp"
+    tools:theme="@style/Theme.BudgetBoss">
+
+    <ImageView
+        android:id="@+id/goBackBtn"
+        style="@style/GoBackBtn"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pageTitle" />
+
+    <TextView
+        android:id="@+id/pageTitle"
+        style="@style/PageTitle"
+        android:text="@string/account_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_rounded_container"
+        android:backgroundTint="@color/container"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="22dp"
+        android:paddingBottom="18dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/DetailTitle"
+            app:layout_constraintEnd_toStartOf="@+id/emoji"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Debit" />
+
+        <EditText
+            android:id="@+id/nameField"
+            style="@style/DetailFieldStyle"
+            android:autofillHints="@null"
+            android:hint="@null"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@+id/emoji"
+            app:layout_constraintTop_toTopOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/note"
+            style="@style/DetailTitle"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/emoji"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="Lorem ipsum" />
+
+        <EditText
+            android:id="@+id/noteField"
+            style="@style/DetailFieldStyle"
+            android:autofillHints="@null"
+            android:hint="@null"
+            android:inputType="text"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/emoji"
+            app:layout_constraintTop_toTopOf="@+id/note" />
+
+        <TextView
+            android:id="@+id/balance"
+            style="@style/DetailTitle"
+            android:textColor="@color/danger"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/positiveBtn"
+            app:layout_constraintTop_toBottomOf="@+id/note"
+            tools:text="-200 USD" />
+
+        <EditText
+            style="@style/DetailFieldStyle"
+            android:autofillHints="@null"
+            android:inputType="numberDecimal|numberSigned"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/positiveBtn"
+            app:layout_constraintTop_toTopOf="@+id/balance" />
+
+        <ImageView
+            android:id="@+id/emoji"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_emoji_frown"
+            app:layout_constraintBottom_toTopOf="@+id/balance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/name" />
+
+        <TextView
+            android:id="@+id/positiveBtn"
+            style="@style/Heading"
+            android:layout_marginRight="16dp"
+            android:text="@string/edit"
+            android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/negativeBtn"
+            app:layout_constraintEnd_toStartOf="@+id/negativeBtn"
+            app:layout_constraintTop_toTopOf="@+id/negativeBtn" />
+
+        <TextView
+            android:id="@+id/negativeBtn"
+            style="@style/Heading"
+            android:text="@string/remove"
+            android:textColor="@color/danger"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/balance" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/transferList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/view_record_item"
+        tools:itemCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

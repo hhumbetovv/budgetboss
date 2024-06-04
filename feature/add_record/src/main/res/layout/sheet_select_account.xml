@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="16dp"
+    android:layout_height="wrap_content"
+    tools:background="@color/frame"
+    tools:theme="@style/Theme.BudgetBoss">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        tools:ignore="UseCompoundDrawables">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="@string/transfer_from"/>
+
+        <ImageView
+            android:id="@+id/closeBtn"
+            android:contentDescription="@null"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_close"/>
+
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="5"
+        tools:listitem="@layout/view_select_account"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addBtn"
+        style="@style/PrimaryBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_account"/>
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="DatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="colorSurface">@color/background</item>
+        <item name="shapeAppearance">@style/DatePickerShape</item>
+    </style>
+    
+    <style name="DatePickerShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+</resources>
