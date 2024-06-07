@@ -1,5 +1,6 @@
 package com.theternal.account_details
 
+import android.app.AlertDialog
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
@@ -57,6 +58,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     private var colorDanger: Int? = null
     private var colorWhite: Int? = null
 
+    private lateinit var deleteDialog: AlertDialog.Builder
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAccountDetailsBinding> = {
@@ -72,9 +74,12 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
         initActionButtons()
 
+        initAlertDialog()
+
         goBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
+
     }
 
     override fun onDestroyView() {
@@ -119,15 +124,22 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
             }
 
             negativeBtn.setOnClickListener {
-                postEvent(
-                    if(state?.editMode == true) {
-                        Event.CancelEditAccount
-                    } else {
-                        Event.DeleteAccount
-                    }
-                )
+                if(state?.editMode == true) {
+                    postEvent(Event.CancelEditAccount)
+                } else {
+                    deleteDialog.show()
+                }
             }
         }
+    }
+
+    private fun initAlertDialog() {
+       deleteDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Delete Account")
+            .setMessage("all transactions on the account will be reversed")
+            .setCancelable(true)
+            .setPositiveButton("Delete") { _, _ -> postEvent(Event.DeleteAccount)}
+            .setNegativeButton("Cancel", null)
     }
 
     override fun onStateUpdate(state: State) {

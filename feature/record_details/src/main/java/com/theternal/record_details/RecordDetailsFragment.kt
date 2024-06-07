@@ -1,6 +1,7 @@
 package com.theternal.record_details
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.getDrawable
@@ -37,6 +38,9 @@ class RecordDetailsFragment(
         RecordDetailsViewModel::class.java
     }
 
+    //! UI Properties
+    private lateinit var deleteDialog: AlertDialog.Builder
+
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentRecordDetailsBinding> = {
         postEvent(Event.GetRecord(id, isTransfer))
@@ -55,7 +59,17 @@ class RecordDetailsFragment(
         }
 
         saveBtn.setOnClickListener { postEvent(Event.UpdateRecord) }
-        deleteBtn.setOnClickListener { postEvent(Event.DeleteRecord) }
+        deleteBtn.setOnClickListener { deleteDialog.show() }
+
+        deleteDialog = AlertDialog.Builder(requireContext())
+            .setTitle("Delete Record")
+            .setMessage(
+                if(isTransfer) "amounts of accounts will be reverted back"
+                else "categories will be reorganized"
+            )
+            .setCancelable(true)
+            .setPositiveButton("Delete") { _, _ -> postEvent(Event.DeleteRecord)}
+            .setNegativeButton("Cancel", null)
     }
 
     //! UI Updates
