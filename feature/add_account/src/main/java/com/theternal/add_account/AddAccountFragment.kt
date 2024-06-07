@@ -10,6 +10,8 @@ import com.theternal.add_account.AddAccountContract.*
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.setOnItemSelectedListener
 import com.theternal.common.extensions.show
+import com.theternal.common.extensions.showToast
+import com.theternal.uikit.fragments.AppBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +31,9 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddAccountBinding> = {
+
+        (parentFragment as AppBottomSheetFragment).setTitle("Add Account")
+
         nameField.setOnChangeListener {
             postEvent(Event.SetAccountName(it))
         }
@@ -84,7 +89,10 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
     override fun onEffectUpdate(effect: Effect) {
         when(effect) {
             Effect.NavigateBack -> {
-                (parentFragment as AddAccountSheet).dismiss()
+                (parentFragment as AppBottomSheetFragment).dismiss()
+            }
+            Effect.FetchFailedNotify -> {
+                showToast("Currency fetch failed")
             }
         }
     }

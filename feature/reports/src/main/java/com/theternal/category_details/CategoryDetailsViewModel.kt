@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoryDetailsViewModel @Inject constructor(
     private val getCategoryRecordsUseCase: GetCategoryRecordsUseCase
-) : BaseViewModel<Event, State, ViewEffect.Empty>() {
+) : BaseViewModel<Event, State, Effect>() {
 
     private var getRecordsJob: Job? = null
 
@@ -36,12 +36,15 @@ class CategoryDetailsViewModel @Inject constructor(
             title,
             isExpense
         ).onEach { records ->
-            setState(currentState.copy(
-                records = records.sortedByDescending { it.date },
-                totalAmount = records.fold(BigDecimal.ZERO) { acc, record ->
-                    acc + record.amount
-                }
-            ))
+            setState { state ->
+                state.copy(
+                    records = records.sortedByDescending { it.date },
+                    totalAmount = records.fold(BigDecimal.ZERO) { acc, record ->
+                        acc + record.amount
+                    }
+                )
+            }
+            if(records.isEmpty()) postEffect(Effect.NavigateBack)
         }.launchIn(viewModelScope)
     }
 }

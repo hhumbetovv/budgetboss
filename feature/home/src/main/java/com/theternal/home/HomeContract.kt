@@ -5,7 +5,7 @@ import com.theternal.core.base.interfaces.ViewState
 import com.theternal.domain.interfaces.RecordEntity
 import java.math.BigDecimal
 
-sealed class HomeContract {
+sealed interface HomeContract {
 
     data class State(
         val balance: BigDecimal = BigDecimal.ZERO,

@@ -9,6 +9,7 @@ interface CurrencyRepository {
     fun saveCurrencyList(currencyList: Map<String,BigDecimal>)
     fun getCurrencyList(): Flow<List<CurrencyEntity>>
     fun getCurrencyListAsync(): List<CurrencyEntity>
+    fun getCurrencyValueAsync(label: String): BigDecimal
 
     suspend fun fetchCurrencyList(): List<String>
     suspend fun exchange(from: String, to: String?): BigDecimal

@@ -2,14 +2,11 @@ package com.theternal.category_details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.transition.Slide
 import androidx.transition.Transition
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.SlideDistanceProvider
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
@@ -19,13 +16,12 @@ import com.theternal.category_details.CategoryDetailsContract.*
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
 import com.theternal.core.base.interfaces.ViewEffect
-import com.theternal.reports.R
-import com.theternal.uikit.adapters.RecordAdapter
+import com.theternal.record_details.adapters.RecordAdapter
 import com.theternal.common.R.color as Colors
 
 @AndroidEntryPoint
 class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBinding,
-        CategoryDetailsViewModel, Event, State, ViewEffect.Empty>() {
+        CategoryDetailsViewModel, Event, State, Effect>() {
 
     //! Initialize Binding and State
     override val inflateBinding: Inflater<FragmentCategoryDetailsBinding>
@@ -36,13 +32,15 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     }
 
     //! Screen Transitions
-    override val transitionDuration: Long = 300
-    override val viewEntering: Transition = Slide().apply {
-        slideEdge = Gravity.RIGHT
+    private val viewTransition = MaterialFadeThrough().apply {
+        secondaryAnimatorProvider = SlideDistanceProvider(Gravity.END)
     }
+    override val transitionDuration: Long = 300
+    override val viewEntering: Transition = viewTransition
+    override val viewExiting: Transition = viewTransition
 
     //! UI Properties
-    private val recordAdapter = RecordAdapter()
+    private var recordAdapter: RecordAdapter? = null
     private var isExpense = false
     private lateinit var prefix: String
 
@@ -52,10 +50,17 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
         prefix = if(isExpense) "-" else "+"
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        recordAdapter = null
+    }
+
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentCategoryDetailsBinding> = {
         goBackBtn.setOnClickListener { findNavController().popBackStack() }
         categoryLabel.text = arguments?.getString("category")
+
+        recordAdapter = RecordAdapter(childFragmentManager)
         recordList.adapter = recordAdapter
 
         amount.setTextColor(
@@ -77,6 +82,12 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
         if(state.totalAmount != null) {
             binding.amount.text = "$prefix${state.totalAmount.format()} $"
         }
-        recordAdapter.submitList(state.records)
+        recordAdapter?.submitList(state.records)
+    }
+
+    override fun onEffectUpdate(effect: Effect) {
+        when(effect) {
+            Effect.NavigateBack -> findNavController().popBackStack()
+        }
     }
 }

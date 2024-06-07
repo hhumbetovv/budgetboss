@@ -13,4 +13,5 @@ interface RecordRepository {
     fun getAllTransfers(): Flow<List<TransferEntity>>
     fun getRecord(id: Long, isTransfer: Boolean): Flow<RecordEntity>
     fun deleteRecord(id: Long, isTransfer: Boolean)
+    fun updateRecord(record: RecordEntity)
 }

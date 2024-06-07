@@ -9,8 +9,8 @@
     <color name="container">#323232</color>
     <color name="primary">#0EDE7E</color>
     <color name="warning">#DEA30E</color>
-    <color name="danger">#DE0E0E</color>
+    <color name="danger">#FF1515</color>
     <color name="hint">#ABABAB</color>
-    <color name="balance">#A4A2A2</color>
+    <color name="subtitle">#D0D0D0</color>
     <color name="divider">#A4A2A2</color>
 </resources>

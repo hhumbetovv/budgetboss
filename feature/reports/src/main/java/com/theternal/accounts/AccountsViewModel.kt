@@ -22,7 +22,7 @@ class AccountsViewModel @Inject constructor(
 
     init {
         getAllAccountsUseCase().onEach { accounts ->
-            setState(State(accounts))
+            setState { State(accounts) }
         }.launchIn(viewModelScope)
     }
 }

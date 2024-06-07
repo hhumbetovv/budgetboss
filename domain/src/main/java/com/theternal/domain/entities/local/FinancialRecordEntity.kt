@@ -1,3 +1,4 @@
+
 package com.theternal.domain.entities.local
 
 import androidx.room.ColumnInfo
@@ -19,7 +20,6 @@ data class FinancialRecordEntity(
     override val date: Long,
     @ColumnInfo("note")
     override val note: String? = null,
-
     @ColumnInfo("isExpense")
     val isExpense: Boolean,
 ) : RecordEntity

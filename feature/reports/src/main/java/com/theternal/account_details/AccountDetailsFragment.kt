@@ -1,19 +1,31 @@
 package com.theternal.account_details
 
-import android.annotation.SuppressLint
+import android.graphics.drawable.Animatable
+import android.graphics.drawable.AnimatedVectorDrawable
+import android.graphics.drawable.Drawable
 import android.view.Gravity
+import android.view.View
 import androidx.navigation.fragment.findNavController
-import androidx.transition.Slide
 import androidx.transition.Transition
+import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.SlideDistanceProvider
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.reports.databinding.FragmentAccountDetailsBinding
 import com.theternal.account_details.AccountDetailsContract.*
 import com.theternal.common.extensions.format
+import com.theternal.common.extensions.getColor
+import com.theternal.common.extensions.getDrawable
+import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.Initializer
-import com.theternal.uikit.adapters.RecordAdapter
+import com.theternal.domain.entities.local.AccountEntity
+import com.theternal.record_details.adapters.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.math.BigDecimal
+import com.theternal.common.R.color as Colors
+import com.theternal.common.R.string as Strings
+import com.theternal.uikit.R.drawable as Drawables
 
 @AndroidEntryPoint
 class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBinding,
@@ -28,40 +40,194 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     }
 
     //! Screen Transitions
-    override val transitionDuration: Long = 300
-    override val viewEntering: Transition = Slide().apply {
-        slideEdge = Gravity.RIGHT
+    private val viewTransition = MaterialFadeThrough().apply {
+        secondaryAnimatorProvider = SlideDistanceProvider(Gravity.END)
     }
+    override val transitionDuration: Long = 300
+    override val viewEntering: Transition = viewTransition
+    override val viewExiting: Transition = viewTransition
 
     //! UI Properties
-    private val transferAdapter = RecordAdapter()
+    private var transferAdapter: RecordAdapter? = null
+    private var smile: Drawable? = null
+    private var neutral: Drawable? = null
+    private var frown: Drawable? = null
+
+    private var colorPrimary: Int? = null
+    private var colorDanger: Int? = null
+    private var colorWhite: Int? = null
+
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAccountDetailsBinding> = {
         postEvent(Event.GetAccount(arguments?.getLong("id")))
+
+        transferAdapter = RecordAdapter(childFragmentManager)
+
         transferList.adapter = transferAdapter
+
+        initDrawables()
+
+        initColors()
+
+        initActionButtons()
 
         goBackBtn.setOnClickListener {
             findNavController().popBackStack()
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onStateUpdate(state: State) {
-        if(state.account != null) {
-            transferAdapter.submitList(state.transfers)
-            binding {
-                details.show()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        transferAdapter = null
+        smile = null
+        neutral = null
+        frown = null
 
-                name.text = state.account.name
+        colorPrimary = null
+        colorDanger = null
+        colorWhite = null
+    }
 
-                if(state.account.note.isNullOrBlank()) {
-                    note.text = "empty note"
-                } else note.text = state.account.note
+    private fun initDrawables() {
+        (binding.emoji.drawable as AnimatedVectorDrawable).start()
+        smile = getDrawable(Drawables.ic_emoji_smile)
+        neutral = getDrawable(Drawables.ic_emoji_neutral)
+        frown = getDrawable(Drawables.ic_emoji_frown)
+    }
 
-                balance.text = "${state.account.balance.format()} ${state.account.currency}"
+    private fun initColors() {
+        colorPrimary = getColor(Colors.primary)
+        colorDanger = getColor(Colors.danger)
+        colorWhite = getColor(Colors.white)
+    }
+
+    private fun initActionButtons() {
+        binding {
+            positiveBtn.setOnClickListener {
+                postEvent(
+                    if(state?.editMode == true) {
+                        Event.SaveAccount(
+                            nameField.text.trim().toString(),
+                            noteField.text.trim().toString(),
+                            balanceField.text.toString().toBigDecimalOrNull()
+                        )
+                    } else {
+                        Event.EditAccount
+                    }
+                )
+            }
+
+            negativeBtn.setOnClickListener {
+                postEvent(
+                    if(state?.editMode == true) {
+                        Event.CancelEditAccount
+                    } else {
+                        Event.DeleteAccount
+                    }
+                )
             }
         }
     }
 
+    override fun onStateUpdate(state: State) {
+        if(state.account != null) {
+            transferAdapter?.submitList(state.transfers)
+
+            updateAccountInfo(state.account, state.editMode)
+
+            updateBalance(state.account.balance, state.account.currency, state.currencyValue)
+
+            updateEmoji(state.account.balance)
+
+            updateFields(state)
+
+            updateActionButtons(state.editMode)
+
+            if(state.transfers.isEmpty()) {
+                binding.emptyListTitle.show()
+            } else {
+                binding.emptyListTitle.hide()
+            }
+        }
+    }
+
+    private fun updateAccountInfo(account: AccountEntity, editMode: Boolean) {
+        binding {
+            details.show()
+
+            val visibility = if(editMode) View.INVISIBLE else View.VISIBLE
+
+            name.text = account.name
+            name.visibility = visibility
+
+            if(account.note.isNullOrBlank()) {
+                note.text = getString(Strings.empty_note)
+            } else note.text = account.note
+            note.visibility = visibility
+
+            balance.visibility = visibility
+        }
+    }
+
+    private fun updateBalance(balance: BigDecimal, currency: String, currencyValue: BigDecimal?) {
+        var accountBalance = "${balance.format()} $currency"
+        if(currencyValue != null && (balance > BigDecimal.ZERO || balance < BigDecimal.ZERO)){
+            accountBalance += " / ${(balance * currencyValue).format()} USD"
+        }
+        binding.balance.text = accountBalance
+        binding.balance.setTextColor(
+            when {
+                balance > BigDecimal.ZERO -> colorPrimary
+                balance < BigDecimal.ZERO -> colorDanger
+                else -> colorWhite
+            } ?: getColor(Colors.white)
+        )
+    }
+
+    private fun updateEmoji(balance: BigDecimal) {
+        val drawable = when{
+            balance > BigDecimal.ZERO -> smile
+            balance < BigDecimal.ZERO -> frown
+            else -> neutral
+        }
+        if(drawable != binding.emoji.drawable) {
+            binding.emoji.setImageDrawable(drawable)
+            (binding.emoji.drawable as Animatable).start()
+        }
+    }
+
+    private fun updateFields(state: State) {
+        binding {
+            state.apply {
+                nameField.setText(name.text)
+                noteField.setText(note.text)
+                balanceField.setText(account?.balance.toString())
+
+                val visibility = if(editMode) View.VISIBLE else View.INVISIBLE
+                nameField.visibility = visibility
+                noteField.visibility = visibility
+                balanceField.visibility = visibility
+            }
+        }
+    }
+
+    private fun updateActionButtons(editMode: Boolean) {
+        binding {
+            positiveBtn.setImageDrawable(getDrawable(
+                if(editMode) Drawables.ic_check
+                else Drawables.ic_edit
+            ))
+            negativeBtn.setImageDrawable(getDrawable(
+                if(editMode) Drawables.ic_close
+                else Drawables.ic_trash
+            ))
+        }
+    }
+
+    override fun onEffectUpdate(effect: Effect) {
+        when(effect) {
+            Effect.NavigateBack -> findNavController().popBackStack()
+        }
+    }
 }

@@ -34,9 +34,7 @@ class AddRecordViewModel @Inject constructor(
 
     init {
         getAllAccountsUseCase().onEach { accounts ->
-            setState(currentState.copy(
-                accounts = accounts
-            ))
+            setState { it.copy(accounts = accounts) }
         }.launchIn(viewModelScope)
     }
 
@@ -47,31 +45,33 @@ class AddRecordViewModel @Inject constructor(
     override fun onEventUpdate(event: Event) {
         when(event) {
             is Event.SetType -> {
-                setState(currentState.copy(recordType = event.recordType))
+                setState { it.copy(recordType = event.recordType) }
             }
             is Event.SetAmount -> setAmount(event.amount)
             is Event.SelectExpenseCategory -> {
-                setState(currentState.copy(expenseCategory = event.category))
+                setState { it.copy(expenseCategory = event.category) }
             }
             is Event.SelectIncomeCategory -> {
-                setState(currentState.copy(incomeCategory = event.category))
+                setState { it.copy(incomeCategory = event.category) }
             }
             is Event.SelectDate -> {
-                setState(currentState.copy(date = event.date))
+                setState { it.copy(date = event.date) }
             }
             is Event.SetReceiverAccount -> {
-                setState(currentState.copy(transferTo = event.account))
+                setState { it.copy(transferTo = event.account) }
                 exchange()
             }
             is Event.SetSenderAccount -> {
-                setState(currentState.copy(transferFrom = event.account))
+                setState { it.copy(transferFrom = event.account) }
                 exchange()
             }
             Event.SwitchAccounts -> {
-                setState(currentState.copy(
-                    transferTo = currentState.transferFrom,
-                    transferFrom = currentState.transferTo
-                ))
+                setState{ state ->
+                    state.copy(
+                        transferTo = state.transferFrom,
+                        transferFrom = state.transferTo
+                    )
+                }
                 exchange()
             }
             is Event.CreateRecord -> {
@@ -88,7 +88,7 @@ class AddRecordViewModel @Inject constructor(
         notifyJob?.cancel()
         notifyJob = viewModelScope.launch(Dispatchers.IO) {
             if(currentState.recordType == TRANSFER) delay(1000)
-            setState(currentState.copy(amount = amount))
+            setState { it.copy(amount = amount) }
             if(currentState.exchangeValue != null && currentState.exchangeValue != BigDecimal.ONE) {
                 postEffect(Effect.ExchangeNotify)
             }
@@ -99,7 +99,7 @@ class AddRecordViewModel @Inject constructor(
         exchangeJob?.cancel()
         exchangeJob = viewModelScope.launch(Dispatchers.IO) {
             delay(500)
-            setState(currentState.copy(isLoading = true, exchangeValue = null))
+            setState { it.copy(isLoading = true, exchangeValue = null) }
             if(currentState.transferFrom != null && currentState.transferTo != null) {
                 makeRequest(
                     NetworkRequest.WithParams(
@@ -110,19 +110,21 @@ class AddRecordViewModel @Inject constructor(
                         ),
                     ),
                     onSuccess = { value ->
-                        setState(currentState.copy(
-                            isLoading = false,
-                            exchangeValue = value
-                        ))
+                        setState { state ->
+                            state.copy(
+                                isLoading = false,
+                                exchangeValue = value
+                            )
+                        }
                         postEffect(Effect.ExchangeNotify)
                     },
                     onError = {
-                        setState(currentState.copy(isLoading = false))
+                        setState { it.copy(isLoading = false) }
                         postEffect(Effect.CheckInternetNotify)
                     }
                 )
             } else {
-                setState(currentState.copy(isLoading = false))
+                setState { it.copy(isLoading = false) }
             }
         }
     }
@@ -153,7 +155,7 @@ class AddRecordViewModel @Inject constructor(
             currentState.apply {
                 createRecord(
                     TransferEntity(
-                        title = "${transferFrom!!.name} ⇒ ${transferTo!!.name}",
+                        title = "${transferFrom!!.name} ► ${transferTo!!.name}",
                         amount = amount!!,
                         date = date,
                         note = note,
@@ -171,7 +173,7 @@ class AddRecordViewModel @Inject constructor(
     private fun createRecord(record: RecordEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             createRecordUseCase(record)
-            postEffect(Effect.NavigateToMain)
+            postEffect(Effect.NavigateBack)
         }
     }
 }

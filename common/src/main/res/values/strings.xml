@@ -32,5 +32,8 @@
     <string name="account_details">Account Details</string>
     <string name="empty_note">empty note</string>
     <string name="edit">Edit</string>
-    <string name="remove">Remove</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_record_list">No records have been \ncreated in this app yet</string>
+    <string name="empty_transfer_list">No transfers have been \ncreated in this account yet</string>
 </resources>

@@ -56,4 +56,12 @@ class RecordRepositoryImpl @Inject constructor(
         if(isTransfer) recordDao.deleteTransferRecord(id)
         else recordDao.deleteFinancialRecord(id)
     }
+
+    override fun updateRecord(record: RecordEntity) {
+        if(record is FinancialRecordEntity) {
+            recordDao.updateFinancialRecord(record)
+        } else {
+            recordDao.updateTransferRecord(record as TransferEntity)
+        }
+    }
 }

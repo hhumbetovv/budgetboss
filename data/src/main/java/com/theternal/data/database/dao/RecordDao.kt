@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import kotlinx.coroutines.flow.Flow
@@ -29,6 +30,9 @@ interface RecordDao {
     @Query("DELETE FROM financialRecords WHERE id=:id")
     fun deleteFinancialRecord(id: Long)
 
+    @Update
+    fun updateFinancialRecord(record: FinancialRecordEntity)
+
     @Query("SELECT * FROM transferRecords WHERE id=:id")
     fun getTransferRecord(id: Long): Flow<TransferEntity>
 
@@ -40,4 +44,7 @@ interface RecordDao {
 
     @Query("DELETE FROM transferRecords WHERE id=:id")
     fun deleteTransferRecord(id: Long)
+
+    @Update
+    fun updateTransferRecord(record: TransferEntity)
 }

@@ -20,5 +20,5 @@ interface CurrencyDao {
     fun getCurrencyListAsync(): List<CurrencyEntity>
 
     @Query("SELECT value FROM currencyList WHERE label=:label")
-    fun getCurrencyValue(label: String): Flow<BigDecimal>
+    fun getCurrencyValueAsync(label: String): BigDecimal
 }

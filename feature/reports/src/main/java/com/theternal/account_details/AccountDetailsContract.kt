@@ -5,18 +5,31 @@ import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.core.base.interfaces.ViewState
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.domain.entities.local.TransferEntity
+import java.math.BigDecimal
 
-sealed class AccountDetailsContract {
+sealed interface AccountDetailsContract {
 
     sealed interface Event : ViewEvent {
 
         data class GetAccount(val id: Long?) : Event
 
+        data object EditAccount : Event
+
+        data object DeleteAccount : Event
+
+        data class SaveAccount(
+            val name: String,
+            val note: String,
+            val balance: BigDecimal?
+        ) : Event
+
+        data object CancelEditAccount : Event
     }
 
     data class State(
         val editMode: Boolean = false,
         val account: AccountEntity? = null,
+        val currencyValue: BigDecimal? = null,
         val transfers: List<TransferEntity> = listOf(),
         val newName: String = "",
     ) : ViewState

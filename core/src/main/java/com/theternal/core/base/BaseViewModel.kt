@@ -16,6 +16,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
 
 abstract class BaseViewModel<Event: ViewEvent, State: ViewState, Effect: ViewEffect> : ViewModel() {
@@ -47,9 +49,11 @@ abstract class BaseViewModel<Event: ViewEvent, State: ViewState, Effect: ViewEff
     }
 
     //! Setters
-    protected fun setState(state: State) {
+    protected fun setState(update: (currentState: State) -> State) {
         viewModelScope.launch {
-            _uiState.emit(state)
+            val currentState = _uiState.value
+            val newState = update(currentState)
+            _uiState.emit(newState)
         }
     }
 
@@ -67,7 +71,7 @@ abstract class BaseViewModel<Event: ViewEvent, State: ViewState, Effect: ViewEff
 
     protected open fun onEventUpdate(event: Event) {}
 
-    //! Networking
+    //! Network
     suspend fun <R> makeRequest(
         request: NetworkRequest<R>,
         onError: ((Exception) -> Unit)? = null,
@@ -78,11 +82,11 @@ abstract class BaseViewModel<Event: ViewEvent, State: ViewState, Effect: ViewEff
             onSuccess?.invoke(result.getData)
         } else {
             onError?.invoke(result.getException)
-            globalErrorHandler(result.getException)
+            log(result.getException)
         }
     }
 
-    private fun globalErrorHandler(exception: Exception) {
+    private fun log(exception: Exception) {
         Log.e("ERROR", exception.message.toString())
     }
 

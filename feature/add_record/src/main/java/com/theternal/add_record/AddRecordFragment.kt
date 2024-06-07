@@ -1,11 +1,12 @@
 package com.theternal.add_record
 
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
 import androidx.transition.Transition
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.theternal.uikit.adapters.CategoryAdapter
 import com.theternal.common.extensions.capitalize
 import com.theternal.core.base.BaseStatefulFragment
@@ -16,21 +17,17 @@ import com.theternal.domain.entities.base.RecordType
 import com.theternal.domain.entities.base.RecordType.*
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.common.R.string as Strings
-import com.theternal.common.R.color as Colors
 import com.theternal.add_record.AddRecordContract.*
 import com.theternal.add_record.databinding.FragmentAddRecordBinding
 import com.theternal.common.extensions.format
-import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.setOnChangeListener
 import com.theternal.common.extensions.setOnTabSelectedListener
 import com.theternal.common.extensions.show
 import com.theternal.common.extensions.showToast
 import com.theternal.core.base.Inflater
-import com.theternal.domain.entities.local.AccountEntity
+import com.theternal.uikit.fragments.AppBottomSheetFragment
 import java.math.BigDecimal
-import java.text.SimpleDateFormat
-import java.util.Locale
 
 @AndroidEntryPoint
 class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
@@ -69,12 +66,8 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         CategoryAdapter.CategoryItem(category)
     }
 
-    private val bottomSheet = SelectAccountSheet()
-
-    private val datePicker = MaterialDatePicker.Builder
-        .datePicker()
-        .setSelection(System.currentTimeMillis())
-        .build()
+    private val selectAccountFragment = SelectAccountFragment()
+    private val bottomSheet = AppBottomSheetFragment { selectAccountFragment }
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddRecordBinding> = {
@@ -91,11 +84,10 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
         initBottomSheet()
 
-        initDatePicker()
-
-        date.text = SimpleDateFormat(
-            "dd.MM.yyyy", Locale.getDefault()
-        ).format(System.currentTimeMillis())
+        binding.dateBtn.setDate(System.currentTimeMillis())
+        binding.dateBtn.setDateSelectionListener(parentFragmentManager) { date ->
+            postEvent(Event.SelectDate(date))
+        }
 
         saveBtn.setOnClickListener {
             postEvent(Event.CreateRecord(noteField.text.toString()))
@@ -135,18 +127,9 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
     private fun initAccounts() {
         binding {
-            senderAccount.setOnClickListener {
-                bottomSheet.show(
-                    parentFragmentManager,
-                    SelectAccountSheet.AccountType.SENDER
-                )
-            }
-            receiverAccount.setOnClickListener {
-                bottomSheet.show(
-                    parentFragmentManager,
-                    SelectAccountSheet.AccountType.RECEIVER
-                )
-            }
+            senderAccount.setOnClickListener { showSelectAccountSheet(true) }
+            receiverAccount.setOnClickListener { showSelectAccountSheet(false) }
+
             var isAnimating = false
             accountSwitch.setOnClickListener {
                 if(!isAnimating) {
@@ -160,32 +143,31 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         }
     }
 
-    private fun initBottomSheet() {
-        bottomSheet.initialize { account, type ->
-            when(type) {
-                SelectAccountSheet.AccountType.SENDER -> {
-                    postEvent(Event.SetSenderAccount(account))
-                }
-                SelectAccountSheet.AccountType.RECEIVER -> {
-                    postEvent(Event.SetReceiverAccount(account))
-                }
-            }
+    private fun showSelectAccountSheet(isSender: Boolean) {
+        if(!bottomSheet.isAdded) {
+            selectAccountFragment.setIsSender(isSender)
+            bottomSheet.show(
+                parentFragmentManager,
+                selectAccountFragment.tag
+            )
         }
     }
 
-    private fun initDatePicker() {
-        datePicker.addOnPositiveButtonClickListener { selection ->
-            postEvent(Event.SelectDate(selection))
-        }
-        binding.dateBtn.setOnClickListener {
-            if(!datePicker.isAdded) {
-                datePicker.show(parentFragmentManager, datePicker.tag)
-            }
+    private fun initBottomSheet() {
+        selectAccountFragment.initialize { account, isSender ->
+            postEvent(
+                if(isSender) {
+                    Event.SetSenderAccount(account)
+                } else {
+                    Event.SetReceiverAccount(account)
+                }
+            )
         }
     }
 
     //!  UI Updates
     override fun onStateUpdate(state: State) {
+        Log.d("LOGGER STATE", state.toString())
         updateAmountField()
 
         updateCategoryListVisibility(state.recordType != TRANSFER)
@@ -195,10 +177,6 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         updateAccounts()
 
         updateBottomSheet()
-
-        binding.date.text = SimpleDateFormat(
-            "dd.MM.yyyy", Locale.getDefault()
-        ).format(state.date)
 
         updateSaveButton()
 
@@ -219,11 +197,11 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateCategoryListVisibility(isVisible: Boolean) {
         binding {
             if(isVisible) {
-                categoryList.show()
-                selectionTitle.show()
+                categoryList.visibility = View.VISIBLE
+                selectionTitle.visibility = View.VISIBLE
             } else {
-                categoryList.hide()
-                selectionTitle.hide()
+                categoryList.visibility = View.GONE
+                selectionTitle.visibility = View.GONE
             }
         }
     }
@@ -244,43 +222,23 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateAccounts() {
         state?.apply {
             if(recordType == TRANSFER) {
-                binding.accounts.show()
+                binding.accounts.visibility = View.VISIBLE
             } else {
-                binding.accounts.hide()
+                binding.accounts.visibility = View.GONE
             }
-            updateSenderAccount(transferFrom)
-            updateReceiverAccount(transferTo)
+            binding.senderAccount.setAccount(transferFrom)
+            binding.receiverAccount.setAccount(transferTo)
             binding.accountSwitch.isEnabled = !isLoading
         }
     }
 
     private fun updateBottomSheet() {
         state?.apply {
-            bottomSheet.submitList(accounts.filter { account ->
+            selectAccountFragment.submitList(accounts.filter { account ->
                 val isCurrentSender = account.id == transferFrom?.id
                 val isCurrentReceiver = account.id == transferTo?.id
                 !isCurrentSender && !isCurrentReceiver
             })
-        }
-    }
-
-    private fun updateSenderAccount(account: AccountEntity?) {
-        val text = account?.name ?: getString(Strings.select_account)
-        val color = getColor(if(account == null) Colors.hint else Colors.danger)
-        binding {
-            sender.text = text
-            sender.setTextColor(color)
-            senderCurrency.text = account?.currency
-        }
-    }
-
-    private fun updateReceiverAccount(account: AccountEntity?) {
-        val text = account?.name ?: getString(Strings.select_account)
-        val color = getColor(if(account == null) Colors.hint else Colors.primary)
-        binding {
-            receiver.text = text
-            receiver.setTextColor(color)
-            receiverCurrency.text = account?.currency
         }
     }
 
@@ -297,7 +255,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     //! UI Effects
     override fun onEffectUpdate(effect: Effect) {
         when(effect) {
-            Effect.NavigateToMain -> findNavController().popBackStack()
+            Effect.NavigateBack -> findNavController().popBackStack()
             Effect.CheckInternetNotify -> {
                 showToast("Please, check internet connection")
             }

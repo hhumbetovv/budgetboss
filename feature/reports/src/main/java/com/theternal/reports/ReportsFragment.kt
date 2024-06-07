@@ -8,7 +8,6 @@ import com.google.android.material.transition.SlideDistanceProvider
 import com.theternal.core.base.BaseStatelessFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
-import com.theternal.reports.adapters.ReportsPagerAdapter
 import com.theternal.reports.databinding.FragmentReportsBinding
 import com.theternal.common.R.string as Strings
 

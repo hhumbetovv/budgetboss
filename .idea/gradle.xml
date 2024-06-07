@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/feature/add_account" />
             <option value="$PROJECT_DIR$/feature/add_record" />
             <option value="$PROJECT_DIR$/feature/home" />
+            <option value="$PROJECT_DIR$/feature/record_details" />
             <option value="$PROJECT_DIR$/feature/reports" />
             <option value="$PROJECT_DIR$/uikit" />
           </set>

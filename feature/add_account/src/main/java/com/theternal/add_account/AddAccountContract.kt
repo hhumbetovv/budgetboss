@@ -5,7 +5,7 @@ import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.core.base.interfaces.ViewState
 import java.math.BigDecimal
 
-sealed class AddAccountContract {
+sealed interface AddAccountContract {
     sealed interface Event : ViewEvent {
 
         data class SetAccountName(val accountName: String) : Event
@@ -27,5 +27,7 @@ sealed class AddAccountContract {
 
     sealed interface Effect : ViewEffect {
         data object NavigateBack : Effect
+
+        data object FetchFailedNotify : Effect
     }
 }

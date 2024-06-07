@@ -1,13 +1,11 @@
 package com.theternal.data.repositories
 
-import android.util.Log
 import com.theternal.data.database.dao.AccountDao
 import com.theternal.domain.entities.local.AccountBalance
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.repositories.AccountRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.last
 import javax.inject.Inject
 
 class AccountRepositoryImpl @Inject constructor(
@@ -54,5 +52,13 @@ class AccountRepositoryImpl @Inject constructor(
 
     override fun getAccount(id: Long): Flow<AccountEntity> {
         return accountDao.getAccount(id)
+    }
+
+    override fun deleteAccount(id: Long) {
+        accountDao.deleteAccount(id)
+    }
+
+    override fun updateAccount(account: AccountEntity) {
+        accountDao.updateAccount(account)
     }
 }

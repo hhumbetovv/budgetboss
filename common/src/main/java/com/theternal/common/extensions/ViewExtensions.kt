@@ -1,6 +1,7 @@
 package com.theternal.common.extensions
 
 import android.view.View
+import androidx.core.content.ContextCompat
 
 fun View.hide() {
     if(visibility == View.GONE) return
@@ -20,4 +21,8 @@ fun View.show() {
         .alpha(1f)
         .setDuration(300)
         .setListener(null)
+}
+
+fun View.getColor(id: Int): Int {
+    return ContextCompat.getColor(context, id)
 }

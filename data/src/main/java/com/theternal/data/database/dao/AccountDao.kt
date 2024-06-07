@@ -28,6 +28,9 @@ interface AccountDao {
     @Update
     fun updateAccount(account: AccountEntity)
 
+    @Query("DELETE FROM accounts WHERE id=:id")
+    fun deleteAccount(id: Long)
+
     //! Amount
     @Query("SELECT currency, balance FROM accounts")
     fun getAllBalances(): Flow<List<AccountBalance>>

@@ -60,6 +60,12 @@ class FinancialRecordsFragment : BaseStatefulFragment<FragmentFinancialRecordsBi
                 if(totalExpense === BigDecimal.ZERO) {
                     expenseContainer.hide()
                 } else expenseContainer.show()
+
+                if(state.incomeCategories.isEmpty() && state.expenseCategories.isEmpty()) {
+                    emptyListTitle.show()
+                } else {
+                    emptyListTitle.hide()
+                }
             }
         }
     }

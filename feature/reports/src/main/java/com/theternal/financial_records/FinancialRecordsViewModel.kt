@@ -45,7 +45,7 @@ class FinancialRecordsViewModel @Inject constructor(
                 totalExpense
             )
         }.onEach { state ->
-            setState(state)
+            setState { state }
         }.launchIn(viewModelScope)
     }
 

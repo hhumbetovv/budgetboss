@@ -52,7 +52,7 @@ class HomeViewModel @Inject constructor(
                 records = records.sortedByDescending { it.date }
             )
         }.onEach { state ->
-            setState(state)
+            setState { state }
         }.launchIn(viewModelScope)
     }
 

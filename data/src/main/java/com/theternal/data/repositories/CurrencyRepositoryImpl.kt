@@ -30,6 +30,10 @@ class CurrencyRepositoryImpl @Inject constructor(
         return currencyDao.getCurrencyListAsync()
     }
 
+    override fun getCurrencyValueAsync(label: String): BigDecimal {
+        return currencyDao.getCurrencyValueAsync(label)
+    }
+
     override suspend fun fetchCurrencyList(): List<String> {
         return currencyService.getCurrencyList()
     }

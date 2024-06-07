@@ -14,5 +14,6 @@
         <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropdownItemStyle</item>
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>

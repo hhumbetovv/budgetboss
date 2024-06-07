@@ -10,18 +10,14 @@ class CreateAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository,
     private val currencyRepository: CurrencyRepository
 ) {
-    operator fun invoke(params: Params) {
-        accountRepository.createAccount(
-            params.account
-        )
-        currencyRepository.saveCurrency(
-            params.account.currency,
-            params.currencyValue
-        )
-    }
+    operator fun invoke(account: AccountEntity, currencyValue: BigDecimal? = null) {
+        accountRepository.createAccount(account)
 
-    data class Params(
-        val account: AccountEntity,
-        val currencyValue: BigDecimal
-    )
+        if(currencyValue != null) {
+            currencyRepository.saveCurrency(
+                account.currency,
+                currencyValue
+            )
+        }
+    }
 }

@@ -10,7 +10,7 @@ import com.theternal.domain.entities.local.AccountEntity
 import java.math.BigDecimal
 
 
-sealed class AddRecordContract {
+sealed interface AddRecordContract {
 
     sealed interface Event : ViewEvent {
 
@@ -49,7 +49,7 @@ sealed class AddRecordContract {
 
     sealed interface Effect : ViewEffect {
 
-        data object NavigateToMain : Effect
+        data object NavigateBack : Effect
 
         data object CheckInternetNotify : Effect
 

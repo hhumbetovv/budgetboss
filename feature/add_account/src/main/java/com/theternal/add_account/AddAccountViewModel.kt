@@ -32,64 +32,80 @@ class AddAccountViewModel @Inject constructor(
             makeRequest(
                 NetworkRequest.NoParams(fetchCurrencyListUseCase::invoke),
                 onSuccess = { list: List<String> ->
-                    setState(currentState.copy(currencyList = list, isLoading = false))
+                    setState { it.copy(currencyList = list, isLoading = false) }
                 },
                 onError = {
-                    viewModelScope.launch(Dispatchers.IO) {
-                        setState(
-                            currentState.copy(
-                                currencyList = getLocalCurrencyListUseCase(),
-                                isLoading = false
-                            )
-                        )
-                    }
+                   getLocalCurrencyList()
                 },
             )
+        }
+    }
+
+    private fun getLocalCurrencyList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            setState { state ->
+                state.copy(
+                    currencyList = getLocalCurrencyListUseCase(),
+                    isLoading = false
+                )
+            }
         }
     }
 
     override fun onEventUpdate(event: Event) {
         when(event) {
             is Event.SetAccountName -> {
-                setState(currentState.copy(accountName = event.accountName))
+                setState { it.copy(accountName = event.accountName) }
             }
             is Event.SetBalance -> {
-                setState(currentState.copy(balance = event.balance))
+                setState { it.copy(balance = event.balance) }
             }
             is Event.SetCurrency -> {
-                setState(currentState.copy(currency = event.currency))
+                setState { it.copy(currency = event.currency) }
             }
             is Event.CreateAccount -> {
-                createAccount(event.note)
+                fetchCurrencyAndCreateAccount(event.note)
             }
         }
     }
 
-    private fun createAccount(note: String?) {
+    private fun fetchCurrencyAndCreateAccount(note: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            setState(currentState.copy(isLoading = true))
+            setState { it.copy(isLoading = true) }
             makeRequest(
                 NetworkRequest.WithParams(
                     exchangeUseCase::invoke,
                     ExchangeUseCase.Params(currentState.currency!!)
-                )
-            ) { currencyValue ->
-                viewModelScope.launch(Dispatchers.IO) {
-                    createAccountUseCase(
-                        CreateAccountUseCase.Params(
-                            AccountEntity(
-                                name = currentState.accountName,
-                                balance = currentState.balance ?: BigDecimal.ZERO,
-                                currency = currentState.currency!!,
-                                note = note
-                            ),
-                            currencyValue
-                        )
-                    )
-                    postEffect(Effect.NavigateBack)
-                }
+                ),
+                onSuccess = { currencyValue -> createAccount(note, currencyValue) },
+                onError = { getLocalCurrencyAndCreateAccount(note) },
+            )
+            setState { it.copy(isLoading = false) }
+        }
+    }
+
+    private fun getLocalCurrencyAndCreateAccount(note: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if(getLocalCurrencyListUseCase().contains(currentState.currency!!)) {
+                createAccount(note)
+            } else {
+                postEffect(Effect.FetchFailedNotify)
             }
-            setState(currentState.copy(isLoading = false))
+        }
+    }
+
+    private fun createAccount(note: String?, currencyValue: BigDecimal? = null) {
+        viewModelScope.launch(Dispatchers.IO) {
+            createAccountUseCase(
+                account = AccountEntity(
+                    name = currentState.accountName,
+                    balance = currentState.balance ?: BigDecimal.ZERO,
+                    currency = currentState.currency!!,
+                    note = note
+                ),
+                currencyValue = currencyValue
+            )
+            postEffect(Effect.NavigateBack)
         }
     }
 }

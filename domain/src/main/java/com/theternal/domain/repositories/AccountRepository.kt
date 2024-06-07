@@ -14,4 +14,6 @@ interface AccountRepository {
     fun getAllAccounts(): Flow<List<AccountEntity>>
     fun createAccount(account: AccountEntity)
     fun getAccount(id: Long): Flow<AccountEntity>
+    fun deleteAccount(id: Long)
+    fun updateAccount(account: AccountEntity)
 }

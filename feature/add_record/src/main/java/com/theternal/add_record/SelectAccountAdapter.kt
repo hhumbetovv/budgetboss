@@ -1,4 +1,4 @@
-package com.theternal.add_record.adapters
+package com.theternal.add_record
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat

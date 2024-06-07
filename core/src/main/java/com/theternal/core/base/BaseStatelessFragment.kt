@@ -40,9 +40,9 @@ abstract class BaseStatelessFragment<VB : ViewBinding> : Fragment() {
         initViews()
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         _binding = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 
     //! Initializers

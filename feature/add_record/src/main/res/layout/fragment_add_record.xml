@@ -61,6 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginHorizontal="10dp" />
 
+
             </com.google.android.material.card.MaterialCardView>
 
             <EditText
@@ -103,55 +104,12 @@
                     style="@style/Heading"
                     android:text="@string/transfer_from" />
 
-                <LinearLayout
+                <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/senderAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    app:mainColor="@color/danger"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_clickable_container"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="20dp">
-
-                    <TextView
-                        android:id="@+id/sender"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/select_account"
-                        android:textColor="@color/hint"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/senderCurrency"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="AZ" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_chevron_down"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/hint" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,55 +138,12 @@
 
                 </LinearLayout>
 
-                <LinearLayout
+                <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/receiverAccount"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    app:mainColor="@color/primary"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/bg_clickable_container"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="20dp">
-
-                    <TextView
-                        android:id="@+id/receiver"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/select_account"
-                        android:textColor="@color/hint"
-                        android:textSize="16sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/receiverCurrency"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="16dp"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
-                        tools:text="AZ" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_chevron_down"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/hint" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -239,64 +154,12 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/date" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.theternal.uikit.views.DateButtonView
                 android:id="@+id/dateBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/bg_clickable_container"
-                android:paddingVertical="18dp">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginLeft="20dp"
-                    android:contentDescription="@null"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_date"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:text="@string/date"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                    app:layout_constraintStart_toEndOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="12dp"
-                    android:textColor="@color/hint"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="@+id/imageView2"
-                    tools:text="31.01.2024" />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginRight="16dp"
-                    android:contentDescription="@null"
-                    android:src="@drawable/ic_chevron_right"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/hint"
-                    tools:tint="@color/hint" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"/>
 
             <EditText
                 android:id="@+id/noteField"

@@ -1,7 +1,8 @@
-package com.theternal.uikit.adapters
+package com.theternal.record_details.adapters
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.show
@@ -15,20 +16,25 @@ import com.theternal.domain.entities.base.RecordType.*
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
+import com.theternal.record_details.RecordDetailsFragment
 import com.theternal.common.R.color as Colors
 import com.theternal.uikit.databinding.ViewRecordItemBinding
+import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getIconDrawable
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class RecordAdapter : BaseAdapter<RecordEntity, ViewRecordItemBinding>(
+class RecordAdapter(
+    private val fragmentManager: FragmentManager,
+) : BaseAdapter<RecordEntity, ViewRecordItemBinding>(
     object : DiffUtil.ItemCallback<RecordEntity>() {
         override fun areItemsTheSame(oldItem: RecordEntity, newItem: RecordEntity): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: RecordEntity, newItem: RecordEntity): Boolean {
-            return oldItem.title == newItem.title && oldItem.amount == newItem.amount
+            return oldItem.title == newItem.title &&
+                    oldItem.date == newItem.date
         }
     }
 ) {
@@ -38,6 +44,18 @@ class RecordAdapter : BaseAdapter<RecordEntity, ViewRecordItemBinding>(
     override val itemBinder: Binder<RecordEntity, ViewRecordItemBinding>
         @SuppressLint("SetTextI18n")
         get() = { item, _ ->
+
+            val bottomSheet = AppBottomSheetFragment { RecordDetailsFragment(
+                item.id,
+                item is TransferEntity
+            ) }
+
+            container.setOnClickListener {
+                if(!bottomSheet.isAdded) {
+                    bottomSheet.show(fragmentManager, "Records")
+                }
+            }
+
             val type = when (item) {
                 is FinancialRecordEntity -> {
                     if (item.isExpense) EXPENSE

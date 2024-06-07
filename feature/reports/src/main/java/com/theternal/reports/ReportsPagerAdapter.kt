@@ -1,4 +1,4 @@
-package com.theternal.reports.adapters
+package com.theternal.reports
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
