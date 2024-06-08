@@ -30,7 +30,10 @@ sealed interface AccountDetailsContract {
         val editMode: Boolean = false,
         val account: AccountEntity? = null,
         val currencyValue: BigDecimal? = null,
-        val transfers: List<TransferEntity> = listOf(),
+        val incomeList: List<TransferEntity> = listOf(),
+        val expenseList: List<TransferEntity> = listOf(),
+        val totalIncomes: BigDecimal? = null,
+        val totalExpenses: BigDecimal? = null,
         val newName: String = "",
     ) : ViewState
 

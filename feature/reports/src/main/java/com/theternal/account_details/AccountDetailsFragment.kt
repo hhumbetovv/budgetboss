@@ -1,5 +1,6 @@
 package com.theternal.account_details
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedVectorDrawable
@@ -21,6 +22,7 @@ import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.Initializer
 import com.theternal.domain.entities.local.AccountEntity
+import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.record_details.adapters.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
@@ -49,7 +51,8 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     override val viewExiting: Transition = viewTransition
 
     //! UI Properties
-    private var transferAdapter: RecordAdapter? = null
+    private var incomesAdapter: RecordAdapter? = null
+    private var expensesAdepter: RecordAdapter? = null
     private var smile: Drawable? = null
     private var neutral: Drawable? = null
     private var frown: Drawable? = null
@@ -64,9 +67,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     override val initViews: Initializer<FragmentAccountDetailsBinding> = {
         postEvent(Event.GetAccount(arguments?.getLong("id")))
 
-        transferAdapter = RecordAdapter(childFragmentManager)
-
-        transferList.adapter = transferAdapter
+        initRecyclerViews()
 
         initDrawables()
 
@@ -84,7 +85,8 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
     override fun onDestroyView() {
         super.onDestroyView()
-        transferAdapter = null
+        incomesAdapter = null
+        expensesAdepter = null
         smile = null
         neutral = null
         frown = null
@@ -92,6 +94,14 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
         colorPrimary = null
         colorDanger = null
         colorWhite = null
+    }
+
+    private fun initRecyclerViews() {
+        incomesAdapter = RecordAdapter(childFragmentManager)
+        expensesAdepter = RecordAdapter(childFragmentManager)
+
+        binding.incomeList.adapter = incomesAdapter
+        binding.expenseList.adapter = expensesAdepter
     }
 
     private fun initDrawables() {
@@ -144,7 +154,6 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
     override fun onStateUpdate(state: State) {
         if(state.account != null) {
-            transferAdapter?.submitList(state.transfers)
 
             updateAccountInfo(state.account, state.editMode)
 
@@ -156,7 +165,11 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
             updateActionButtons(state.editMode)
 
-            if(state.transfers.isEmpty()) {
+            updateIncomes(state.account.currency, state.totalIncomes, state.incomeList)
+
+            updateExpenses(state.account.currency, state.totalExpenses, state.expenseList)
+
+            if(state.incomeList.isEmpty() && state.expenseList.isEmpty()) {
                 binding.emptyListTitle.show()
             } else {
                 binding.emptyListTitle.hide()
@@ -235,6 +248,44 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
                 else Drawables.ic_trash
             ))
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateIncomes(
+        currency: String,
+        totalIncomes: BigDecimal?,
+        list: List<TransferEntity>
+    ) {
+        binding {
+            if(list.isEmpty()) {
+                incomeContainer.hide()
+            } else {
+                incomeContainer.show()
+            }
+            if(totalIncomes != null) {
+                incomes.text = "+${totalIncomes.format()} $currency"
+            }
+        }
+        incomesAdapter?.submitList(list)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateExpenses(
+        currency: String,
+        totalExpenses: BigDecimal?,
+        list: List<TransferEntity>
+    ) {
+        binding {
+            if(list.isEmpty()) {
+                expenseContainer.hide()
+            } else {
+                expenseContainer.show()
+            }
+            if(totalExpenses != null) {
+                expenses.text = "-${totalExpenses.format()} $currency"
+            }
+        }
+        expensesAdepter?.submitList(list)
     }
 
     override fun onEffectUpdate(effect: Effect) {

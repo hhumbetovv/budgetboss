@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.theternal.core.base.BaseViewModel
 import com.theternal.account_details.AccountDetailsContract.*
 import com.theternal.domain.entities.local.AccountEntity
+import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.usecases.DeleteAccountUseCase
 import com.theternal.domain.usecases.GetAccountTransfersUseCase
 import com.theternal.domain.usecases.GetAccountUseCase
@@ -74,17 +75,52 @@ class AccountDetailsViewModel @Inject constructor(
     private fun getTransfers(transfers: List<Long>) {
         getTransfersJob?.cancel()
         getTransfersJob = getAccountTransfersUseCase(transfers).onEach { transferRecords ->
-            setState { state ->
-                state.copy(transfers = transferRecords.sortedByDescending { it.date })
-            }
+            setIncomes(transferRecords.filter {
+                it.receiverId == currentState.account?.id
+            })
+
+            setExpenses(transferRecords.filter {
+                it.senderId == currentState.account?.id
+            })
         }.launchIn(viewModelScope)
+    }
+
+    private fun setIncomes(list: List<TransferEntity>) {
+        viewModelScope.launch {
+            val totalIncomes = list.fold(BigDecimal.ZERO) { acc, record ->
+                acc + record.amount * record.exchangeValue
+            }
+            setState { state ->
+                state.copy(
+                    totalIncomes = totalIncomes,
+                    incomeList = list.sortedByDescending { it.date }
+                )
+            }
+        }
+    }
+
+    private fun setExpenses(list: List<TransferEntity>) {
+        viewModelScope.launch {
+            val totalExpenses = list.fold(BigDecimal.ZERO) { acc, record ->
+                acc + record.amount
+            }
+            setState { state ->
+                state.copy(
+                    totalExpenses = totalExpenses,
+                    expenseList = list.sortedByDescending { it.date }
+                )
+            }
+        }
     }
 
     private fun removeAccount() {
         getAccountJob?.cancel()
         getTransfersJob?.cancel()
         viewModelScope.launch(Dispatchers.IO) {
-            deleteAccountUseCase(currentState.account!!, currentState.transfers)
+            deleteAccountUseCase(
+                account = currentState.account!!,
+                records = currentState.incomeList + currentState.expenseList
+            )
         }
         postEffect(Effect.NavigateBack)
     }
