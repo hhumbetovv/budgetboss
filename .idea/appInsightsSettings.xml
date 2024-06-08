@@ -27,10 +27,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.theternal.budgetboss" />
+                  <option name="mobileSdkAppId" value="1:293084272483:android:89410defb83024db706556" />
+                  <option name="projectId" value="budget-boss-1e43a" />
+                  <option name="projectNumber" value="293084272483" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

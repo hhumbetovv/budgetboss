@@ -29,5 +29,6 @@ sealed interface AddAccountContract {
         data object NavigateBack : Effect
 
         data object FetchFailedNotify : Effect
+
     }
 }

@@ -1,6 +1,8 @@
 package com.theternal.add_account
 
+import android.os.Bundle
 import android.widget.ArrayAdapter
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.theternal.add_account.databinding.FragmentAddAccountBinding
 import com.theternal.common.extensions.setOnChangeListener
 import com.theternal.core.base.BaseStatefulFragment
@@ -28,6 +30,12 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
 
     //! UI Properties
     private var list: List<String> = listOf()
+    private lateinit var analytics: FirebaseAnalytics
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        analytics = FirebaseAnalytics.getInstance(requireContext())
+    }
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddAccountBinding> = {
