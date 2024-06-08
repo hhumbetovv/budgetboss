@@ -1,7 +1,6 @@
 package com.theternal.core.base
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,11 +59,11 @@ abstract class BaseStatefulFragment<VB : ViewBinding, VM : BaseViewModel<Event, 
         //! State Listener
        stateJob = _viewModel!!.uiState.flowWithLifecycle(
             lifecycle, Lifecycle.State.STARTED
-        ).onEach {state -> onStateUpdate(state) }.launchIn(lifecycleScope)
+        ).onEach { state -> onStateUpdate(state) }.launchIn(lifecycleScope)
         //! Effect Listener
         effectJob = _viewModel!!.uiEffect.flowWithLifecycle(
             lifecycle, Lifecycle.State.STARTED
-        ).onEach {effect -> onEffectUpdate(effect) }.launchIn(lifecycleScope)
+        ).onEach { effect -> onEffectUpdate(effect) }.launchIn(lifecycleScope)
     }
 
     //! View Listeners

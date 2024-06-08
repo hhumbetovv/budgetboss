@@ -31,10 +31,22 @@ class HomeViewModel @Inject constructor(
     }
 
     init {
-        getData()
+        updateCurrencyList()
+        getRecordsAndBalances()
     }
 
-    private fun getData() {
+    private fun getRecordsAndBalances() {
+        combine(getAllRecordsUseCase(), getAllBalancesUseCase()) { records, balance ->
+            State(
+                balance = balance + getAmounts(records),
+                records = records.sortedByDescending { it.date }
+            )
+        }.onEach { state ->
+            setState { state }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun updateCurrencyList() {
         viewModelScope.launch(Dispatchers.IO) {
             makeRequest(
                 NetworkRequest.NoParams(fetchCurrencyValuesUseCase::invoke),
@@ -43,17 +55,6 @@ class HomeViewModel @Inject constructor(
                 }
             )
         }
-        combine(
-            getAllRecordsUseCase(),
-            getAllBalancesUseCase(),
-        ) { records, balance ->
-            State(
-                balance = balance + getAmounts(records),
-                records = records.sortedByDescending { it.date }
-            )
-        }.onEach { state ->
-            setState { state }
-        }.launchIn(viewModelScope)
     }
 
     private fun getAmounts(records: List<RecordEntity>): BigDecimal {

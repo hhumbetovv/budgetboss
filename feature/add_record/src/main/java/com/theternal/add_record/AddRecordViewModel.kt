@@ -78,21 +78,22 @@ class AddRecordViewModel @Inject constructor(
                 exchange()
             }
             is Event.CreateRecord -> {
-                val note = if (event.note.isNullOrEmpty()) null else event.note
                 when(currentState.recordType) {
-                    TRANSFER -> createTransferRecord(note)
-                    else -> createFinancialRecord(note)
+                    TRANSFER -> createTransferRecord(event.note)
+                    else -> createFinancialRecord(event.note)
                 }
             }
         }
     }
 
     private fun setAmount(amount: BigDecimal?) {
+        setState { it.copy(amount = amount) }
         notifyJob?.cancel()
         notifyJob = viewModelScope.launch(Dispatchers.IO) {
-            if(currentState.recordType == TRANSFER) delay(1000)
-            setState { it.copy(amount = amount) }
-            if(currentState.exchangeValue != null && currentState.exchangeValue != BigDecimal.ONE) {
+            if(currentState.recordType == TRANSFER &&
+                currentState.exchangeValue != null &&
+                currentState.exchangeValue != BigDecimal.ONE) {
+                delay(1000)
                 postEffect(Effect.ExchangeNotify)
             }
         }
@@ -157,25 +158,23 @@ class AddRecordViewModel @Inject constructor(
         }
     }
 
-    private fun createTransferRecord(note: String?) {
-        viewModelScope.launch(Dispatchers.IO) {
-            currentState.apply {
-                createRecord(
-                    TransferEntity(
-                        title = "${transferFrom!!.name} ► ${transferTo!!.name}",
-                        amount = amount!!,
-                        date = date,
-                        note = note,
-                        senderId = transferFrom.id,
-                        senderCurrency = transferFrom.currency,
-                        receiverId = transferTo.id,
-                        exchangeValue = exchangeValue!!,
-                        receiverCurrency = transferTo.currency
-                    )
+    private fun createTransferRecord(note: String) {
+        currentState.apply {
+            createRecord(
+                TransferEntity(
+                    title = "${transferFrom!!.name} ► ${transferTo!!.name}",
+                    amount = amount!!,
+                    date = date,
+                    note = note.ifEmpty { "Empty" },
+                    senderId = transferFrom.id,
+                    senderCurrency = transferFrom.currency,
+                    receiverId = transferTo.id,
+                    exchangeValue = exchangeValue!!,
+                    receiverCurrency = transferTo.currency
                 )
-                Firebase.analytics.logEvent("create_record") {
-                    param("record_type", recordType.name)
-                }
+            )
+            Firebase.analytics.logEvent("create_record") {
+                param("record_type", recordType.name)
             }
         }
     }

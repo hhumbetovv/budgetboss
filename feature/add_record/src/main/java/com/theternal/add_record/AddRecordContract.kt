@@ -30,7 +30,7 @@ sealed interface AddRecordContract {
 
         data object SwitchAccounts : Event
 
-        data class CreateRecord(val note: String? = null) : Event
+        data class CreateRecord(val note: String) : Event
 
     }
 

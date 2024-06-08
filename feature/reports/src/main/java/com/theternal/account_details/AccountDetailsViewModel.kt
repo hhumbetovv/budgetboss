@@ -135,4 +135,10 @@ class AccountDetailsViewModel @Inject constructor(
             setState { it.copy(editMode = false) }
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        getAccountJob?.cancel()
+        getTransfersJob?.cancel()
+    }
 }

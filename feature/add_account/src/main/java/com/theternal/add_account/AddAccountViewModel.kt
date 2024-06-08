@@ -30,7 +30,9 @@ class AddAccountViewModel @Inject constructor(
         return State()
     }
 
-    init {
+    init { fetchCurrencyList() }
+
+    private fun fetchCurrencyList() {
         viewModelScope.launch(Dispatchers.IO) {
             makeRequest(
                 NetworkRequest.NoParams(fetchCurrencyListUseCase::invoke),
@@ -38,7 +40,7 @@ class AddAccountViewModel @Inject constructor(
                     setState { it.copy(currencyList = list, isLoading = false) }
                 },
                 onError = {
-                   getLocalCurrencyList()
+                    getLocalCurrencyList()
                 },
             )
         }
@@ -80,8 +82,12 @@ class AddAccountViewModel @Inject constructor(
                     exchangeUseCase::invoke,
                     ExchangeUseCase.Params(currentState.currency!!)
                 ),
-                onSuccess = { currencyValue -> createAccount(note, currencyValue) },
-                onError = { getLocalCurrencyAndCreateAccount(note) },
+                onSuccess = { currencyValue ->
+                    createAccount(note, currencyValue)
+                },
+                onError = {
+                    getLocalCurrencyAndCreateAccount(note)
+                },
             )
             setState { it.copy(isLoading = false) }
         }

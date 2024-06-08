@@ -1,21 +1,17 @@
 package com.theternal.record_details
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.theternal.core.base.BaseViewModel
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
-import com.theternal.domain.usecases.CreateRecordUseCase
 import com.theternal.domain.usecases.DeleteRecordUseCase
 import com.theternal.domain.usecases.GetRecordUseCase
 import com.theternal.domain.usecases.UpdateRecordUseCase
 import com.theternal.record_details.RecordDetailsContract.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch

@@ -3,7 +3,6 @@ package com.theternal.category_details
 import androidx.lifecycle.viewModelScope
 import com.theternal.core.base.BaseViewModel
 import com.theternal.category_details.CategoryDetailsContract.*
-import com.theternal.core.base.interfaces.ViewEffect
 import com.theternal.domain.usecases.GetCategoryRecordsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -32,10 +31,7 @@ class CategoryDetailsViewModel @Inject constructor(
     private fun getRecords(title: String?, isExpense: Boolean) {
         if(title == null) return
         getRecordsJob?.cancel()
-        getRecordsJob = getCategoryRecordsUseCase(
-            title,
-            isExpense
-        ).onEach { records ->
+        getRecordsJob = getCategoryRecordsUseCase(title, isExpense).onEach { records ->
             setState { state ->
                 state.copy(
                     records = records.sortedByDescending { it.date },
