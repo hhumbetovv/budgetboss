@@ -1,6 +1,9 @@
 package com.theternal.add_record
 
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.logEvent
+import com.google.firebase.ktx.Firebase
 import com.theternal.common.extensions.capitalize
 import com.theternal.core.base.BaseViewModel
 import com.theternal.domain.entities.base.RecordType.*
@@ -147,6 +150,10 @@ class AddRecordViewModel @Inject constructor(
                     amount = amount!!
                 )
             )
+            Firebase.analytics.logEvent("create_record") {
+                param("record_type", recordType.name)
+                param("category", title)
+            }
         }
     }
 
@@ -166,6 +173,9 @@ class AddRecordViewModel @Inject constructor(
                         receiverCurrency = transferTo.currency
                     )
                 )
+                Firebase.analytics.logEvent("create_record") {
+                    param("record_type", recordType.name)
+                }
             }
         }
     }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293084272483",
+    "project_id": "budget-boss-1e43a",
+    "storage_bucket": "budget-boss-1e43a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293084272483:android:89410defb83024db706556",
+        "android_client_info": {
+          "package_name": "com.theternal.budgetboss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuH4xjnGPH7SMm7FJP552JhaCIMRA6UCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
