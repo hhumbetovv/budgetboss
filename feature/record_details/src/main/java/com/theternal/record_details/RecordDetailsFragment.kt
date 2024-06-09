@@ -1,7 +1,8 @@
 package com.theternal.record_details
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
+import com.theternal.common.extensions.Colors
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.setOnChangeListener
@@ -19,7 +20,6 @@ import com.theternal.record_details.databinding.FragmentRecordDetailsBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getIconDrawable
 import dagger.hilt.android.AndroidEntryPoint
-import com.theternal.common.R.color as Colors
 
 @AndroidEntryPoint
 class RecordDetailsFragment(
@@ -44,8 +44,10 @@ class RecordDetailsFragment(
         postEvent(Event.GetRecord(id, isTransfer))
 
         (parentFragment as AppBottomSheetFragment).setTitle(
-            if(isTransfer) "Transfer Record"
-            else "Financial Record"
+            getString(
+                if(isTransfer) Strings.transfer_record
+                else Strings.financial_records
+            )
         )
 
         noteField.setOnChangeListener {
@@ -60,14 +62,18 @@ class RecordDetailsFragment(
         deleteBtn.setOnClickListener { deleteDialog.show() }
 
         deleteDialog = AlertDialog.Builder(requireContext())
-            .setTitle("Delete Record")
+            .setTitle(getString(Strings.delete_record))
             .setMessage(
-                if(isTransfer) "amounts of accounts will be reverted back"
-                else "categories will be reorganized"
+                getString(
+                    if(isTransfer) Strings.transfer_info
+                    else Strings.record_info
+                )
             )
             .setCancelable(true)
-            .setPositiveButton("Delete") { _, _ -> postEvent(Event.DeleteRecord)}
-            .setNegativeButton("Cancel", null)
+            .setPositiveButton(getString(Strings.delete)) { _, _ ->
+                postEvent(Event.DeleteRecord)
+            }
+            .setNegativeButton(getString(Strings.cancel), null)
     }
 
     //! UI Updates
@@ -117,13 +123,11 @@ class RecordDetailsFragment(
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setTransferAmounts(record: TransferEntity) {
         binding.sent.text = record.displaySentAmount()
         binding.received.text = record.displayReceivedAmount()
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setAmount(isExpense: Boolean, amount: String) {
         binding.amount.text = amount
         val color = if(isExpense) Colors.danger else Colors.primary

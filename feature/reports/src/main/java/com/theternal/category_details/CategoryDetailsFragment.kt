@@ -13,10 +13,10 @@ import com.theternal.core.base.Initializer
 import com.theternal.reports.databinding.FragmentCategoryDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.category_details.CategoryDetailsContract.*
+import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
 import com.theternal.record_details.RecordAdapter
-import com.theternal.common.R.color as Colors
 
 @AndroidEntryPoint
 class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBinding,

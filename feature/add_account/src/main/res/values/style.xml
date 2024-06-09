@@ -8,7 +8,7 @@
         <item name="android:inputType">text</item>
     </style>
 
-    <style name="NoteField" parent="TextField">
+    <style name="AccountNoteField" parent="TextField">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
         <item name="android:inputType">text</item>
@@ -27,7 +27,7 @@
         <item name="android:layout_marginRight">@dimen/paddingHorizontal</item>
     </style>
 
-    <style name="SaveButton" parent="PrimaryBtn">
+    <style name="AccountSaveButton" parent="PrimaryBtn">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>

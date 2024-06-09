@@ -1,6 +1,5 @@
 package com.theternal.add_record
 
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -16,9 +15,9 @@ import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.domain.entities.base.RecordType
 import com.theternal.domain.entities.base.RecordType.*
 import dagger.hilt.android.AndroidEntryPoint
-import com.theternal.common.R.string as Strings
 import com.theternal.add_record.AddRecordContract.*
 import com.theternal.add_record.databinding.FragmentAddRecordBinding
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.setOnChangeListener
@@ -167,7 +166,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
     //!  UI Updates
     override fun onStateUpdate(state: State) {
-        Log.d("LOGGER STATE", state.toString())
+
         updateAmountField()
 
         updateCategoryListVisibility(state.recordType != TRANSFER)
@@ -257,14 +256,14 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         when(effect) {
             Effect.NavigateBack -> findNavController().popBackStack()
             Effect.CheckInternetNotify -> {
-                showToast("Please, check internet connection")
+                showToast(getString(Strings.check_internet))
             }
             is Effect.ExchangeNotify -> {
                 if (state?.amount == null || state?.amount == BigDecimal.ZERO) return
                 state?.apply {
                     val from = "${amount!!.format()} ${transferFrom?.currency}"
                     val to = "${(amount * exchangeValue!!).format()} ${transferTo?.currency}"
-                    showToast("$from is approximately $to")
+                    showToast(getString(Strings.approximately, from, to))
                 }
             }
         }

@@ -48,12 +48,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/incomeAmount"
+                    android:id="@+id/totalIncomes"
                     style="@style/Incomes"
                     android:layout_margin="@dimen/padding"
-                    app:layout_constraintBottom_toBottomOf="@+id/incomesTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/incomeCategoryList"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/incomesTitle"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="80 $" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -87,12 +87,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/expenseAmount"
+                    android:id="@+id/totalExpenses"
                     style="@style/Expenses"
                     android:layout_margin="@dimen/padding"
-                    app:layout_constraintBottom_toBottomOf="@+id/expensesTitle"
+                    app:layout_constraintBottom_toTopOf="@+id/expenseCategoryList"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/expensesTitle"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="-200 $" />
 
                 <androidx.recyclerview.widget.RecyclerView

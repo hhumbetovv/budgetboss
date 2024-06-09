@@ -25,7 +25,7 @@
         <item name="android:textColor">@color/primary</item>
     </style>
 
-    <style name="NoteField" parent="TextField">
+    <style name="RecordNoteField" parent="TextField">
         <item name="android:layout_width">0dp</item>
         <item name="android:inputType">text</item>
         <item name="android:layout_marginTop">16dp</item>
@@ -38,7 +38,7 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
-    <style name="SaveButton" parent="PrimaryBtn">
+    <style name="RecordSaveButton" parent="PrimaryBtn">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
@@ -46,13 +46,11 @@
         <item name="android:enabled">false</item>
     </style>
 
-    <style name="DeleteButton" parent="PrimaryBtn">
+    <style name="RecordDeleteButton" parent="PrimaryBtn">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:backgroundTint">@color/frame</item>
         <item name="rippleColor">@color/danger</item>
         <item name="android:layout_marginTop">16dp</item>
-        <item name="android:layout_marginRight">16dp</item>
-        <item name="android:enabled">false</item>
     </style>
 </resources>

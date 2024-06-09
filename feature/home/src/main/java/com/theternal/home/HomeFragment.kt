@@ -1,6 +1,5 @@
 package com.theternal.home
 
-import android.annotation.SuppressLint
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
@@ -8,6 +7,7 @@ import android.view.Gravity
 import androidx.transition.Transition
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.SlideDistanceProvider
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.hide
@@ -72,7 +72,6 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     }
 
     //!  UI Updates
-    @SuppressLint("SetTextI18n")
     override fun onStateUpdate(state: State) {
         recordAdapter?.submitList(state.records)
 
@@ -106,7 +105,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     override fun onEffectUpdate(effect: Effect) {
         when(effect) {
             Effect.FetchFailedNotify -> {
-                showToast("Currency fetch failed")
+                showToast(getString(Strings.currency_fetch_failed))
             }
         }
     }

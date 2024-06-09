@@ -20,7 +20,7 @@
 
     <EditText
         android:id="@+id/noteField"
-        style="@style/NoteField"
+        style="@style/AccountNoteField"
         android:autofillHints="@null"
         android:hint="@string/note"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +45,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBtn"
-        style="@style/SaveButton"
+        style="@style/AccountSaveButton"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

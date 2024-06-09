@@ -7,6 +7,7 @@ import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
 import com.theternal.add_account.AddAccountContract.*
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.setOnItemSelectedListener
 import com.theternal.common.extensions.show
@@ -32,7 +33,9 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddAccountBinding> = {
 
-        (parentFragment as AppBottomSheetFragment).setTitle("Add Account")
+        (parentFragment as AppBottomSheetFragment).setTitle(
+            getString(Strings.add_account)
+        )
 
         nameField.setOnChangeListener {
             postEvent(Event.SetAccountName(it))
@@ -91,7 +94,7 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
                 (parentFragment as AppBottomSheetFragment).dismiss()
             }
             Effect.FetchFailedNotify -> {
-                showToast("Currency fetch failed")
+                showToast(getString(Strings.currency_fetch_failed))
             }
         }
     }

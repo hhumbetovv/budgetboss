@@ -1,9 +1,9 @@
 package com.theternal.record_details
 
-import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
+import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -15,7 +15,6 @@ import com.theternal.domain.entities.base.RecordType.*
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
-import com.theternal.common.R.color as Colors
 import com.theternal.uikit.databinding.ViewRecordItemBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getIconDrawable
@@ -40,7 +39,6 @@ class RecordAdapter(
         get() = ViewRecordItemBinding::inflate
 
     override val itemBinder: Binder<RecordEntity, ViewRecordItemBinding>
-        @SuppressLint("SetTextI18n")
         get() = { item, _ ->
 
             val bottomSheet = AppBottomSheetFragment { RecordDetailsFragment(

@@ -17,6 +17,11 @@
     <string name="expenses">Expenses</string>
     <string name="add_note">Add Note</string>
     <string name="home">Home</string>
+    <string name="currency_fetch_failed">Currency Fetch Failed</string>
+    <string name="check_internet">Please, check internet connection</string>
+    <string name="approximately">%1s is approximately %2s</string>
+    <string name="transfer_record">Transfer Record</string>
+    <string name="financial_record">Financial Record</string>
     <string name="transfer_from">Transfer From</string>
     <string name="transfer_to">Transfer To</string>
     <string name="add_account">Add Account</string>
@@ -36,4 +41,9 @@
     <string name="cancel">Cancel</string>
     <string name="empty_record_list">No records have been \ncreated in this app yet</string>
     <string name="empty_transfer_list">No transfers have been \ncreated in this account yet</string>
+    <string name="delete_record">Delete Record?</string>
+    <string name="delete_account">Delete Account?</string>
+    <string name="transfer_info">Amounts of accounts will be reverted back</string>
+    <string name="record_info">Categories will be reorganized</string>
+    <string name="account_delete_info">All transactions on the account will be reversed</string>
 </resources>

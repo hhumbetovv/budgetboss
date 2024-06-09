@@ -57,7 +57,7 @@
 
     <EditText
         android:id="@+id/noteField"
-        style="@style/NoteField"
+        style="@style/RecordNoteField"
         android:autofillHints="@null"
         android:hint="@string/note"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBtn"
-        style="@style/SaveButton"
+        style="@style/RecordSaveButton"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
@@ -82,7 +82,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteBtn"
-        style="@style/DeleteButton"
+        style="@style/RecordDeleteButton"
         android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

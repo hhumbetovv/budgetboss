@@ -1,6 +1,7 @@
 package com.theternal.financial_records
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.theternal.common.extensions.capitalize
 import com.theternal.common.extensions.format
@@ -52,8 +53,9 @@ class FinancialRecordsFragment : BaseStatefulFragment<FragmentFinancialRecordsBi
             expenseCategoryAdapter.submitList(expenseCategories)
 
             binding {
-                incomeAmount.text = "+${totalIncome.format(true)}"
-                expenseAmount.text = "-${totalExpense.format(true)}"
+                Log.d("LOGGER", state.toString())
+                totalIncomes.text = "+${totalIncome.format(true)}"
+                totalExpenses.text = "-${totalExpense.format(true)}"
 
                 if(totalIncome === BigDecimal.ZERO) {
                     incomeContainer.hide()

@@ -15,6 +15,8 @@ import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.reports.databinding.FragmentAccountDetailsBinding
 import com.theternal.account_details.AccountDetailsContract.*
+import com.theternal.common.extensions.Colors
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.getDrawable
@@ -26,8 +28,6 @@ import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.record_details.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
-import com.theternal.common.R.color as Colors
-import com.theternal.common.R.string as Strings
 import com.theternal.uikit.R.drawable as Drawables
 
 @AndroidEntryPoint
@@ -146,11 +146,13 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
     private fun initAlertDialog() {
        deleteDialog = AlertDialog.Builder(requireContext())
-            .setTitle("Delete Account")
-            .setMessage("all transactions on the account will be reversed")
+            .setTitle(getString(Strings.delete_account))
+            .setMessage(getString(Strings.account_delete_info))
             .setCancelable(true)
-            .setPositiveButton("Delete") { _, _ -> postEvent(Event.DeleteAccount)}
-            .setNegativeButton("Cancel", null)
+            .setPositiveButton(getString(Strings.delete)) { _, _ ->
+                postEvent(Event.DeleteAccount)
+            }
+            .setNegativeButton(getString(Strings.cancel), null)
     }
 
     override fun onStateUpdate(state: State) {

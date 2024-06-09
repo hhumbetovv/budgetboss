@@ -18,7 +18,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        style="@style/TabBarContainer"
+        style="@style/ReportsTabContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle">
@@ -45,7 +45,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
-        style="Pager"
+        style="@style/Pager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

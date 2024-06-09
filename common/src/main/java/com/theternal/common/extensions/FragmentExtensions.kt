@@ -1,9 +1,14 @@
+
 package com.theternal.common.extensions
 
 import android.graphics.drawable.Drawable
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.theternal.common.R
+
+typealias Strings = R.string
+typealias Colors = R.color
 
 fun Fragment.getDrawable(id: Int): Drawable? {
     return ContextCompat.getDrawable(requireContext(), id)

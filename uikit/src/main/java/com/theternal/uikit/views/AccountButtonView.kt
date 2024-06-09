@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.theternal.common.extensions.getColor
@@ -50,7 +49,6 @@ class AccountButtonView @JvmOverloads constructor(
     }
 
     fun setAccount(account: AccountEntity?) {
-        Log.d("LOGGER", account.toString())
         setLabel(account?.name)
         setBorder(account != null)
         setBalance(account)
