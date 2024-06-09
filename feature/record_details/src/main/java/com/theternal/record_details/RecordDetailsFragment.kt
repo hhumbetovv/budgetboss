@@ -135,7 +135,7 @@ class RecordDetailsFragment(
     }
 
     private fun updateNote(recordNote: String?, note: String?) {
-        if(note == null) {
+        if(note == null && recordNote != null) {
             binding.noteField.setText(
                 recordNote
             )

@@ -48,9 +48,10 @@ class AddAccountViewModel @Inject constructor(
 
     private fun getLocalCurrencyList() {
         viewModelScope.launch(Dispatchers.IO) {
+            val currencyList = getLocalCurrencyListUseCase()
             setState { state ->
                 state.copy(
-                    currencyList = getLocalCurrencyListUseCase(),
+                    currencyList = currencyList,
                     isLoading = false
                 )
             }
