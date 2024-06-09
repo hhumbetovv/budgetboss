@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.add_record.databinding.ViewSelectAccountBinding
-import com.theternal.common.extensions.format
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
 import com.theternal.core.base.Inflater
@@ -36,7 +35,7 @@ class SelectAccountAdapter(
                 onItemClickListener(account)
             }
             name.text = account.name
-            balance.text = "${account.balance.format()} ${account.currency}"
+            balance.text = account.displayBalance()
             balance.setTextColor(
                 ContextCompat.getColor(
                     balance.context,

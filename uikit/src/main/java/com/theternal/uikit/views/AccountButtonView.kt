@@ -8,10 +8,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
-import com.theternal.common.extensions.hide
-import com.theternal.common.extensions.show
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.uikit.R
 import com.theternal.uikit.databinding.ViewAccountButtonBinding
@@ -56,7 +53,7 @@ class AccountButtonView @JvmOverloads constructor(
         Log.d("LOGGER", account.toString())
         setLabel(account?.name)
         setBorder(account != null)
-        setBalance(account?.balance, account?.currency)
+        setBalance(account)
     }
 
     private fun setBorder(isActive: Boolean) {
@@ -88,18 +85,18 @@ class AccountButtonView @JvmOverloads constructor(
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setBalance(balance: BigDecimal?, currency: String?) {
+    private fun setBalance(account: AccountEntity?) {
         binding.balance.let { tv ->
-            if(balance == null) {
+            if(account == null) {
                 tv.visibility = GONE
                 return
             }
             tv.visibility = VISIBLE
-            tv.text = "${balance.format()} $currency"
+            tv.text = account.displayBalance(true)
             tv.setTextColor(
                 when {
-                    balance > BigDecimal.ZERO -> primaryColor
-                    balance < BigDecimal.ZERO -> dangerColor
+                    account.balance > BigDecimal.ZERO -> primaryColor
+                    account.balance < BigDecimal.ZERO -> dangerColor
                     else -> whiteColor
                 }
             )

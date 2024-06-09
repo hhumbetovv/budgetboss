@@ -3,6 +3,7 @@ package com.theternal.domain.entities.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.theternal.common.extensions.format
 import java.math.BigDecimal
 
 @Entity(tableName = "accounts")
@@ -20,4 +21,8 @@ data class AccountEntity(
     val note: String?,
     @ColumnInfo("transfers")
     val transfers: List<Long> = listOf(),
-)
+) {
+    fun displayBalance(withCurrency: Boolean = true): String {
+        return "${balance.format()} ${if(withCurrency) currency else "$"}"
+    }
+}

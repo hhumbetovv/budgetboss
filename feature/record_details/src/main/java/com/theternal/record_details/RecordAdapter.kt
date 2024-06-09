@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
-import com.theternal.common.extensions.format
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -74,13 +73,12 @@ class RecordAdapter(
             ).format(item.date)
 
             if(item is TransferEntity) {
-                sent.text = "-${item.amount.format()} ${item.senderCurrency}"
-                received.text = "+${(item.amount * item.exchangeValue).format()} ${item.receiverCurrency}"
+                sent.text = item.displaySentAmount()
+                received.text = item.displayReceivedAmount()
                 sent.show()
                 received.show()
             } else {
-                val prefix = if(type == INCOME) "+" else "-"
-                amount.text = "$prefix${item.amount.format()} \$"
+                amount.text = (item as FinancialRecordEntity).displayAmount()
                 amount.setTextColor(ContextCompat.getColor(
                     amount.context,
                     when(type) {

@@ -77,7 +77,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
         recordAdapter?.submitList(state.records)
 
         binding {
-            total.text = "${state.balance.format()} $"
+            total.text = state.balance.format(true)
 
             updateEmoji(state.balance)
 

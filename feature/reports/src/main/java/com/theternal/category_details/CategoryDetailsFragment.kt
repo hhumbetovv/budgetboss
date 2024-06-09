@@ -79,7 +79,7 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     @SuppressLint("SetTextI18n")
     override fun onStateUpdate(state: State) {
         if(state.totalAmount != null) {
-            binding.amount.text = "$prefix${state.totalAmount.format()} $"
+            binding.amount.text = prefix + state.totalAmount.format(true)
         }
         recordAdapter?.submitList(state.records)
     }

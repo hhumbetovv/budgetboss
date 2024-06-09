@@ -4,6 +4,7 @@ package com.theternal.domain.entities.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.theternal.common.extensions.format
 import com.theternal.domain.interfaces.RecordEntity
 import java.math.BigDecimal
 
@@ -22,4 +23,9 @@ data class FinancialRecordEntity(
     override val note: String? = null,
     @ColumnInfo("isExpense")
     val isExpense: Boolean,
-) : RecordEntity
+) : RecordEntity {
+    fun displayAmount(): String {
+        val prefix = if(isExpense) "-" else "+"
+        return prefix + amount.format(true)
+    }
+}

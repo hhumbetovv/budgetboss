@@ -18,7 +18,7 @@ import kotlin.math.ln
  * @receiver The BigDecimal value to be formatted.
  * @return A formatted string representing the value in a human-readable format.
  */
-fun BigDecimal.format(): String {
+fun BigDecimal.format(withDollar: Boolean = false): String {
     val sign = if(this.signum() < 0) "-" else ""
     var value = this.abs()
     if (value < BigDecimal(1000)) {
@@ -26,7 +26,7 @@ fun BigDecimal.format(): String {
             .stripTrailingZeros().toPlainString()
         return sign + if (formattedValue.contains(".")) {
             formattedValue.trimEnd('0').trimEnd('.')
-        } else formattedValue
+        } else formattedValue + if(withDollar) " $" else ""
     }
     val exp = (ln(value.toDouble()) / ln(1000.0)).toInt()
     val suffix = "KMBTPEZYRQ"[exp - 1]
@@ -36,5 +36,5 @@ fun BigDecimal.format(): String {
         formattedValue.trimEnd('0').trimEnd('.') + suffix
     } else {
         formattedValue + suffix
-    }
+    } + if(withDollar) " $" else ""
 }

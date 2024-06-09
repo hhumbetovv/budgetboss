@@ -52,8 +52,8 @@ class FinancialRecordsFragment : BaseStatefulFragment<FragmentFinancialRecordsBi
             expenseCategoryAdapter.submitList(expenseCategories)
 
             binding {
-                incomeAmount.text = "+${totalIncome.format()} $"
-                expenseAmount.text = "-${totalExpense.format()} $"
+                incomeAmount.text = "+${totalIncome.format(true)}"
+                expenseAmount.text = "-${totalExpense.format(true)}"
 
                 if(totalIncome === BigDecimal.ZERO) {
                     incomeContainer.hide()

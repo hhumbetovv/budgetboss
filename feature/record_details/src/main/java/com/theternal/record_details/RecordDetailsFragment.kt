@@ -2,7 +2,6 @@ package com.theternal.record_details
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.setOnChangeListener
@@ -20,7 +19,6 @@ import com.theternal.record_details.databinding.FragmentRecordDetailsBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getIconDrawable
 import dagger.hilt.android.AndroidEntryPoint
-import java.math.BigDecimal
 import com.theternal.common.R.color as Colors
 
 @AndroidEntryPoint
@@ -115,23 +113,20 @@ class RecordDetailsFragment(
         if(record is TransferEntity) {
             setTransferAmounts(record)
         } else {
-            setAmount((record as FinancialRecordEntity).isExpense, record.amount)
+            setAmount((record as FinancialRecordEntity).isExpense, record.displayAmount())
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun setTransferAmounts(record: TransferEntity) {
-        record.apply {
-            binding.sent.text = "-${amount.format()} $senderCurrency"
-            binding.received.text = "+${(amount * exchangeValue).format()} $receiverCurrency"
-        }
+        binding.sent.text = record.displaySentAmount()
+        binding.received.text = record.displayReceivedAmount()
     }
 
     @SuppressLint("SetTextI18n")
-    private fun setAmount(isExpense: Boolean, amount: BigDecimal) {
-        val prefix = if(isExpense) "-" else "+"
+    private fun setAmount(isExpense: Boolean, amount: String) {
+        binding.amount.text = amount
         val color = if(isExpense) Colors.danger else Colors.primary
-        binding.amount.text = "$prefix${amount.format()} $"
         binding.amount.setTextColor(getColor(color))
     }
 

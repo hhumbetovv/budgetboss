@@ -1,7 +1,6 @@
 package com.theternal.uikit.adapters
 
 import android.annotation.SuppressLint
-import android.os.Parcelable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.extensions.capitalize
@@ -34,7 +33,12 @@ class CategoryAdapter(
         val category: Enum<*>,
         val isSelected: Boolean = false,
         val amount: BigDecimal? = null,
-    )
+    ) {
+        fun showAmount(): String {
+            val prefix = if(category is IncomeCategory) "+" else "-"
+            return "$prefix${amount?.format(true)}"
+        }
+    }
 
     override val bindingInflater: Inflater<ViewCategoryItemBinding>
         get() = ViewCategoryItemBinding::inflate
@@ -55,8 +59,7 @@ class CategoryAdapter(
             )
 
             if(item.amount != null) {
-                val prefix = if(item.category is IncomeCategory) "+" else "-"
-                amount.text = "$prefix${item.amount.format()} $"
+                amount.text = item.showAmount()
                 amount.show()
             }
 
