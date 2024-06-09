@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="@dimen/padding"
     android:scrollbars="none"
     android:background="@color/background"
     tools:theme="@style/Theme.BudgetBoss">
@@ -16,8 +16,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/accountList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/AccountList"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
                 tools:listitem="@layout/view_account_item" />

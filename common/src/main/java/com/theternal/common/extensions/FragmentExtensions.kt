@@ -1,7 +1,6 @@
 package com.theternal.common.extensions
 
 import android.graphics.drawable.Drawable
-import android.health.connect.datatypes.units.Length
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment

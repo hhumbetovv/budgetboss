@@ -48,10 +48,10 @@ abstract class BaseStatefulFragment<VB : ViewBinding, VM : BaseViewModel<Event, 
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         stateJob?.cancel()
         effectJob?.cancel()
         _viewModel = null
+        super.onDestroyView()
     }
 
     //! Initializers
@@ -66,7 +66,6 @@ abstract class BaseStatefulFragment<VB : ViewBinding, VM : BaseViewModel<Event, 
         ).onEach { effect -> onEffectUpdate(effect) }.launchIn(lifecycleScope)
     }
 
-    //! View Listeners
     protected open fun onStateUpdate(state: State) {}
     protected open fun onEffectUpdate(effect: Effect) {}
 

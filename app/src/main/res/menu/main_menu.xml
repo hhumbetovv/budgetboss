@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/home_nav_graph"
         android:icon="@drawable/ic_home"
-        android:title="Home"/>
+        android:title="@string/home"/>
 
     <item android:enabled="false" android:title=""/>
 
     <item android:id="@+id/reports_nav_graph"
         android:icon="@drawable/ic_reports"
-        android:title="Reports"/>
+        android:title="@string/reports"/>
 </menu>

@@ -34,8 +34,8 @@ class MainFragment : BaseStatelessFragment<FragmentMainBinding>() {
     override val viewEntering: Transition = MaterialElevationScale(true)
     override val viewExiting: Transition? = null
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         navController = null
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

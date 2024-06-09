@@ -23,7 +23,7 @@ import com.theternal.common.extensions.show
 import com.theternal.core.base.Initializer
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.domain.entities.local.TransferEntity
-import com.theternal.record_details.adapters.RecordAdapter
+import com.theternal.record_details.RecordAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
 import com.theternal.common.R.color as Colors
@@ -84,7 +84,6 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         incomesAdapter = null
         expensesAdepter = null
         smile = null
@@ -94,6 +93,8 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
         colorPrimary = null
         colorDanger = null
         colorWhite = null
+
+        super.onDestroyView()
     }
 
     private fun initRecyclerViews() {

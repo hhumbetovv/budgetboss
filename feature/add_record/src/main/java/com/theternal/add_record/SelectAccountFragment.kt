@@ -7,6 +7,7 @@ import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.uikit.fragments.AppBottomSheetFragment
+import com.theternal.common.R.string as Strings
 
 class SelectAccountFragment : BaseStatelessFragment<FragmentSelectAccountBinding>() {
 
@@ -45,8 +46,8 @@ class SelectAccountFragment : BaseStatelessFragment<FragmentSelectAccountBinding
         accountList.adapter = selectAccountAdapter
 
         (parentFragment as AppBottomSheetFragment).setTitle(
-            if(isSender != false) "Transfer From"
-            else "Transfer To"
+            if(isSender != false) getString(Strings.transfer_from)
+            else getString(Strings.transfer_to)
         )
 
         addBtn.setOnClickListener {

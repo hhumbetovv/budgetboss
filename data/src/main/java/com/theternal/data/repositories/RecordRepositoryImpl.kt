@@ -7,7 +7,6 @@ import com.theternal.domain.interfaces.RecordEntity
 import com.theternal.domain.repositories.RecordRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class RecordRepositoryImpl @Inject constructor(
@@ -31,7 +30,9 @@ class RecordRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAllFinancialRecords(isExpense: Boolean?): Flow<List<FinancialRecordEntity>> {
+    override fun getAllFinancialRecords(
+        isExpense: Boolean?
+    ): Flow<List<FinancialRecordEntity>> {
         if(isExpense == null) return recordDao.getAllFinancialRecords()
         return recordDao.getAllFinancialRecords(isExpense)
     }

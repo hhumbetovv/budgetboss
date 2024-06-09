@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
 import com.theternal.uikit.R.drawable as Drawables
 import com.theternal.home.HomeContract.*
-import com.theternal.record_details.adapters.RecordAdapter
+import com.theternal.record_details.RecordAdapter
 
 @AndroidEntryPoint
 class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
@@ -64,11 +64,11 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         recordAdapter = null
         smile = null
         neutral = null
         frown = null
+        super.onDestroyView()
     }
 
     //!  UI Updates
@@ -79,15 +79,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
         binding {
             total.text = "${state.balance.format()} $"
 
-            val drawable = when {
-                state.balance > BigDecimal.ZERO -> smile
-                state.balance < BigDecimal.ZERO -> frown
-                else -> neutral
-            }
-            if(drawable != emoji.drawable) {
-                emoji.setImageDrawable(drawable)
-                (emoji.drawable as Animatable).start()
-            }
+            updateEmoji(state.balance)
 
             if(state.records.isEmpty()) {
                 emptyListTitle.show()
@@ -96,6 +88,18 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
             }
 
             recordList.smoothScrollToPosition(0)
+        }
+    }
+
+    private fun updateEmoji(balance: BigDecimal) {
+        val drawable = when {
+            balance > BigDecimal.ZERO -> smile
+            balance < BigDecimal.ZERO -> frown
+            else -> neutral
+        }
+        if(drawable != binding.emoji.drawable) {
+            binding.emoji.setImageDrawable(drawable)
+            (binding.emoji.drawable as Animatable).start()
         }
     }
 

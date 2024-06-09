@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetAllIncomesUseCase @Inject constructor(
     private val recordRepository: RecordRepository
 ) {
-
     operator fun invoke(): Flow<List<FinancialRecordEntity>> {
         return recordRepository.getAllFinancialRecords(false)
     }

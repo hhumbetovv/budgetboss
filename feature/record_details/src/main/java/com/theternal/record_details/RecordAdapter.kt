@@ -1,4 +1,4 @@
-package com.theternal.record_details.adapters
+package com.theternal.record_details
 
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
@@ -16,7 +16,6 @@ import com.theternal.domain.entities.base.RecordType.*
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
-import com.theternal.record_details.RecordDetailsFragment
 import com.theternal.common.R.color as Colors
 import com.theternal.uikit.databinding.ViewRecordItemBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment

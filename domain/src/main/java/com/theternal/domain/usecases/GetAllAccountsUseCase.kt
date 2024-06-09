@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetAllAccountsUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
-
     operator fun invoke(): Flow<List<AccountEntity>> {
         return accountRepository.getAllAccounts()
     }

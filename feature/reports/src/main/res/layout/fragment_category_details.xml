@@ -5,39 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:padding="@dimen/padding"
     tools:theme="@style/Theme.BudgetBoss">
 
     <ImageView
         android:contentDescription="@null"
+        style="@style/GoBackBtn"
         android:id="@+id/goBackBtn"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/pageTitle" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/pageTitle"
         style="@style/PageTitle"
         android:text="@string/category_details"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/categoryLabel"
-        style="@style/Heading"
+        style="@style/ContentTitle"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         tools:text="Teleportation" />
 
     <TextView
         android:id="@+id/amount"
-        style="@style/Heading"
+        style="@style/ContentTitle"
         app:layout_constraintBottom_toBottomOf="@+id/categoryLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/categoryLabel"
@@ -45,13 +42,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recordList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        style="@style/CategoryRecordList"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoryLabel"
         tools:itemCount="5"

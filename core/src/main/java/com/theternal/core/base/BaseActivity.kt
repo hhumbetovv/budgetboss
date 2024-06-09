@@ -41,8 +41,14 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         super.onDestroy()
     }
 
+    /**
+     * Overrides the dispatchTouchEvent to clear focus from an EditText and hide the keyboard
+     * when a touch event occurs outside the EditText.
+     *
+     * @param event The MotionEvent representing the touch event.
+     * @return Boolean indicating whether the event was handled.
+     */
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        //! For disabling focus on tap
         if (event.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus
             if (v is EditText) {
@@ -56,10 +62,5 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
             }
         }
         return super.dispatchTouchEvent(event)
-    }
-
-    //! Additional Functions
-    fun binding(block: VB.() -> Unit) {
-        _binding?.apply(block)
     }
 }

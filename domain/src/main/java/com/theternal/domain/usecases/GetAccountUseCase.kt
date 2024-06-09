@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
-
     operator fun invoke(id: Long): Flow<AccountEntity> {
         return accountRepository.getAccount(id)
     }

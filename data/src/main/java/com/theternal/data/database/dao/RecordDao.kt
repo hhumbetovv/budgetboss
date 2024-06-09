@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RecordDao {
 
+    //! Financial Records
     @Query("SELECT * FROM financialRecords WHERE id=:id")
     fun getFinancialRecord(id: Long): Flow<FinancialRecordEntity>
 
@@ -33,6 +34,7 @@ interface RecordDao {
     @Update
     fun updateFinancialRecord(record: FinancialRecordEntity)
 
+    //! Transfer Records
     @Query("SELECT * FROM transferRecords WHERE id=:id")
     fun getTransferRecord(id: Long): Flow<TransferEntity>
 

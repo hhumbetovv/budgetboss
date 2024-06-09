@@ -20,7 +20,7 @@ import com.theternal.domain.entities.local.TransferEntity
         TransferEntity::class,
         CurrencyEntity::class,
         AccountEntity::class
-               ],
+    ],
     version = 1,
     exportSchema = false
 )

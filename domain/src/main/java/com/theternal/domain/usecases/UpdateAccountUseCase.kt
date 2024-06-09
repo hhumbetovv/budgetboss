@@ -7,7 +7,6 @@ import javax.inject.Inject
 class UpdateAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
-
     operator fun invoke(account: AccountEntity) {
         accountRepository.updateAccount(account)
     }

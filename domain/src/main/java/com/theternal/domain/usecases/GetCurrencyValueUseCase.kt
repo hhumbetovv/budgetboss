@@ -7,7 +7,6 @@ import javax.inject.Inject
 class GetCurrencyValueUseCase @Inject constructor(
     private val currencyRepository: CurrencyRepository
 ) {
-
     operator fun invoke(label: String): BigDecimal {
         return currencyRepository.getCurrencyValueAsync(label)
     }

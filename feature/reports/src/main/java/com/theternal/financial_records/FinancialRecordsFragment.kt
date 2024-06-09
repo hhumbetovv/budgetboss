@@ -54,9 +54,11 @@ class FinancialRecordsFragment : BaseStatefulFragment<FragmentFinancialRecordsBi
             binding {
                 incomeAmount.text = "+${totalIncome.format()} $"
                 expenseAmount.text = "-${totalExpense.format()} $"
+
                 if(totalIncome === BigDecimal.ZERO) {
                     incomeContainer.hide()
                 } else incomeContainer.show()
+
                 if(totalExpense === BigDecimal.ZERO) {
                     expenseContainer.hide()
                 } else expenseContainer.show()

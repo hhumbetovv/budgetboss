@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="paddingHorizontal">16dp</dimen>
+
+    <style name="BackBtn" parent="GoBackBtn">
+        <item name="android:layout_marginLeft">@dimen/paddingHorizontal</item>
+    </style>
+
+    <style name="ContentScrollView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="TabBarContainer" parent="TabContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+        <item name="android:paddingTop">32dp</item>
+    </style>
+
+    <style name="TabBarLayout" parent="TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+    </style>
+
+    <style name="AmountField" parent="TextField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:autofillHints">@null</item>
+        <item name="android:drawableEnd">@drawable/ic_dollar</item>
+    </style>
+
+    <style name="SelectionTitle" parent="ContentTitle">
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="CategoryList">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:nestedScrollingEnabled">false</item>
+    </style>
+
+    <style name="AccountsContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AccountsButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="TitleAndSwitch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="Switch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/paddingHorizontal</item>
+    </style>
+
+    <style name="SaveButton" parent="PrimaryBtn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">@dimen/paddingHorizontal</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+</resources>

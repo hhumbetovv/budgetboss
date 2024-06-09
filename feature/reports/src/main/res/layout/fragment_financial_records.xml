@@ -9,17 +9,12 @@
 
     <TextView
         android:id="@+id/emptyListTitle"
-        style="@style/Heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        style="@style/EmptyListTitle"
         android:text="@string/empty_record_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -37,46 +32,37 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/incomeContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
+                style="@style/ListContainer"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible">
 
                 <TextView
-                    android:id="@+id/textView"
-                    style="@style/Heading"
-                    android:layout_margin="16dp"
+                    android:id="@+id/incomesTitle"
+                    style="@style/IncomesTitle"
+                    android:layout_margin="@dimen/padding"
+                    android:layout_marginTop="0dp"
                     android:text="@string/incomes"
-                    android:textColor="@color/primary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/incomeAmount"
-                    style="@style/Heading"
-                    android:layout_marginHorizontal="16dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/primary"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    style="@style/Incomes"
+                    android:layout_margin="@dimen/padding"
+                    app:layout_constraintBottom_toBottomOf="@+id/incomesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    app:layout_constraintTop_toTopOf="@+id/incomesTitle"
                     tools:text="80 $" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/incomeCategoryList"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:nestedScrollingEnabled="false"
+                    style="@style/List"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    app:layout_constraintTop_toBottomOf="@+id/incomesTitle"
                     tools:itemCount="4"
                     tools:listitem="@layout/view_category_item">
 
@@ -86,52 +72,43 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expenseContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
+                style="@style/ListContainer"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    style="@style/Heading"
-                    android:layout_margin="16dp"
+                    android:id="@+id/expensesTitle"
+                    style="@style/ExpensesTitle"
+                    android:layout_margin="@dimen/padding"
                     android:text="@string/expenses"
-                    android:textColor="@color/danger"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/expenseAmount"
-                    style="@style/Heading"
-                    android:layout_marginHorizontal="16dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:textColor="@color/danger"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    style="@style/Expenses"
+                    android:layout_margin="@dimen/padding"
+                    app:layout_constraintBottom_toBottomOf="@+id/expensesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    app:layout_constraintTop_toTopOf="@+id/expensesTitle"
                     tools:text="-200 $" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/expenseCategoryList"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:nestedScrollingEnabled="false"
+                    style="@style/List"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:layout_constraintTop_toBottomOf="@+id/expensesTitle"
                     tools:itemCount="4"
                     tools:listitem="@layout/view_category_item">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
     </ScrollView>

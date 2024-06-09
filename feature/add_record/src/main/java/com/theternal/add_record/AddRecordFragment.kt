@@ -222,9 +222,9 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateAccounts() {
         state?.apply {
             if(recordType == TRANSFER) {
-                binding.accounts.visibility = View.VISIBLE
+                binding.accountsContainer.visibility = View.VISIBLE
             } else {
-                binding.accounts.visibility = View.GONE
+                binding.accountsContainer.visibility = View.GONE
             }
             binding.senderAccount.setAccount(transferFrom)
             binding.receiverAccount.setAccount(transferTo)

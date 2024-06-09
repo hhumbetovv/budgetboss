@@ -34,8 +34,14 @@ object NetworkModule {
         val request = chain.request()
 
         val newRequest = request.newBuilder()
-            .addHeader("X-RapidAPI-Key", "fdb57825demsha9f52e197bdc9e4p12a2f6jsn43e509a5d5a5")
-            .addHeader("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
+            .addHeader(
+                "X-RapidAPI-Key",
+                "fdb57825demsha9f52e197bdc9e4p12a2f6jsn43e509a5d5a5"
+            )
+            .addHeader(
+                "X-RapidAPI-Host",
+                "currency-exchange.p.rapidapi.com"
+            )
             .build()
 
         chain.proceed(newRequest)

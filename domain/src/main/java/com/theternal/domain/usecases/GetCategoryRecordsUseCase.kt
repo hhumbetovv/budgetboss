@@ -9,9 +9,6 @@ class GetCategoryRecordsUseCase @Inject constructor(
     private val recordRepository: RecordRepository
 ) {
     operator fun invoke(title: String, isExpense: Boolean): Flow<List<FinancialRecordEntity>> {
-        return recordRepository.getAllFinancialRecords(
-            title,
-            isExpense
-        )
+        return recordRepository.getAllFinancialRecords(title, isExpense)
     }
 }

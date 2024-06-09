@@ -31,7 +31,7 @@ interface AccountDao {
     @Query("DELETE FROM accounts WHERE id=:id")
     fun deleteAccount(id: Long)
 
-    //! Amount
+    //! Balance
     @Query("SELECT currency, balance FROM accounts")
     fun getAllBalances(): Flow<List<AccountBalance>>
 }

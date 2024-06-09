@@ -8,7 +8,6 @@ import javax.inject.Inject
 class GetRecordUseCase @Inject constructor(
     private val recordRepository: RecordRepository
 ) {
-
     operator fun invoke(id: Long, isTransfer: Boolean): Flow<RecordEntity> {
         return recordRepository.getRecord(id, isTransfer)
     }

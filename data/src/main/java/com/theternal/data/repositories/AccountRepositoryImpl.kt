@@ -12,6 +12,16 @@ class AccountRepositoryImpl @Inject constructor(
     private val accountDao: AccountDao
 ): AccountRepository {
 
+    /**
+     * Adds a transfer record by updating the sender's and receiver's accounts accordingly.
+     *
+     * This method retrieves the sender and receiver accounts synchronously from the database,
+     * updates their balances based on the transfer amount and exchange value, and appends the transfer ID
+     * to their respective transfer lists.
+     *
+     * @param record The TransferEntity representing the transfer details, including sender ID, receiver ID,
+     * amount, and exchange value.
+     */
     override fun addTransfer(record: TransferEntity) {
         val sender = accountDao.getAccountSync(record.senderId)
         val receiver = accountDao.getAccountSync(record.receiverId)
@@ -25,6 +35,16 @@ class AccountRepositoryImpl @Inject constructor(
         ))
     }
 
+    /**
+     * Removes a transfer record by reverting the changes made to the sender's and receiver's accounts.
+     *
+     * This method retrieves the sender and receiver accounts synchronously from the database,
+     * updates their balances to revert the transfer amount and exchange value, and removes the transfer ID
+     * from their respective transfer lists.
+     *
+     * @param record The TransferEntity representing the transfer details, including sender ID, receiver ID,
+     * amount, and exchange value.
+     */
     override fun removeTransfer(record: TransferEntity) {
         val sender = accountDao.getAccountSync(record.senderId)
         val receiver = accountDao.getAccountSync(record.receiverId)

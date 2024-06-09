@@ -9,21 +9,19 @@
     tools:theme="@style/Theme.BudgetBoss">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/pageTitle"
         style="@style/PageTitle"
         android:text="@string/reports"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginHorizontal="@dimen/padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        style="@style/TabContainer"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
+        style="@style/TabBarContainer"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabBar"
@@ -47,11 +45,9 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="Pager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 

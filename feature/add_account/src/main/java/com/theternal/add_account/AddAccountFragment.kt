@@ -1,8 +1,6 @@
 package com.theternal.add_account
 
-import android.os.Bundle
 import android.widget.ArrayAdapter
-import com.google.firebase.analytics.FirebaseAnalytics
 import com.theternal.add_account.databinding.FragmentAddAccountBinding
 import com.theternal.common.extensions.setOnChangeListener
 import com.theternal.core.base.BaseStatefulFragment
@@ -30,12 +28,6 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
 
     //! UI Properties
     private var list: List<String> = listOf()
-    private lateinit var analytics: FirebaseAnalytics
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        analytics = FirebaseAnalytics.getInstance(requireContext())
-    }
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddAccountBinding> = {
@@ -83,10 +75,9 @@ class AddAccountFragment : BaseStatefulFragment<FragmentAddAccountBinding,
 
             if(state.isLoading) loader.show() else loader.hide()
 
-            currencyList.isEnabled = !state.isLoading
-            nameField.isEnabled = !state.isLoading
-            noteField.isEnabled = !state.isLoading
-            balanceField.isEnabled = !state.isLoading
+            listOf(currencyList, nameField, noteField, balanceField).forEach { view ->
+                view.isEnabled = !state.isLoading
+            }
 
             saveBtn.isEnabled = state.accountName.isNotEmpty()
                     && !state.isLoading

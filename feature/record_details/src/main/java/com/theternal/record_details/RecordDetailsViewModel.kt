@@ -76,8 +76,8 @@ class RecordDetailsViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        super.onCleared()
         getRecordJob?.cancel()
+        super.onCleared()
     }
 }
 

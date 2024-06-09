@@ -14,10 +14,7 @@ class CreateAccountUseCase @Inject constructor(
         accountRepository.createAccount(account)
 
         if(currencyValue != null) {
-            currencyRepository.saveCurrency(
-                account.currency,
-                currencyValue
-            )
+            currencyRepository.saveCurrency(account.currency, currencyValue)
         }
     }
 }

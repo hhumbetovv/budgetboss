@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:padding="@dimen/padding"
     tools:theme="@style/Theme.BudgetBoss">
 
     <ImageView
         android:id="@+id/goBackBtn"
         style="@style/GoBackBtn"
         android:contentDescription="@null"
-        android:src="@drawable/ic_arrow_left"
         app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/pageTitle" />
@@ -22,31 +21,19 @@
         style="@style/PageTitle"
         android:text="@string/account_details"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/details"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_rounded_container"
-        android:backgroundTint="@color/container"
-        android:paddingHorizontal="24dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="16dp"
-        android:visibility="gone"
+        style="@style/DetailsContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingRight="16dp"
+            style="@style/DetailsInfoContainer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/positiveBtn"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +49,9 @@
 
             <EditText
                 android:id="@+id/nameField"
-                style="@style/DetailFieldStyle"
+                style="@style/DetailField"
                 android:autofillHints="@null"
                 android:hint="@null"
-                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/name"
@@ -73,9 +59,7 @@
 
             <TextView
                 android:id="@+id/note"
-                style="@style/DetailTitle"
-                android:textColor="@color/subtitle"
-                android:textSize="16sp"
+                style="@style/NoteTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name"
@@ -83,12 +67,9 @@
 
             <EditText
                 android:id="@+id/noteField"
-                style="@style/DetailFieldStyle"
+                style="@style/NoteField"
                 android:autofillHints="@null"
                 android:hint="@null"
-                android:inputType="textMultiLine"
-                android:textColor="@color/subtitle"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/note"
@@ -96,9 +77,7 @@
 
             <TextView
                 android:id="@+id/balance"
-                style="@style/DetailTitle"
-                android:textColor="@color/danger"
-                android:textSize="16sp"
+                style="@style/AccountBalanceTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/note"
@@ -106,23 +85,18 @@
 
             <EditText
                 android:id="@+id/balanceField"
-                style="@style/DetailFieldStyle"
+                style="@style/AccountBalanceField"
                 android:autofillHints="@null"
-                android:inputType="numberDecimal|numberSigned"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/balance" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <ImageView
             android:id="@+id/emoji"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            style="@style/Emoji"
             android:contentDescription="@null"
-            android:src="@drawable/ic_emoji_frown"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/positiveBtn"
             app:layout_constraintTop_toTopOf="parent" />
@@ -130,23 +104,17 @@
         <ImageView
             android:id="@+id/positiveBtn"
             android:contentDescription="@null"
-            android:layout_height="28dp"
-            android:layout_width="28dp"
+            style="@style/PositiveIcon"
             app:tint="@color/primary"
             tools:tint="@color/primary"
-            android:src="@drawable/ic_edit"
-            android:layout_marginRight="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/negativeBtn"
             app:layout_constraintEnd_toStartOf="@+id/negativeBtn"
             app:layout_constraintTop_toTopOf="@+id/negativeBtn" />
 
         <ImageView
             android:id="@+id/negativeBtn"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            style="@style/NegativeIcon"
             android:contentDescription="@null"
-            android:src="@drawable/ic_trash"
-            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/danger"
@@ -156,22 +124,15 @@
 
     <TextView
         android:id="@+id/emptyListTitle"
-        style="@style/Heading"
+        style="@style/EmptyListTitle"
         android:text="@string/empty_transfer_list"
-        android:layout_width="wrap_content"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/details" />
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:scrollbars="none"
+        style="@style/ListScrollView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -184,43 +145,32 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/incomeContainer"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                style="@style/ListContainer"
+                tools:visibility="visible">
 
                 <TextView
-                    android:id="@+id/textView3"
-                    style="@style/Heading"
-                    android:layout_marginTop="16dp"
+                    android:id="@+id/incomesTitle"
+                    style="@style/IncomesTitle"
                     android:text="@string/incomes"
-                    android:textColor="@color/primary"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintEnd_toStartOf="@+id/incomes"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/incomes"
-                    style="@style/Heading"
-                    android:textColor="@color/primary"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView3"
+                    style="@style/Incomes"
+                    app:layout_constraintBottom_toBottomOf="@+id/incomesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView3"
+                    app:layout_constraintTop_toTopOf="@+id/incomesTitle"
                     tools:text="20 EURO / 34 USD" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/incomeList"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="16dp"
+                    style="@style/List"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView3"
+                    app:layout_constraintTop_toBottomOf="@+id/incomesTitle"
                     tools:itemCount="4"
                     tools:listitem="@layout/view_record_item" />
 
@@ -228,42 +178,32 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expenseContainer"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                style="@style/ListContainer"
+                tools:visibility="visible">
 
                 <TextView
-                    android:id="@+id/textView4"
-                    style="@style/Heading"
+                    android:id="@+id/expensesTitle"
+                    style="@style/ExpensesTitle"
                     android:text="@string/expenses"
-                    android:textColor="@color/danger"
-                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintEnd_toStartOf="@+id/expenses"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/expenses"
-                    style="@style/Heading"
-                    android:textSize="16sp"
+                    style="@style/Expenses"
                     tools:text="34 EURO / 40 USD"
-                    android:textColor="@color/danger"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
+                    app:layout_constraintBottom_toBottomOf="@+id/expensesTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView4" />
+                    app:layout_constraintTop_toTopOf="@+id/expensesTitle" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/expenseList"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="16dp"
+                    style="@style/List"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView4"
+                    app:layout_constraintTop_toBottomOf="@+id/expensesTitle"
                     tools:itemCount="4"
                     tools:listitem="@layout/view_record_item" />
 
@@ -271,8 +211,6 @@
 
         </LinearLayout>
 
-
     </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

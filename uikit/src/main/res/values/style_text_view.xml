@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextStyle">
+    <style name="PageTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-    </style>
-    <style name="PageTitle" parent="TextStyle">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="android:textSize">24sp</item>
     </style>
-    <style name="Heading" parent="TextStyle">
+    <style name="ContentTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
     </style>
 </resources>

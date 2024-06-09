@@ -9,86 +9,64 @@
     tools:theme="@style/Theme.BudgetBoss">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/pageTitle"
         style="@style/PageTitle"
         android:text="@string/home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/emptyListTitle"
-        style="@style/Heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:gravity="center"
-        android:text="@string/empty_record_list"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        tools:visibility="visible"/>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/bg_rounded_container"
-        android:backgroundTint="@color/container"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="22dp"
+        android:id="@+id/totalBalanceContainer"
+        style="@style/TotalBalanceContainer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
 
         <TextView
-            android:id="@+id/textView"
-            style="@style/PageTitle"
+            android:id="@+id/totalBalanceTitle"
+            style="@style/TotalBalanceTitle"
             android:text="@string/total_balance"
-            android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:textColor="@color/divider"
-            android:textSize="20sp"
+            style="@style/TotalBalance"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/totalBalanceTitle"
             tools:text="-52.5 $" />
 
         <ImageView
             android:id="@+id/emoji"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            style="@style/AnimatedEmoji"
             android:contentDescription="@null"
             android:src="@drawable/ic_emoji_neutral"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/emptyListTitle"
+        style="@style/EmptyListTitle"
+        android:text="@string/empty_record_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalBalanceContainer"
+        tools:visibility="visible"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recordList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="20dp"
-        tools:visibility="gone"
+        style="@style/RecordList"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        app:layout_constraintTop_toBottomOf="@+id/totalBalanceContainer"
         tools:itemCount="5"
+        tools:visibility="gone"
         tools:listitem="@layout/view_record_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

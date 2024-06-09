@@ -15,8 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.category_details.CategoryDetailsContract.*
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
-import com.theternal.core.base.interfaces.ViewEffect
-import com.theternal.record_details.adapters.RecordAdapter
+import com.theternal.record_details.RecordAdapter
 import com.theternal.common.R.color as Colors
 
 @AndroidEntryPoint
@@ -51,8 +50,8 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         recordAdapter = null
+        super.onDestroyView()
     }
 
     //! UI Listeners and Initialization
