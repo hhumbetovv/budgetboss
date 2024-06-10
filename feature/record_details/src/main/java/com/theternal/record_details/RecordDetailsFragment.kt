@@ -18,7 +18,8 @@ import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
 import com.theternal.record_details.databinding.FragmentRecordDetailsBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
-import com.theternal.uikit.utility.getIconDrawable
+import com.theternal.uikit.utility.getCategoryIcon
+import com.theternal.uikit.utility.getCategoryName
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,7 +47,7 @@ class RecordDetailsFragment(
         (parentFragment as AppBottomSheetFragment).setTitle(
             getString(
                 if(isTransfer) Strings.transfer_record
-                else Strings.financial_records
+                else Strings.financial_record
             )
         )
 
@@ -82,7 +83,7 @@ class RecordDetailsFragment(
         state.apply {
             updateIcon(record)
 
-            binding.title.text = record?.title
+            updateTitle(state.record)
 
             updateAmount(record)
 
@@ -93,6 +94,19 @@ class RecordDetailsFragment(
             binding.saveBtn.isEnabled = note != record?.note ||
                     (date != record?.date && date != null)
         }
+    }
+
+    private fun updateTitle(record: RecordEntity?) {
+        if(record == null) return
+        if(record is TransferEntity) {
+            binding.title.text = record.title
+        } else {
+            val isExpense = (record as FinancialRecordEntity).isExpense
+            binding.title.text = getString(getCategoryName(
+                if(isExpense) ExpenseCategory.valueOf(record.title.uppercase())
+                else IncomeCategory.valueOf(record.title.uppercase())
+            ))
+        }
 
     }
 
@@ -101,7 +115,7 @@ class RecordDetailsFragment(
         if(record == null) return
         binding.icon.setImageDrawable(
             getDrawable(
-                getIconDrawable(
+                getCategoryIcon(
                     when {
                         record is TransferEntity -> RecordType.TRANSFER
                         (record as FinancialRecordEntity).isExpense -> {

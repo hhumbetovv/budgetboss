@@ -26,6 +26,7 @@ import com.theternal.common.extensions.show
 import com.theternal.common.extensions.showToast
 import com.theternal.core.base.Inflater
 import com.theternal.uikit.fragments.AppBottomSheetFragment
+import com.theternal.uikit.utility.getCategoryName
 import java.math.BigDecimal
 
 @AndroidEntryPoint
@@ -98,7 +99,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         RecordType.entries.forEach {
             tabBar.addTab(
                 tabBar.newTab().apply {
-                    text = it.name.capitalize()
+                    text = getString(getCategoryName(it))
                 }
             )
         }
@@ -185,9 +186,9 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateAmountField() {
         binding.amountField.hint = getString(
             when(state!!.recordType) {
-                INCOME -> Strings.add_income
-                EXPENSE -> Strings.add_expense
-                TRANSFER -> Strings.add_amount
+                INCOME -> Strings.income
+                EXPENSE -> Strings.expense
+                TRANSFER -> Strings.amount
             }
         )
         binding.amountField.isEnabled = !state!!.isLoading

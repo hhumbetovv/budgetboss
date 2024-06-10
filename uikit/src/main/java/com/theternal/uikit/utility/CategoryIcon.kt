@@ -5,7 +5,7 @@ import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.domain.entities.base.RecordType
 import com.theternal.uikit.R
 
-fun <T : Enum<*>> getIconDrawable(category: T): Int {
+fun <T : Enum<*>> getCategoryIcon(category: T): Int {
     return when(category) {
         IncomeCategory.SALARY -> R.drawable.ic_salary
         IncomeCategory.INVESTMENTS -> R.drawable.ic_money_bag

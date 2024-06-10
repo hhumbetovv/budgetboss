@@ -16,7 +16,10 @@ import com.theternal.category_details.CategoryDetailsContract.*
 import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
+import com.theternal.domain.entities.base.ExpenseCategory
+import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.record_details.RecordAdapter
+import com.theternal.uikit.utility.getCategoryName
 
 @AndroidEntryPoint
 class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBinding,
@@ -57,7 +60,12 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentCategoryDetailsBinding> = {
         goBackBtn.setOnClickListener { findNavController().popBackStack() }
-        categoryLabel.text = arguments?.getString("category")
+        categoryLabel.text = getString(getCategoryName(
+            arguments?.getString("category")?.uppercase().let { label ->
+                if(isExpense) ExpenseCategory.valueOf(label ?: "OTHERS")
+                else IncomeCategory.valueOf(label ?: "OTHERS")
+            }
+        ))
 
         recordAdapter = RecordAdapter(childFragmentManager)
         recordList.adapter = recordAdapter

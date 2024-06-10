@@ -51,12 +51,12 @@
                 android:id="@+id/amountField"
                 style="@style/AmountField"
                 android:autofillHints="@null"
-                android:hint="@string/add_income" />
+                android:hint="@string/income" />
 
             <TextView
                 android:id="@+id/selectionTitle"
                 style="@style/SelectionTitle"
-                android:text="@string/select_categories" />
+                android:text="@string/select_category" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryList"
@@ -127,7 +127,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints="@null"
-                android:hint="@string/add_note"
+                android:hint="@string/note"
                 android:inputType="text" />
 
         </LinearLayout>

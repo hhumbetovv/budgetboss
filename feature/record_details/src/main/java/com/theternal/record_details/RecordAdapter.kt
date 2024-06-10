@@ -1,5 +1,6 @@
 package com.theternal.record_details
 
+import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
@@ -17,7 +18,8 @@ import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
 import com.theternal.uikit.databinding.ViewRecordItemBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
-import com.theternal.uikit.utility.getIconDrawable
+import com.theternal.uikit.utility.getCategoryIcon
+import com.theternal.uikit.utility.getCategoryName
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -64,7 +66,9 @@ class RecordAdapter(
                 icon.context, getIcon(type, item.title)
             ))
 
-            title.text = item.title
+
+
+            title.text = getName(type, item.title, title.context)
 
             date.text = SimpleDateFormat(
                 "dd.MM.yyyy", Locale.getDefault()
@@ -88,8 +92,15 @@ class RecordAdapter(
             }
         }
 
+    private fun getName(type: RecordType, title: String, context: Context): String {
+        if(type == TRANSFER) return title
+        val category = if(type == INCOME) IncomeCategory.valueOf(title.uppercase())
+        else ExpenseCategory.valueOf(title.uppercase())
+        return context.getString(getCategoryName(category))
+    }
+
     private fun getIcon(type: RecordType, title: String): Int {
-        return getIconDrawable(
+        return getCategoryIcon(
             when(type) {
                 INCOME -> IncomeCategory.valueOf(title.uppercase())
                 EXPENSE -> ExpenseCategory.valueOf(title.uppercase())

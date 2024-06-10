@@ -7,6 +7,7 @@ import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.getColor
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.uikit.R
@@ -24,7 +25,7 @@ class AccountButtonView @JvmOverloads constructor(
         LayoutInflater.from(context), this, true
     )
     private var mainColor: Int? = null
-    private var label: String? = "Select Account"
+    private var label: String? = context.getString(Strings.select_account)
 
     private val hintColor = getColor(Colors.hint)
     private val primaryColor = getColor(Colors.primary)

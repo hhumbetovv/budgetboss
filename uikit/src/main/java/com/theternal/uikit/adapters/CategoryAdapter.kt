@@ -12,7 +12,8 @@ import com.theternal.core.base.Binder
 import com.theternal.core.base.Inflater
 import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.uikit.databinding.ViewCategoryItemBinding
-import com.theternal.uikit.utility.getIconDrawable
+import com.theternal.uikit.utility.getCategoryIcon
+import com.theternal.uikit.utility.getCategoryName
 import java.math.BigDecimal
 
 class CategoryAdapter(
@@ -50,11 +51,11 @@ class CategoryAdapter(
                 onItemClickListener(item)
             }
 
-            label.text = item.category.name.capitalize()
+            label.text = label.context.getString(getCategoryName(item.category))
 
             icon.setImageDrawable(
                 ContextCompat.getDrawable(
-                    icon.context, getIconDrawable(item.category)
+                    icon.context, getCategoryIcon(item.category)
                 )
             )
 
