@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
 import androidx.transition.Transition
 import com.theternal.uikit.adapters.CategoryAdapter
-import com.theternal.common.extensions.capitalize
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Initializer
 import com.theternal.domain.entities.base.ExpenseCategory

@@ -3,7 +3,6 @@ package com.theternal.uikit.adapters
 import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
-import com.theternal.common.extensions.capitalize
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
