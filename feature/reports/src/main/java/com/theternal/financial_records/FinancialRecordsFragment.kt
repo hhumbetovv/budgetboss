@@ -1,7 +1,6 @@
 package com.theternal.financial_records
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.navigation.fragment.findNavController
 import com.theternal.common.extensions.capitalize
 import com.theternal.common.extensions.format
