@@ -50,7 +50,6 @@ class AccountDetailsViewModel @Inject constructor(
         getAccountJob?.cancel()
         getAccountJob = getAccountUseCase(id).onEach { account ->
             setAccount(account)
-            getTransfers(account.transfers)
         }.launchIn(viewModelScope)
     }
 
@@ -64,17 +63,20 @@ class AccountDetailsViewModel @Inject constructor(
                         currencyValue = currencyValue,
                     )
                 }
+                getTransfers(account.transfers)
             }
         } else {
             setState { state ->
                 state.copy(account = account)
             }
+            getTransfers(account.transfers)
         }
     }
 
     private fun getTransfers(transfers: List<Long>) {
         getTransfersJob?.cancel()
         getTransfersJob = getAccountTransfersUseCase(transfers).onEach { transferRecords ->
+
             setIncomes(transferRecords.filter {
                 it.receiverId == currentState.account?.id
             })
@@ -86,30 +88,26 @@ class AccountDetailsViewModel @Inject constructor(
     }
 
     private fun setIncomes(list: List<TransferEntity>) {
-        viewModelScope.launch {
-            val totalIncomes = list.fold(BigDecimal.ZERO) { acc, record ->
-                acc + record.amount * record.exchangeValue
-            }
-            setState { state ->
-                state.copy(
-                    totalIncomes = totalIncomes,
-                    incomeList = list.sortedByDescending { it.date }
-                )
-            }
+        val totalIncomes = list.fold(BigDecimal.ZERO) { acc, record ->
+            acc + record.amount * record.exchangeValue
+        }
+        setState { state ->
+            state.copy(
+                totalIncomes = totalIncomes,
+                incomeList = list.sortedByDescending { it.date }
+            )
         }
     }
 
     private fun setExpenses(list: List<TransferEntity>) {
-        viewModelScope.launch {
-            val totalExpenses = list.fold(BigDecimal.ZERO) { acc, record ->
-                acc + record.amount
-            }
-            setState { state ->
-                state.copy(
-                    totalExpenses = totalExpenses,
-                    expenseList = list.sortedByDescending { it.date }
-                )
-            }
+        val totalExpenses = list.fold(BigDecimal.ZERO) { acc, record ->
+            acc + record.amount
+        }
+        setState { state ->
+            state.copy(
+                totalExpenses = totalExpenses,
+                expenseList = list.sortedByDescending { it.date }
+            )
         }
     }
 

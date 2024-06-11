@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.extensions.Colors
+import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -79,7 +80,10 @@ class RecordAdapter(
                 received.text = item.displayReceivedAmount()
                 sent.show()
                 received.show()
+                amount.hide()
             } else {
+                sent.hide()
+                received.hide()
                 amount.text = (item as FinancialRecordEntity).displayAmount()
                 amount.setTextColor(ContextCompat.getColor(
                     amount.context,

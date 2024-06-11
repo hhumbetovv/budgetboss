@@ -53,7 +53,6 @@ class FinancialRecordsFragment : BaseStatefulFragment<FragmentFinancialRecordsBi
             expenseCategoryAdapter.submitList(expenseCategories)
 
             binding {
-                Log.d("LOGGER", state.toString())
                 totalIncomes.text = "+${totalIncome.format(true)}"
                 totalExpenses.text = "-${totalExpense.format(true)}"
 
