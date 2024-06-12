@@ -133,7 +133,7 @@ class RecordDetailsFragment(
         if(record is TransferEntity) {
             setTransferAmounts(record)
         } else {
-            setAmount((record as FinancialRecordEntity).isExpense, record.displayAmount())
+            setAmount((record as FinancialRecordEntity).isExpense, record.amountText)
         }
     }
 

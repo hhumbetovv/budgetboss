@@ -137,6 +137,7 @@ class AddRecordViewModel @Inject constructor(
     private fun createFinancialRecord(note: String?) {
         currentState.apply {
             val isExpense = recordType == EXPENSE
+            val prefix = if(isExpense) "-" else "+"
             val title = if(isExpense) {
                 expenseCategory!!.name
             } else {
@@ -149,7 +150,8 @@ class AddRecordViewModel @Inject constructor(
                     isExpense = isExpense,
                     date = date,
                     note = note,
-                    amount = amount!!
+                    amount = amount!!,
+                    amountText = "$prefix${amount.format()} $"
                 )
             )
             Firebase.analytics.logEvent("create_record") {
@@ -172,7 +174,7 @@ class AddRecordViewModel @Inject constructor(
                     senderCurrency = transferFrom.currency,
                     receiverId = transferTo.id,
                     exchangeValue = exchangeValue!!,
-                    receivedAmount = "-${(amount * exchangeValue).format()} ${transferFrom.currency}",
+                    receivedAmount = "+${(amount * exchangeValue).format()} ${transferFrom.currency}",
                     receiverCurrency = transferTo.currency
                 )
             )

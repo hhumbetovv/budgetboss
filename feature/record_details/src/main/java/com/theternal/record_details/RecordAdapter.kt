@@ -83,7 +83,7 @@ class RecordAdapter(
             } else {
                 sent.hide()
                 received.hide()
-                amount.text = (item as FinancialRecordEntity).displayAmount()
+                amount.text = (item as FinancialRecordEntity).amountText
                 amount.setTextColor(ContextCompat.getColor(
                     amount.context,
                     when(type) {

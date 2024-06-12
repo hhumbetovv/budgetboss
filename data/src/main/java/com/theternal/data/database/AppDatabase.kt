@@ -21,7 +21,7 @@ import com.theternal.domain.entities.local.TransferEntity
         CurrencyEntity::class,
         AccountEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(IdListConverter::class, AmountConverter::class)
