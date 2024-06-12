@@ -3,7 +3,6 @@ package com.theternal.domain.entities.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.theternal.common.extensions.format
 import com.theternal.domain.interfaces.RecordEntity
 import java.math.BigDecimal
 
