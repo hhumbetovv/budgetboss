@@ -22,20 +22,16 @@ data class TransferEntity(
     override val note: String? = null,
     @ColumnInfo("sender")
     val senderId: Long,
+    @ColumnInfo("sentAmount")
+    val sentAmount: String,
     @ColumnInfo("senderCurrency")
     val senderCurrency: String,
     @ColumnInfo("receiver")
     val receiverId: Long,
+    @ColumnInfo("receivedAmount")
+    val receivedAmount: String,
     @ColumnInfo("receiverCurrency")
     val receiverCurrency: String,
     @ColumnInfo("exchangeValue")
     val exchangeValue: BigDecimal
-) : RecordEntity {
-    fun displaySentAmount(): String {
-        return "-${amount.format()} $senderCurrency"
-    }
-
-    fun displayReceivedAmount(): String {
-        return "+${(amount * exchangeValue).format()} $receiverCurrency"
-    }
-}
+) : RecordEntity

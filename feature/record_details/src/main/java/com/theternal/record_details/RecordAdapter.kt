@@ -33,8 +33,7 @@ class RecordAdapter(
         }
 
         override fun areContentsTheSame(oldItem: RecordEntity, newItem: RecordEntity): Boolean {
-            return oldItem.title == newItem.title &&
-                    oldItem.date == newItem.date
+            return oldItem.date == newItem.date
         }
     }
 ) {
@@ -76,8 +75,8 @@ class RecordAdapter(
             ).format(item.date)
 
             if(item is TransferEntity) {
-                sent.text = item.displaySentAmount()
-                received.text = item.displayReceivedAmount()
+                sent.text = item.sentAmount
+                received.text = item.receivedAmount
                 sent.show()
                 received.show()
                 amount.hide()

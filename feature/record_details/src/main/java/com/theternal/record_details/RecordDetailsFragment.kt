@@ -138,8 +138,8 @@ class RecordDetailsFragment(
     }
 
     private fun setTransferAmounts(record: TransferEntity) {
-        binding.sent.text = record.displaySentAmount()
-        binding.received.text = record.displayReceivedAmount()
+        binding.sent.text = record.sentAmount
+        binding.received.text = record.receivedAmount
     }
 
     private fun setAmount(isExpense: Boolean, amount: String) {

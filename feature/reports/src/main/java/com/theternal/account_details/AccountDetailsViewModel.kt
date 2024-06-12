@@ -13,6 +13,7 @@ import com.theternal.domain.usecases.UpdateAccountUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -77,37 +78,52 @@ class AccountDetailsViewModel @Inject constructor(
         getTransfersJob?.cancel()
         getTransfersJob = getAccountTransfersUseCase(transfers).onEach { transferRecords ->
 
-            setIncomes(transferRecords.filter {
-                it.receiverId == currentState.account?.id
-            })
+            viewModelScope.launch(Dispatchers.IO) {
+                val (incomes, expenses) = async {
+                    transferRecords.partition {
+                        it.senderId != currentState.account?.id
+                    }
+                }.await()
 
-            setExpenses(transferRecords.filter {
-                it.senderId == currentState.account?.id
-            })
+                setIncomes(incomes)
+
+                setExpenses(expenses)
+            }
+
         }.launchIn(viewModelScope)
     }
 
     private fun setIncomes(list: List<TransferEntity>) {
-        val totalIncomes = list.fold(BigDecimal.ZERO) { acc, record ->
-            acc + record.amount * record.exchangeValue
-        }
-        setState { state ->
-            state.copy(
-                totalIncomes = totalIncomes,
-                incomeList = list.sortedByDescending { it.date }
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            val totalIncomes = async {
+                list.fold(BigDecimal.ZERO) { acc, record ->
+                    acc + record.amount * record.exchangeValue
+                }
+            }.await()
+
+            setState { state ->
+                state.copy(
+                    totalIncomes = totalIncomes,
+                    incomeList = list.sortedByDescending { it.date }
+                )
+            }
         }
     }
 
     private fun setExpenses(list: List<TransferEntity>) {
-        val totalExpenses = list.fold(BigDecimal.ZERO) { acc, record ->
-            acc + record.amount
-        }
-        setState { state ->
-            state.copy(
-                totalExpenses = totalExpenses,
-                expenseList = list.sortedByDescending { it.date }
-            )
+        viewModelScope.launch(Dispatchers.IO) {
+            val totalExpenses = async {
+                list.fold(BigDecimal.ZERO) { acc, record ->
+                    acc + record.amount
+                }
+            }.await()
+
+            setState { state ->
+                state.copy(
+                    totalExpenses = totalExpenses,
+                    expenseList = list.sortedByDescending { it.date }
+                )
+            }
         }
     }
 

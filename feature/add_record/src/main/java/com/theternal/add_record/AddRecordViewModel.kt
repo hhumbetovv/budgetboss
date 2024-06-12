@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.theternal.add_record.AddRecordContract.*
+import com.theternal.common.extensions.format
 import com.theternal.core.domain.NetworkRequest
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
@@ -167,9 +168,11 @@ class AddRecordViewModel @Inject constructor(
                     date = date,
                     note = note.ifEmpty { "Empty" },
                     senderId = transferFrom.id,
+                    sentAmount = "-${amount.format()} ${transferFrom.currency}",
                     senderCurrency = transferFrom.currency,
                     receiverId = transferTo.id,
                     exchangeValue = exchangeValue!!,
+                    receivedAmount = "-${(amount * exchangeValue).format()} ${transferFrom.currency}",
                     receiverCurrency = transferTo.currency
                 )
             )
