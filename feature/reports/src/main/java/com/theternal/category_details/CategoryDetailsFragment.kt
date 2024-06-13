@@ -13,6 +13,8 @@ import com.theternal.core.base.Initializer
 import com.theternal.reports.databinding.FragmentCategoryDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.category_details.CategoryDetailsContract.*
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
@@ -49,7 +51,7 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isExpense = arguments?.getBoolean("isExpense") ?: false
-        prefix = if(isExpense) "-" else "+"
+        prefix = if(isExpense) MINUS else PLUS
     }
 
     override fun onDestroyView() {

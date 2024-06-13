@@ -15,6 +15,10 @@ import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.reports.databinding.FragmentAccountDetailsBinding
 import com.theternal.account_details.AccountDetailsContract.*
+import com.theternal.common.constants.DEFAULT_CURRENCY
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
+import com.theternal.common.constants.SLASH
 import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
@@ -201,7 +205,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     private fun updateBalance(balance: BigDecimal, currency: String, currencyValue: BigDecimal?) {
         var accountBalance = "${balance.format()} $currency"
         if(currencyValue != null && (balance > BigDecimal.ZERO || balance < BigDecimal.ZERO)){
-            accountBalance += " / ${(balance * currencyValue).format()} USD"
+            accountBalance += " $SLASH ${(balance * currencyValue).format()} $DEFAULT_CURRENCY"
         }
         binding.balance.text = accountBalance
         binding.balance.setTextColor(
@@ -266,7 +270,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
                 incomeContainer.show()
             }
             if(totalIncomes != null) {
-                incomes.text = "+${totalIncomes.format()} $currency"
+                incomes.text = "$PLUS${totalIncomes.format()} $currency"
             }
         }
         incomesAdapter?.submitList(list)
@@ -285,7 +289,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
                 expenseContainer.show()
             }
             if(totalExpenses != null) {
-                expenses.text = "-${totalExpenses.format()} $currency"
+                expenses.text = "$MINUS${totalExpenses.format()} $currency"
             }
         }
         expensesAdepter?.submitList(list)

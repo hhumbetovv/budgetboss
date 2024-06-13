@@ -1,5 +1,6 @@
 package com.theternal.account_details
 
+import com.theternal.common.constants.BLANK
 import com.theternal.core.base.interfaces.ViewEffect
 import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.core.base.interfaces.ViewState
@@ -34,7 +35,7 @@ sealed interface AccountDetailsContract {
         val expenseList: List<TransferEntity> = listOf(),
         val totalIncomes: BigDecimal? = null,
         val totalExpenses: BigDecimal? = null,
-        val newName: String = "",
+        val newName: String = BLANK,
     ) : ViewState
 
     sealed interface Effect : ViewEffect {

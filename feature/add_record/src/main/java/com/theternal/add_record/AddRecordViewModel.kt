@@ -1,9 +1,6 @@
 package com.theternal.add_record
 
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.logEvent
-import com.google.firebase.ktx.Firebase
 import com.theternal.common.extensions.capitalize
 import com.theternal.core.base.BaseViewModel
 import com.theternal.domain.entities.base.RecordType.*
@@ -13,6 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.theternal.add_record.AddRecordContract.*
+import com.theternal.common.constants.DOLLAR
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
+import com.theternal.common.constants.TRANSFER_ARROW
 import com.theternal.common.extensions.format
 import com.theternal.core.domain.NetworkRequest
 import com.theternal.domain.entities.local.FinancialRecordEntity
@@ -137,7 +138,7 @@ class AddRecordViewModel @Inject constructor(
     private fun createFinancialRecord(note: String?) {
         currentState.apply {
             val isExpense = recordType == EXPENSE
-            val prefix = if(isExpense) "-" else "+"
+            val prefix = if(isExpense) MINUS else PLUS
             val title = if(isExpense) {
                 expenseCategory!!.name
             } else {
@@ -151,13 +152,13 @@ class AddRecordViewModel @Inject constructor(
                     date = date,
                     note = note,
                     amount = amount!!,
-                    amountText = "$prefix${amount.format()} $"
+                    amountText = "$prefix${amount.format()} $DOLLAR"
                 )
             )
-            Firebase.analytics.logEvent("create_record") {
-                param("record_type", recordType.name)
-                param("category", title)
-            }
+//            Firebase.analytics.logEvent("create_record") {
+//                param("record_type", recordType.name)
+//                param("category", title)
+//            }
         }
     }
 
@@ -165,22 +166,22 @@ class AddRecordViewModel @Inject constructor(
         currentState.apply {
             createRecord(
                 TransferEntity(
-                    title = "${transferFrom!!.name} ► ${transferTo!!.name}",
+                    title = "${transferFrom!!.name} $TRANSFER_ARROW ${transferTo!!.name}",
                     amount = amount!!,
                     date = date,
                     note = note.ifEmpty { "Empty" },
                     senderId = transferFrom.id,
-                    sentAmount = "-${amount.format()} ${transferFrom.currency}",
+                    sentAmount = "$MINUS${amount.format()} ${transferFrom.currency}",
                     senderCurrency = transferFrom.currency,
                     receiverId = transferTo.id,
                     exchangeValue = exchangeValue!!,
-                    receivedAmount = "+${(amount * exchangeValue).format()} ${transferFrom.currency}",
+                    receivedAmount = "$PLUS${(amount * exchangeValue).format()} ${transferFrom.currency}",
                     receiverCurrency = transferTo.currency
                 )
             )
-            Firebase.analytics.logEvent("create_record") {
-                param("record_type", recordType.name)
-            }
+//            Firebase.analytics.logEvent(FirebaseEvents.CreateRecord) {
+//                param("record_type", recordType.name)
+//            }
         }
     }
 

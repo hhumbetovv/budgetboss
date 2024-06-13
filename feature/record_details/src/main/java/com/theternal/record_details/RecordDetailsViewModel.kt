@@ -1,6 +1,7 @@
 package com.theternal.record_details
 
 import androidx.lifecycle.viewModelScope
+import com.theternal.common.constants.UNKNOWN_RECORD_TYPE
 import com.theternal.core.base.BaseViewModel
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
@@ -71,7 +72,7 @@ class RecordDetailsViewModel @Inject constructor(
         return when (this) {
             is FinancialRecordEntity -> this.copy(note = note, date = date ?: this.date)
             is TransferEntity -> this.copy(note = note, date = date ?: this.date)
-            else -> throw IllegalArgumentException("Unknown RecordEntity type")
+            else -> throw IllegalArgumentException(UNKNOWN_RECORD_TYPE)
         }
     }
 
