@@ -1,5 +1,12 @@
 package com.theternal.common.extensions
 
+import com.theternal.common.constants.BLANK
+import com.theternal.common.constants.DOLLAR
+import com.theternal.common.constants.DOT
+import com.theternal.common.constants.DOT_CHAR
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.NUMERIC_SUFFIXES
+import com.theternal.common.constants.ZERO_CHAR
 import java.math.BigDecimal
 import java.math.RoundingMode
 import kotlin.math.ln
@@ -19,22 +26,22 @@ import kotlin.math.ln
  * @return A formatted string representing the value in a human-readable format.
  */
 fun BigDecimal.format(withDollar: Boolean = false): String {
-    val sign = if(this.signum() < 0) "-" else ""
+    val sign = if(this.signum() < 0) MINUS else BLANK
     var value = this.abs()
     if (value < BigDecimal(1000)) {
         val formattedValue = value.setScale(2, RoundingMode.HALF_UP)
             .stripTrailingZeros().toPlainString()
-        return sign + if (formattedValue.contains(".")) {
-            formattedValue.trimEnd('0').trimEnd('.')
-        } else formattedValue + if(withDollar) " $" else ""
+        return sign + if (formattedValue.contains(DOT)) {
+            formattedValue.trimEnd(ZERO_CHAR).trimEnd(DOT_CHAR)
+        } else formattedValue + if(withDollar) " $DOLLAR" else BLANK
     }
     val exp = (ln(value.toDouble()) / ln(1000.0)).toInt()
-    val suffix = "KMBTPEZYRQ"[exp - 1]
+    val suffix = NUMERIC_SUFFIXES[exp - 1]
     value = value.divide(BigDecimal.valueOf(1000.0).pow(exp), 2, RoundingMode.HALF_UP)
     val formattedValue = value.stripTrailingZeros().toPlainString()
-    return sign + if (formattedValue.contains(".")) {
-        formattedValue.trimEnd('0').trimEnd('.') + suffix
+    return sign + if (formattedValue.contains(DOT)) {
+        formattedValue.trimEnd(ZERO_CHAR).trimEnd(DOT_CHAR) + suffix
     } else {
         formattedValue + suffix
-    } + if(withDollar) " $" else ""
+    } + if(withDollar) " $DOLLAR" else BLANK
 }

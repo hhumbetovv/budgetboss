@@ -1,9 +1,6 @@
 package com.theternal.add_account
 
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.logEvent
-import com.google.firebase.ktx.Firebase
 import com.theternal.core.base.BaseViewModel
 import com.theternal.add_account.AddAccountContract.*
 import com.theternal.core.domain.NetworkRequest
@@ -115,9 +112,6 @@ class AddAccountViewModel @Inject constructor(
                 ),
                 currencyValue = currencyValue
             )
-            Firebase.analytics.logEvent("create_account") {
-                param("currency_name", currentState.currency!!)
-            }
             postEffect(Effect.NavigateBack)
         }
     }

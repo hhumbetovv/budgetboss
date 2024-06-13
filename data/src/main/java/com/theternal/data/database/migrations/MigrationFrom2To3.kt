@@ -2,6 +2,9 @@ package com.theternal.data.database.migrations
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.theternal.common.constants.DOLLAR
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.format
 
 class MigrationFrom2To3 : Migration(2, 3) {
@@ -26,8 +29,8 @@ class MigrationFrom2To3 : Migration(2, 3) {
             if(isExpenseIndex == -1) return
             val isExpense = cursor.getInt(isExpenseIndex) > 0
 
-            val prefix = if(isExpense) "-" else "+"
-            val amountText = "$prefix${amount.format()} $"
+            val prefix = if(isExpense) MINUS else PLUS
+            val amountText = "$prefix${amount.format()} $DOLLAR"
 
             val updateQuery = "UPDATE financialRecords SET amountText = '$amountText' WHERE id = $id"
             db.execSQL(updateQuery)

@@ -2,6 +2,8 @@ package com.theternal.data.database.migrations
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.format
 
 class MigrationFrom1To2 : Migration(1, 2) {
@@ -27,7 +29,7 @@ class MigrationFrom1To2 : Migration(1, 2) {
             if(senderCurrencyIndex == -1) return
             val senderCurrency = cursor.getString(senderCurrencyIndex)
 
-            val sentAmount = "-${amount.format()} $senderCurrency"
+            val sentAmount = "$MINUS${amount.format()} $senderCurrency"
 
             val updateQuery = "UPDATE transferRecords SET sentAmount = '$sentAmount' WHERE id = $id"
             db.execSQL(updateQuery)
@@ -54,7 +56,7 @@ class MigrationFrom1To2 : Migration(1, 2) {
             if(exchangeValueIndex == -1) return
             val exchangeValue = cursor.getString(exchangeValueIndex).toBigDecimal()
 
-            val receivedAmount = "+${(amount * exchangeValue).format()} $senderCurrency"
+            val receivedAmount = "$PLUS${(amount * exchangeValue).format()} $senderCurrency"
 
             val updateQuery = "UPDATE transferRecords SET receivedAmount = '$receivedAmount' WHERE id = $id"
             db.execSQL(updateQuery)

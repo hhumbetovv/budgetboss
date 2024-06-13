@@ -1,8 +1,9 @@
 package com.theternal.uikit.adapters
 
-import android.annotation.SuppressLint
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
+import com.theternal.common.constants.MINUS
+import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
@@ -35,7 +36,7 @@ class CategoryAdapter(
         val amount: BigDecimal? = null,
     ) {
         fun showAmount(): String {
-            val prefix = if(category is IncomeCategory) "+" else "-"
+            val prefix = if(category is IncomeCategory) PLUS else MINUS
             return "$prefix${amount?.format(true)}"
         }
     }
@@ -44,7 +45,6 @@ class CategoryAdapter(
         get() = ViewCategoryItemBinding::inflate
 
     override val itemBinder: Binder<CategoryItem, ViewCategoryItemBinding>
-        @SuppressLint("SetTextI18n")
         get() = { item, _ ->
             container.setOnClickListener {
                 onItemClickListener(item)

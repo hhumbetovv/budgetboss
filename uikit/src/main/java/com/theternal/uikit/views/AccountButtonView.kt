@@ -1,6 +1,5 @@
 package com.theternal.uikit.views
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -83,7 +82,6 @@ class AccountButtonView @JvmOverloads constructor(
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setBalance(account: AccountEntity?) {
         binding.balance.let { tv ->
             if(account == null) {

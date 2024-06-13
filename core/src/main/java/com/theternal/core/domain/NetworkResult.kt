@@ -1,5 +1,8 @@
 package com.theternal.core.domain
 
+import com.theternal.common.constants.CALL_FAILED_ERROR
+import com.theternal.common.constants.CALL_SUCCESSFUL_ERROR
+
 sealed class NetworkResult<T>(
     val isSuccess: Boolean,
     private val _data: T? = null,
@@ -9,7 +12,7 @@ sealed class NetworkResult<T>(
     val getData: T
         get() {
             if (!isSuccess) {
-                throw IllegalStateException("Call isn't successful")
+                throw IllegalStateException(CALL_FAILED_ERROR)
             }
             return _data!!
         }
@@ -17,7 +20,7 @@ sealed class NetworkResult<T>(
     val getException: Exception
         get() {
             if (isSuccess) {
-                throw IllegalStateException("Call is successful, There is no Exception")
+                throw IllegalStateException(CALL_SUCCESSFUL_ERROR)
             }
             return _exception!!
         }
