@@ -155,10 +155,6 @@ class AddRecordViewModel @Inject constructor(
                     amountText = "$prefix${amount.format()} $DOLLAR"
                 )
             )
-//            Firebase.analytics.logEvent("create_record") {
-//                param("record_type", recordType.name)
-//                param("category", title)
-//            }
         }
     }
 
@@ -179,9 +175,6 @@ class AddRecordViewModel @Inject constructor(
                     receiverCurrency = transferTo.currency
                 )
             )
-//            Firebase.analytics.logEvent(FirebaseEvents.CreateRecord) {
-//                param("record_type", recordType.name)
-//            }
         }
     }
 
