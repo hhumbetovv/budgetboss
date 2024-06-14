@@ -9,7 +9,11 @@
 
     <TextView
         android:id="@+id/emptyListTitle"
-        style="@style/EmptyListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="gone"
         android:text="@string/empty_record_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +36,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/incomeContainer"
-                style="@style/ListContainer"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,17 +46,24 @@
 
                 <TextView
                     android:id="@+id/incomesTitle"
-                    style="@style/IncomesTitle"
-                    android:layout_margin="@dimen/padding"
-                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:textColor="@color/primary"
                     android:text="@string/incomes"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/totalIncomes"
-                    style="@style/Incomes"
-                    android:layout_margin="@dimen/padding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/primary"
+                    android:layout_margin="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/incomeCategoryList"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +71,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/incomeCategoryList"
-                    style="@style/List"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +88,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/expenseContainer"
-                style="@style/ListContainer"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -80,16 +98,24 @@
 
                 <TextView
                     android:id="@+id/expensesTitle"
-                    style="@style/ExpensesTitle"
-                    android:layout_margin="@dimen/padding"
+                    android:textColor="@color/danger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_margin="16dp"
                     android:text="@string/expenses"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/totalExpenses"
-                    style="@style/Expenses"
-                    android:layout_margin="@dimen/padding"
+                    android:textColor="@color/danger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:layout_margin="16dp"
                     app:layout_constraintBottom_toTopOf="@+id/expenseCategoryList"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -97,7 +123,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/expenseCategoryList"
-                    style="@style/List"
+                    android:layout_width="0dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

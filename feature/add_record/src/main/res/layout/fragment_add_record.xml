@@ -10,7 +10,8 @@
 
     <ImageView
         android:id="@+id/goBackBtn"
-        style="@style/BackBtn"
+        style="@style/GoBackBtn"
+        android:layout_marginLeft="16dp"
         android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,8 +26,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        style="@style/ContentScrollView"
-        tools:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/saveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,35 +42,55 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
-                style="@style/TabBarContainer">
+                style="@style/TabContainer"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:paddingTop="32dp">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabBar"
-                    style="@style/TabBarLayout" />
+                    style="@style/TabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="16dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
             <EditText
                 android:id="@+id/amountField"
-                style="@style/AmountField"
+                style="@style/TextField"
                 android:autofillHints="@null"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:maxLength="20"
+                android:inputType="numberDecimal"
+                android:drawableEnd="@drawable/ic_dollar"
                 android:hint="@string/income" />
 
             <TextView
                 android:id="@+id/selectionTitle"
-                style="@style/SelectionTitle"
+                style="@style/ContentTitle"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/select_category" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryList"
-                style="@style/CategoryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
                 tools:listitem="@layout/view_category_item" />
 
             <LinearLayout
                 android:id="@+id/accountsContainer"
-                style="@style/AccountsContainer">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/ContentTitle"
@@ -75,11 +98,16 @@
 
                 <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/senderAccount"
-                    style="@style/AccountsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     app:mainColor="@color/danger" />
 
                 <LinearLayout
-                    style="@style/TitleAndSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
 
                     <TextView
@@ -93,7 +121,10 @@
 
                     <ImageView
                         android:id="@+id/accountSwitch"
-                        style="@style/Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="16dp"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_swap" />
 
@@ -101,7 +132,9 @@
 
                 <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/receiverAccount"
-                    style="@style/AccountsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     app:mainColor="@color/primary" />
 
             </LinearLayout>
@@ -136,8 +169,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBtn"
-        style="@style/SaveButton"
+        style="@style/PrimaryBtn"
         android:text="@string/save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -12,13 +12,16 @@
         android:id="@+id/pageTitle"
         style="@style/PageTitle"
         android:text="@string/reports"
-        android:layout_marginHorizontal="@dimen/padding"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        style="@style/ReportsTabContainer"
+        style="@style/TabContainer"
+        android:layout_width="0dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pageTitle">
@@ -45,7 +48,9 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
-        style="@style/Pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingVertical="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
