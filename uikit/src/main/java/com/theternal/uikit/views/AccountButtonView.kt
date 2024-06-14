@@ -60,7 +60,8 @@ class AccountButtonView @JvmOverloads constructor(
         ) as GradientDrawable).apply {
             mutate()
             if(isActive) {
-                setStroke(1, mainColor ?: hintColor)
+                val width = (resources.displayMetrics.density + 0.5f).toInt()
+                setStroke(width, mainColor ?: hintColor)
             } else {
                 setStroke(0, hintColor)
             }
