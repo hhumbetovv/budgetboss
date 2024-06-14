@@ -1,7 +1,6 @@
 package com.theternal.add_record
 
 import android.view.Gravity
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
