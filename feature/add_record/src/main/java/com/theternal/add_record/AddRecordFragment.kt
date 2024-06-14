@@ -204,11 +204,11 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateCategoryListVisibility(isVisible: Boolean) {
         binding {
             if(isVisible) {
-                categoryList.visibility = View.VISIBLE
-                selectionTitle.visibility = View.VISIBLE
+                categoryList.show()
+                selectionTitle.show()
             } else {
-                categoryList.visibility = View.GONE
-                selectionTitle.visibility = View.GONE
+                categoryList.hide()
+                selectionTitle.hide()
             }
         }
     }
@@ -229,9 +229,9 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateAccounts() {
         state?.apply {
             if(recordType == TRANSFER) {
-                binding.accountsContainer.visibility = View.VISIBLE
+                binding.accountsContainer.show()
             } else {
-                binding.accountsContainer.visibility = View.GONE
+                binding.accountsContainer.hide()
             }
             binding.senderAccount.setAccount(transferFrom)
             binding.receiverAccount.setAccount(transferTo)

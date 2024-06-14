@@ -36,7 +36,9 @@
 
             <TextView
                 android:id="@+id/name"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:includeFontPadding="true"
                 android:fontFamily="@font/montserrat_medium"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -50,7 +52,9 @@
 
             <EditText
                 android:id="@+id/nameField"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:autofillHints="@null"
                 android:includeFontPadding="true"
                 android:fontFamily="@font/montserrat_medium"
@@ -70,7 +74,8 @@
 
             <TextView
                 android:id="@+id/note"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:includeFontPadding="true"
                 android:fontFamily="@font/montserrat_medium"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -86,7 +91,8 @@
 
             <EditText
                 android:id="@+id/noteField"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_bias="0.0"
                 android:inputType="text"
                 android:textSize="16sp"
@@ -108,7 +114,8 @@
 
             <TextView
                 android:id="@+id/balance"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:includeFontPadding="true"
                 android:fontFamily="@font/montserrat_medium"
                 android:paddingTop="0dp"
@@ -124,7 +131,8 @@
 
             <EditText
                 android:id="@+id/balanceField"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:autofillHints="@null"
                 android:backgroundTint="@color/primary"
                 android:includeFontPadding="true"
@@ -221,7 +229,6 @@
                     android:textSize="20sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:textColor="@color/primary"
                     android:text="@string/incomes"
                     app:layout_constraintEnd_toStartOf="@+id/incomes"

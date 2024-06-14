@@ -34,6 +34,7 @@ class AddRecordViewModel @Inject constructor(
     getAllAccountsUseCase: GetAllAccountsUseCase
 ) : BaseViewModel<Event, State, Effect>() {
 
+    private var recordTypeJob: Job? = null
     private var exchangeJob: Job? = null
     private var notifyJob: Job? = null
 
@@ -50,7 +51,11 @@ class AddRecordViewModel @Inject constructor(
     override fun onEventUpdate(event: Event) {
         when(event) {
             is Event.SetType -> {
-                setState { it.copy(recordType = event.recordType) }
+                recordTypeJob?.cancel()
+                recordTypeJob = viewModelScope.launch {
+                    delay(300)
+                    setState { it.copy(recordType = event.recordType) }
+                }
             }
             is Event.SetAmount -> setAmount(event.amount)
             is Event.SelectExpenseCategory -> {

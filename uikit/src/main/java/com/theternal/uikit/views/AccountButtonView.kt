@@ -45,7 +45,7 @@ class AccountButtonView @JvmOverloads constructor(
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
-        binding.container.setOnClickListener(l)
+        binding.accountContainer.setOnClickListener(l)
     }
 
     fun setAccount(account: AccountEntity?) {
@@ -55,7 +55,7 @@ class AccountButtonView @JvmOverloads constructor(
     }
 
     private fun setBorder(isActive: Boolean) {
-        ((binding.container.background as RippleDrawable).findDrawableByLayerId(
+        ((binding.accountContainer.background as RippleDrawable).findDrawableByLayerId(
             android.R.id.background
         ) as GradientDrawable).apply {
             mutate()

@@ -1,9 +1,10 @@
 package com.theternal.budgetboss
 
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.theternal.budgetboss.databinding.ActivityMainBinding
-import com.theternal.common.extensions.hide
+import com.theternal.common.extensions.fadeOut
 import com.theternal.common.extensions.show
 import com.theternal.core.base.ActivityInflater
 import com.theternal.core.base.BaseActivity
@@ -44,11 +45,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationManager, Too
     }
 
     override fun showBackIcon() {
-        binding.goBackBtn.show()
+        binding.apply {
+            goBackBtn.show()
+            pageTitle.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        }
     }
 
     override fun hideBackIcon() {
-        binding.goBackBtn.hide()
+        binding.apply {
+            goBackBtn.fadeOut()
+            pageTitle.textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+        }
     }
 
     override fun setTitle(title: String) {

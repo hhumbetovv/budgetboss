@@ -79,9 +79,14 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
 
     //!  UI Updates
     override fun onStateUpdate(state: State) {
-        recordAdapter?.submitList(state.records)
 
         binding {
+            recordAdapter?.apply {
+                currentList.size < state.records.size
+                submitList(state.records)
+                recordList.scrollToPosition(0)
+            }
+
             total.text = state.balance.format(true)
 
             updateEmoji(state.balance)
@@ -92,7 +97,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
                 emptyListTitle.hide()
             }
 
-            recordList.smoothScrollToPosition(0)
+            recordList.scrollToPosition(0)
         }
     }
 
