@@ -5,30 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp"
     tools:theme="@style/Theme.BudgetBoss">
-
-    <ImageView
-        android:id="@+id/goBackBtn"
-        style="@style/GoBackBtn"
-        android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pageTitle" />
-
-    <TextView
-        android:id="@+id/pageTitle"
-        style="@style/PageTitle"
-        android:text="@string/account_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/details"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/bg_rounded_container"
         android:backgroundTint="@color/container"
         android:paddingHorizontal="24dp"
@@ -37,7 +22,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout

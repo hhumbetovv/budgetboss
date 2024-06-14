@@ -5,15 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="16dp"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp"
     tools:theme="@style/Theme.BudgetBoss">
-
-    <TextView
-        android:id="@+id/pageTitle"
-        style="@style/PageTitle"
-        android:text="@string/home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/totalBalanceContainer"
@@ -23,10 +17,10 @@
         android:backgroundTint="@color/container"
         android:paddingHorizontal="16dp"
         android:paddingVertical="22dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/totalBalanceTitle"

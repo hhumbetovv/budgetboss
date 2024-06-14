@@ -27,6 +27,7 @@ import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.Initializer
+import com.theternal.core.managers.ToolbarManager
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.record_details.RecordAdapter
@@ -71,6 +72,8 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     override val initViews: Initializer<FragmentAccountDetailsBinding> = {
         postEvent(Event.GetAccount(arguments?.getLong("id")))
 
+        initToolbar()
+
         initRecyclerViews()
 
         initDrawables()
@@ -80,11 +83,6 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
         initActionButtons()
 
         initAlertDialog()
-
-        goBackBtn.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
     }
 
     override fun onDestroyView() {
@@ -99,6 +97,13 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
         colorWhite = null
 
         super.onDestroyView()
+    }
+
+    private fun initToolbar() {
+        (requireActivity() as ToolbarManager).apply {
+            showBackIcon()
+            setTitle(getString(Strings.account_details))
+        }
     }
 
     private fun initRecyclerViews() {

@@ -24,6 +24,7 @@ import com.theternal.common.extensions.setOnTabSelectedListener
 import com.theternal.common.extensions.show
 import com.theternal.common.extensions.showToast
 import com.theternal.core.base.Inflater
+import com.theternal.core.managers.ToolbarManager
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getCategoryName
 import java.math.BigDecimal
@@ -71,7 +72,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddRecordBinding> = {
 
-        goBackBtn.setOnClickListener { findNavController().popBackStack() }
+        initToolbar()
 
         initTabBar()
 
@@ -90,6 +91,13 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
         saveBtn.setOnClickListener {
             postEvent(Event.CreateRecord(noteField.text.toString()))
+        }
+    }
+
+    private fun initToolbar() {
+        (requireActivity() as ToolbarManager).apply {
+            showBackIcon()
+            setTitle(getString(Strings.new_transaction))
         }
     }
 

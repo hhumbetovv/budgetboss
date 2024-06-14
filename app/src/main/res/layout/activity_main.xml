@@ -8,16 +8,41 @@
     tools:context=".MainActivity"
     tools:theme="@style/Theme.BudgetBoss">
 
+    <ImageView
+        android:id="@+id/goBackBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="16dp"
+        android:contentDescription="@null"
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pageTitle"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/pageTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Home" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activityContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_marginTop="16dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
         app:navGraph="@navigation/activity_nav_graph" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

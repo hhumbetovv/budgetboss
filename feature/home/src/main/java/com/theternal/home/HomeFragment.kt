@@ -17,6 +17,7 @@ import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEvent
+import com.theternal.core.managers.ToolbarManager
 import com.theternal.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
@@ -53,6 +54,11 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentHomeBinding> = {
+        (requireActivity() as ToolbarManager).apply {
+            hideBackIcon()
+            setTitle(getString(Strings.home))
+        }
+
         (emoji.drawable as AnimatedVectorDrawable).start()
 
         smile = getDrawable(Drawables.ic_emoji_smile)
