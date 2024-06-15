@@ -5,36 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:padding="@dimen/padding"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp"
     tools:theme="@style/Theme.BudgetBoss">
-
-    <ImageView
-        android:contentDescription="@null"
-        style="@style/GoBackBtn"
-        android:id="@+id/goBackBtn"
-        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pageTitle" />
-
-    <TextView
-        android:id="@+id/pageTitle"
-        style="@style/PageTitle"
-        android:text="@string/category_details"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/categoryLabel"
-        style="@style/ContentTitle"
-        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/transportation" />
 
     <TextView
         android:id="@+id/amount"
-        style="@style/ContentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/categoryLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/categoryLabel"
@@ -42,7 +31,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recordList"
-        style="@style/CategoryRecordList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

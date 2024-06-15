@@ -5,32 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:paddingTop="16dp"
     tools:theme="@style/Theme.BudgetBoss">
 
-    <ImageView
-        android:id="@+id/goBackBtn"
-        style="@style/BackBtn"
-        android:contentDescription="@null"
-        app:layout_constraintBottom_toBottomOf="@+id/pageTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/pageTitle"/>
-
-    <TextView
-        android:id="@+id/pageTitle"
-        style="@style/PageTitle"
-        android:text="@string/new_transaction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
-        style="@style/ContentScrollView"
-        tools:layout_marginTop="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:paddingBottom="16dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/saveBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pageTitle">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,51 +24,84 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
-                style="@style/TabBarContainer">
+                style="@style/TabContainer"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:paddingTop="32dp">
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabBar"
-                    style="@style/TabBarLayout" />
+                    style="@style/TabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="16dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
             <EditText
                 android:id="@+id/amountField"
-                style="@style/AmountField"
+                style="@style/TextField"
                 android:autofillHints="@null"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:maxLength="20"
+                android:inputType="numberDecimal"
+                android:drawableEnd="@drawable/ic_dollar"
                 android:hint="@string/income" />
 
             <TextView
                 android:id="@+id/selectionTitle"
-                style="@style/SelectionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/select_category" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categoryList"
-                style="@style/CategoryList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
                 tools:listitem="@layout/view_category_item" />
 
             <LinearLayout
                 android:id="@+id/accountsContainer"
-                style="@style/AccountsContainer">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                android:orientation="vertical">
 
                 <TextView
-                    style="@style/ContentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:text="@string/transfer_from" />
 
                 <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/senderAccount"
-                    style="@style/AccountsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     app:mainColor="@color/danger" />
 
                 <LinearLayout
-                    style="@style/TitleAndSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
                     tools:ignore="UseCompoundDrawables">
 
                     <TextView
-                        style="@style/ContentTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:text="@string/transfer_to" />
 
                     <Space
@@ -93,7 +111,10 @@
 
                     <ImageView
                         android:id="@+id/accountSwitch"
-                        style="@style/Switch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="16dp"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_swap" />
 
@@ -101,14 +122,18 @@
 
                 <com.theternal.uikit.views.AccountButtonView
                     android:id="@+id/receiverAccount"
-                    style="@style/AccountsButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     app:mainColor="@color/primary" />
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/dateTitle"
-                style="@style/ContentTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/date" />
@@ -136,8 +161,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBtn"
-        style="@style/SaveButton"
+        style="@style/PrimaryBtn"
         android:text="@string/save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

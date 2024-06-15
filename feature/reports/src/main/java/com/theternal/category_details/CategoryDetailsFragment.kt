@@ -16,8 +16,10 @@ import com.theternal.category_details.CategoryDetailsContract.*
 import com.theternal.common.constants.MINUS
 import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.Colors
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
+import com.theternal.core.managers.ToolbarManager
 import com.theternal.domain.entities.base.ExpenseCategory
 import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.record_details.RecordAdapter
@@ -61,7 +63,12 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentCategoryDetailsBinding> = {
-        goBackBtn.setOnClickListener { findNavController().popBackStack() }
+
+        (requireActivity() as ToolbarManager).apply {
+            showBackIcon()
+            setTitle(getString(Strings.category_details))
+        }
+
         categoryLabel.text = getString(getCategoryName(
             arguments?.getString("category")?.uppercase().let { label ->
                 if(isExpense) ExpenseCategory.valueOf(label ?: "OTHERS")

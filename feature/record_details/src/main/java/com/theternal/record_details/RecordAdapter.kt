@@ -48,7 +48,7 @@ class RecordAdapter(
                 item is TransferEntity
             ) }
 
-            container.setOnClickListener {
+            recordContainer.setOnClickListener {
                 if(!bottomSheet.isAdded) {
                     bottomSheet.show(fragmentManager, "Records")
                 }

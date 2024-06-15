@@ -1,7 +1,6 @@
 package com.theternal.add_record
 
 import android.view.Gravity
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
@@ -24,6 +23,7 @@ import com.theternal.common.extensions.setOnTabSelectedListener
 import com.theternal.common.extensions.show
 import com.theternal.common.extensions.showToast
 import com.theternal.core.base.Inflater
+import com.theternal.core.managers.ToolbarManager
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getCategoryName
 import java.math.BigDecimal
@@ -71,7 +71,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAddRecordBinding> = {
 
-        goBackBtn.setOnClickListener { findNavController().popBackStack() }
+        initToolbar()
 
         initTabBar()
 
@@ -90,6 +90,13 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
         saveBtn.setOnClickListener {
             postEvent(Event.CreateRecord(noteField.text.toString()))
+        }
+    }
+
+    private fun initToolbar() {
+        (requireActivity() as ToolbarManager).apply {
+            showBackIcon()
+            setTitle(getString(Strings.new_transaction))
         }
     }
 
@@ -196,11 +203,11 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateCategoryListVisibility(isVisible: Boolean) {
         binding {
             if(isVisible) {
-                categoryList.visibility = View.VISIBLE
-                selectionTitle.visibility = View.VISIBLE
+                categoryList.show()
+                selectionTitle.show()
             } else {
-                categoryList.visibility = View.GONE
-                selectionTitle.visibility = View.GONE
+                categoryList.hide()
+                selectionTitle.hide()
             }
         }
     }
@@ -221,9 +228,9 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun updateAccounts() {
         state?.apply {
             if(recordType == TRANSFER) {
-                binding.accountsContainer.visibility = View.VISIBLE
+                binding.accountsContainer.show()
             } else {
-                binding.accountsContainer.visibility = View.GONE
+                binding.accountsContainer.hide()
             }
             binding.senderAccount.setAccount(transferFrom)
             binding.receiverAccount.setAccount(transferTo)

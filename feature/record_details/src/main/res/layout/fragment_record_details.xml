@@ -13,7 +13,10 @@
 
     <ImageView
         android:id="@+id/icon"
-        style="@style/Icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/bg_icon_wrapper"
+        android:padding="4dp"
         android:contentDescription="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +26,10 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="@+id/icon"
@@ -31,7 +37,9 @@
 
     <TextView
         android:id="@+id/amount"
-        style="@style/ContentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
         tools:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +48,10 @@
 
     <TextView
         android:id="@+id/sent"
-        style="@style/Sent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/danger"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/received"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/icon"
@@ -49,7 +60,10 @@
 
     <TextView
         android:id="@+id/received"
-        style="@style/Received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sent"
@@ -57,7 +71,10 @@
 
     <EditText
         android:id="@+id/noteField"
-        style="@style/RecordNoteField"
+        style="@style/TextField"
+        android:layout_width="0dp"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
         android:autofillHints="@null"
         android:hint="@string/note"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,14 +83,22 @@
 
     <com.theternal.uikit.views.DateButtonView
         android:id="@+id/dateBtn"
-        style="@style/DateButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:backgroundTint="@color/container"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteField" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveBtn"
-        style="@style/RecordSaveButton"
+        style="@style/PrimaryBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:enabled="false"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deleteBtn"
@@ -82,7 +107,12 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteBtn"
-        style="@style/RecordDeleteButton"
+        style="@style/PrimaryBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/frame"
+        app:rippleColor="@color/danger"
+        android:layout_marginTop="16dp"
         android:text="@string/delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
