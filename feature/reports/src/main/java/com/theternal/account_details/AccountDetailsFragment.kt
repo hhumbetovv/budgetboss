@@ -270,9 +270,9 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     ) {
         binding {
             if(list.isEmpty()) {
-                incomeContainer.hide()
+                incomeContainer.visibility = View.GONE
             } else {
-                incomeContainer.show()
+                incomeContainer.visibility = View.VISIBLE
             }
             if(totalIncomes != null) {
                 incomes.text = "$PLUS${totalIncomes.format()} $currency"
@@ -289,9 +289,9 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     ) {
         binding {
             if(list.isEmpty()) {
-                expenseContainer.hide()
+                expenseContainer.visibility = View.GONE
             } else {
-                expenseContainer.show()
+                expenseContainer.visibility = View.VISIBLE
             }
             if(totalExpenses != null) {
                 expenses.text = "$MINUS${totalExpenses.format()} $currency"

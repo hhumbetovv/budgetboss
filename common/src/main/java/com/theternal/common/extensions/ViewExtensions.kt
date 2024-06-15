@@ -6,49 +6,52 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 
 fun View.hide() {
-    if(visibility == View.GONE) return
+    if(visibility == View.GONE) {
+        setLayoutAnimation()
+        return
+    }
     animate()
         .alpha(0f)
         .setDuration(300)
-        .withEndAction{
+        .withEndAction {
             visibility = View.GONE
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+            setLayoutAnimation()
         }
 }
 
 fun View.fadeOut() {
-    if(visibility == View.INVISIBLE) return
+    if(visibility == View.INVISIBLE) {
+        setLayoutAnimation()
+        return
+    }
     animate()
         .alpha(0f)
         .setDuration(300)
-        .withEndAction{
+        .withEndAction {
             visibility = View.INVISIBLE
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+            setLayoutAnimation()
         }
 }
 
 fun View.show() {
-    if(visibility == View.VISIBLE) return
+    if(visibility == View.VISIBLE) {
+        setLayoutAnimation()
+        return
+    }
     alpha = 0f
     visibility = View.VISIBLE
     animate()
         .alpha(1f)
         .setDuration(300)
-        .setListener(null).withEndAction {
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+        .withEndAction { setLayoutAnimation() }
+}
+
+private fun View.setLayoutAnimation() {
+    (parent as? ViewGroup)?.apply {
+        layoutTransition = LayoutTransition().apply {
+            enableTransitionType(LayoutTransition.CHANGING)
         }
+    }
 }
 
 fun View.getColor(id: Int): Int {

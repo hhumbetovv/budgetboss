@@ -2,7 +2,6 @@ package com.theternal.add_record
 
 import android.view.Gravity
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.transition.Slide
 import androidx.transition.Transition
 import com.theternal.uikit.adapters.CategoryAdapter
@@ -125,7 +124,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     private fun initCategoryList() {
         val categoryList = binding.categoryList
         categoryList.adapter = categoryAdapter
-        (categoryList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+        categoryList.itemAnimator = null
         categoryAdapter.submitList(incomeItems.map { item ->
             item.copy(isSelected = item.category == state?.incomeCategory)
         })
