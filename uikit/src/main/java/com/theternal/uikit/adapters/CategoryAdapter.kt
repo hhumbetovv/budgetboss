@@ -46,6 +46,7 @@ class CategoryAdapter(
 
     override val itemBinder: Binder<CategoryItem, ViewCategoryItemBinding>
         get() = { item, _ ->
+
             container.setOnClickListener {
                 onItemClickListener(item)
             }

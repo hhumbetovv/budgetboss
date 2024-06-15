@@ -53,7 +53,7 @@ dependencies {
     implementation(project(":core"))
 
     implementation(project(":feature:home"))
-    implementation(project(":feature:add_record"))
+    implementation(project(":feature:record:add"))
     implementation(project(":feature:reports"))
 
     implementation("androidx.core:core-ktx:1.13.1")

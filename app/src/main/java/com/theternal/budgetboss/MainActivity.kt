@@ -8,12 +8,12 @@ import com.theternal.common.extensions.show
 import com.theternal.core.base.ActivityInflater
 import com.theternal.core.base.BaseActivity
 import com.theternal.core.base.Initializer
-import com.theternal.core.managers.NavigationManager
+import com.theternal.core.managers.ActivityNavManager
 import com.theternal.core.managers.ToolbarManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(), NavigationManager, ToolbarManager {
+class MainActivity : BaseActivity<ActivityMainBinding>(), ActivityNavManager, ToolbarManager {
 
     private var navController: NavController? = null
 

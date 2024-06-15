@@ -60,4 +60,5 @@
     <string name="others">Diğerleri</string>
     <string name="amount">Tutar</string>
     <string name="transfer">TRANSFER</string>
+    <string name="categories">Kategoriler</string>
 </resources>

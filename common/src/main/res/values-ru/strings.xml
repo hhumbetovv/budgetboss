@@ -60,4 +60,5 @@
     <string name="others">Другие</string>
     <string name="amount">Сумма</string>
     <string name="transfer">ТРАНСФЕР</string>
+    <string name="categories">Категории</string>
 </resources>

@@ -18,12 +18,15 @@ import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.core.managers.ToolbarManager
+import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
 import com.theternal.uikit.R.drawable as Drawables
 import com.theternal.home.HomeContract.*
-import com.theternal.record_details.RecordAdapter
+import com.theternal.record_details.RecordDetailsFragment
+import com.theternal.uikit.adapters.RecordAdapter
+import com.theternal.uikit.fragments.AppBottomSheetFragment
 
 @AndroidEntryPoint
 class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
@@ -47,7 +50,16 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     }
 
     //! UI Properties
-    private var recordAdapter: RecordAdapter? = null
+    private val recordDetailsFragment = RecordDetailsFragment()
+    private val recordDetailsSheet = AppBottomSheetFragment { recordDetailsFragment }
+
+    private var recordAdapter = RecordAdapter { record ->
+        recordDetailsFragment.setProperties(record.id, record is TransferEntity)
+
+        if(!recordDetailsSheet.isAdded) {
+            recordDetailsSheet.show(childFragmentManager, "Record Details")
+        }
+    }
     private var smile: Drawable? = null
     private var neutral: Drawable? = null
     private var frown: Drawable? = null
@@ -65,12 +77,10 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
         neutral = getDrawable(Drawables.ic_emoji_neutral)
         frown = getDrawable(Drawables.ic_emoji_frown)
 
-        recordAdapter = RecordAdapter(childFragmentManager)
         recordList.adapter = recordAdapter
     }
 
     override fun onDestroyView() {
-        recordAdapter = null
         smile = null
         neutral = null
         frown = null
@@ -81,7 +91,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     override fun onStateUpdate(state: State) {
 
         binding {
-            recordAdapter?.apply {
+            recordAdapter.apply {
                 currentList.size < state.records.size
                 submitList(state.records)
                 recordList.scrollToPosition(0)

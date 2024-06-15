@@ -60,4 +60,5 @@
     <string name="others">Others</string>
     <string name="amount">Amount</string>
     <string name="transfer">Transfer</string>
+    <string name="categories">Categories</string>
 </resources>

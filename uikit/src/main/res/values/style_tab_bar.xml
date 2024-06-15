@@ -11,7 +11,8 @@
         <item name="android:background">@color/container</item>
         <item name="tabIndicatorGravity">stretch</item>
         <item name="tabRippleColor">@null</item>
-        <item name="tabTextColor">@color/white</item>
+        <item name="tabTextColor">@color/text</item>
+        <item name="tabSelectedTextColor">@color/white</item>
         <item name="tabIndicator">@drawable/bg_tab_indicator</item>
         <item name="tabTextAppearance">@style/TabTextStyle</item>
     </style>

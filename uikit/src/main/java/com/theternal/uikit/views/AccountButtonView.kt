@@ -29,14 +29,14 @@ class AccountButtonView @JvmOverloads constructor(
     private val hintColor = getColor(Colors.hint)
     private val primaryColor = getColor(Colors.primary)
     private val dangerColor = getColor(Colors.danger)
-    private val whiteColor = getColor(Colors.white)
+    private val textColor = getColor(Colors.text)
 
     init {
         context.obtainStyledAttributes(
             attrs, R.styleable.AccountButtonView, defAttrs, 0
         ).apply {
 
-            mainColor = getColor(R.styleable.AccountButtonView_mainColor, whiteColor)
+            mainColor = getColor(R.styleable.AccountButtonView_mainColor, textColor)
 
             recycle()
         }
@@ -95,7 +95,7 @@ class AccountButtonView @JvmOverloads constructor(
                 when {
                     account.balance > BigDecimal.ZERO -> primaryColor
                     account.balance < BigDecimal.ZERO -> dangerColor
-                    else -> whiteColor
+                    else -> textColor
                 }
             )
         }
