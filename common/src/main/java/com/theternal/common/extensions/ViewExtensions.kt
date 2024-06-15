@@ -9,8 +9,6 @@ fun View.hide() {
     if(visibility == View.GONE) return
     animate()
         .alpha(0f)
-        .scaleX(0f)
-        .scaleY(0f)
         .setDuration(300)
         .withEndAction{
             visibility = View.GONE
@@ -26,8 +24,6 @@ fun View.fadeOut() {
     if(visibility == View.INVISIBLE) return
     animate()
         .alpha(0f)
-        .scaleX(0f)
-        .scaleY(0f)
         .setDuration(300)
         .withEndAction{
             visibility = View.INVISIBLE
@@ -42,13 +38,9 @@ fun View.fadeOut() {
 fun View.show() {
     if(visibility == View.VISIBLE) return
     alpha = 0f
-    scaleX = 0f
-    scaleY = 0f
     visibility = View.VISIBLE
     animate()
         .alpha(1f)
-        .scaleX(1f)
-        .scaleY(1f)
         .setDuration(300)
         .setListener(null).withEndAction {
             (parent as? ViewGroup)?.apply {
