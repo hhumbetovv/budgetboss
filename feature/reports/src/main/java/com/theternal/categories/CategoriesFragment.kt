@@ -16,7 +16,6 @@ import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.domain.entities.base.ExpenseCategory
 import com.theternal.uikit.adapters.CategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import java.math.BigDecimal
 import com.theternal.categories.CategoriesContract.*
 import com.theternal.common.extensions.safeNavigate
 import com.theternal.reports.ReportsFragmentDirections
@@ -58,18 +57,14 @@ class CategoriesFragment : BaseStatefulFragment<FragmentCategoriesBinding,
                 totalIncomes.text = "$PLUS${totalIncome.format(true)}"
                 totalExpenses.text = "$MINUS${totalExpense.format(true)}"
 
-                if(totalIncome === BigDecimal.ZERO) {
-                    incomeContainer.hide()
-                } else incomeContainer.show()
-
-                if(totalExpense === BigDecimal.ZERO) {
-                    expenseContainer.hide()
-                } else expenseContainer.show()
-
                 if(state.incomeCategories.isEmpty() && state.expenseCategories.isEmpty()) {
-                    emptyListTitle.show()
+                    incomeContainer.hide(false)
+                    expenseContainer.hide(false)
+                    emptyListTitle.show(false)
                 } else {
-                    emptyListTitle.hide()
+                    incomeContainer.show(false)
+                    expenseContainer.show(false)
+                    emptyListTitle.hide(false)
                 }
             }
         }

@@ -57,8 +57,6 @@ class RecordAdapter(
                 icon.context, getIcon(type, item.title)
             ))
 
-
-
             title.text = getName(type, item.title, title.context)
 
             date.text = SimpleDateFormat(
@@ -68,12 +66,12 @@ class RecordAdapter(
             if(item is TransferEntity) {
                 sent.text = item.sentAmount
                 received.text = item.receivedAmount
-                sent.show()
-                received.show()
-                amount.hide()
+                sent.show(false)
+                received.show(false)
+                amount.hide(false)
             } else {
-                sent.hide()
-                received.hide()
+                sent.hide(false)
+                received.hide(false)
                 amount.text = (item as FinancialRecordEntity).amountText
                 amount.setTextColor(ContextCompat.getColor(
                     amount.context,
@@ -82,7 +80,7 @@ class RecordAdapter(
                         else -> Colors.danger
                     }
                 ))
-                amount.show()
+                amount.show(false)
             }
         }
 

@@ -1,6 +1,7 @@
 package com.theternal.uikit.views
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.util.AttributeSet
@@ -55,17 +56,20 @@ class AccountButtonView @JvmOverloads constructor(
     }
 
     private fun setBorder(isActive: Boolean) {
-        ((binding.accountContainer.background as RippleDrawable).findDrawableByLayerId(
-            android.R.id.background
-        ) as GradientDrawable).apply {
-            mutate()
-            if(isActive) {
-                val width = (resources.displayMetrics.density + 0.5f).toInt()
-                setStroke(width, mainColor ?: hintColor)
-            } else {
-                setStroke(0, hintColor)
-            }
+        val gradientDrawable = GradientDrawable()
+        gradientDrawable.cornerRadius = resources.displayMetrics.density * 16 + 0.5f
+        gradientDrawable.setColor(getColor(Colors.container))
+        if(isActive) {
+            val width = (resources.displayMetrics.density + 0.5f).toInt()
+            gradientDrawable.setStroke(width, mainColor ?: hintColor)
+        } else {
+            gradientDrawable.setStroke(0, hintColor)
         }
+
+        val colors = ColorStateList.valueOf(getColor(Colors.ripple))
+        val rippleDrawable = RippleDrawable(colors, gradientDrawable, null)
+
+        binding.accountContainer.background = rippleDrawable
     }
 
     private fun setLabel(accountName: String?) {

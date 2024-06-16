@@ -83,10 +83,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
         initBottomSheet()
 
-        binding.dateBtn.setDate(System.currentTimeMillis())
-        binding.dateBtn.setDateSelectionListener(parentFragmentManager) { date ->
-            postEvent(Event.SelectDate(date))
-        }
+        initDateButton()
 
         saveBtn.setOnClickListener {
             postEvent(Event.CreateRecord(noteField.text.toString()))
@@ -112,6 +109,12 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
         }
         tabBar.setOnTabSelectedListener {
             postEvent(Event.SetType(RecordType.entries[it]))
+        }
+
+        val type = state?.recordType
+        if(type != null) {
+            val index = RecordType.entries.indexOf(type)
+            tabBar.getTabAt(index)?.select()
         }
     }
 
@@ -147,6 +150,15 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
                     postEvent(Event.SwitchAccounts)
                 }
             }
+        }
+    }
+
+    private fun initDateButton() {
+        binding.dateBtn.setDate(
+            state?.date ?: System.currentTimeMillis()
+        )
+        binding.dateBtn.setDateSelectionListener(parentFragmentManager) { date ->
+            postEvent(Event.SelectDate(date))
         }
     }
 

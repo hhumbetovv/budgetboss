@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 
-fun View.hide() {
+fun View.hide(withLayoutAnimation: Boolean = true) {
     if(visibility == View.GONE) {
-        setLayoutAnimation()
+        if(withLayoutAnimation) setLayoutAnimation()
         return
     }
     animate()
@@ -15,13 +15,13 @@ fun View.hide() {
         .setDuration(300)
         .withEndAction {
             visibility = View.GONE
-            setLayoutAnimation()
+            if(withLayoutAnimation) setLayoutAnimation()
         }
 }
 
-fun View.fadeOut() {
+fun View.fadeOut(withLayoutAnimation: Boolean = true) {
     if(visibility == View.INVISIBLE) {
-        setLayoutAnimation()
+        if(withLayoutAnimation) setLayoutAnimation()
         return
     }
     animate()
@@ -29,13 +29,13 @@ fun View.fadeOut() {
         .setDuration(300)
         .withEndAction {
             visibility = View.INVISIBLE
-            setLayoutAnimation()
+            if(withLayoutAnimation) setLayoutAnimation()
         }
 }
 
-fun View.show() {
+fun View.show(withLayoutAnimation: Boolean = true) {
     if(visibility == View.VISIBLE) {
-        setLayoutAnimation()
+        if(withLayoutAnimation) setLayoutAnimation()
         return
     }
     alpha = 0f
@@ -43,7 +43,7 @@ fun View.show() {
     animate()
         .alpha(1f)
         .setDuration(300)
-        .withEndAction { setLayoutAnimation() }
+        .withEndAction { if(withLayoutAnimation) setLayoutAnimation() }
 }
 
 private fun View.setLayoutAnimation() {
