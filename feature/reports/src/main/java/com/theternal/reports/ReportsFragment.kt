@@ -36,6 +36,7 @@ class ReportsFragment : BaseStatelessFragment<FragmentReportsBinding>() {
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentReportsBinding> = {
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             hideBackIcon()
             setTitle(getString(Strings.reports))
         }

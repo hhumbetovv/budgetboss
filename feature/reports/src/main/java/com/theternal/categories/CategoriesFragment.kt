@@ -18,6 +18,7 @@ import com.theternal.uikit.adapters.CategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.math.BigDecimal
 import com.theternal.categories.CategoriesContract.*
+import com.theternal.common.extensions.safeNavigate
 import com.theternal.reports.ReportsFragmentDirections
 import com.theternal.reports.databinding.FragmentCategoriesBinding
 
@@ -75,7 +76,7 @@ class CategoriesFragment : BaseStatefulFragment<FragmentCategoriesBinding,
     }
 
     private fun navigateToDetails(category: CategoryAdapter.CategoryItem) {
-        findNavController().navigate(
+        findNavController().safeNavigate(
             ReportsFragmentDirections.toCategoryDetails(
                 category.category.name.capitalize(),
                 category.category is ExpenseCategory

@@ -67,6 +67,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentHomeBinding> = {
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             hideBackIcon()
             setTitle(getString(Strings.home))
         }

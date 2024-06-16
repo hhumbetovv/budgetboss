@@ -72,6 +72,7 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     override val initViews: Initializer<FragmentCategoryDetailsBinding> = {
 
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             showBackIcon()
             setTitle(getString(Strings.category_details))
         }

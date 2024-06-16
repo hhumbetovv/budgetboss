@@ -9,7 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.theternal.uikit.databinding.FragmentAppBottomSheetBinding
 
 class AppBottomSheetFragment(
-    private val fragmentFactory: () -> Fragment
+    private val fragmentFactory: (() -> Fragment)? = null
 ) : BottomSheetDialogFragment() {
 
     private var binding: FragmentAppBottomSheetBinding? = null
@@ -25,17 +25,20 @@ class AppBottomSheetFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(fragmentFactory == null){
+            dismiss()
+        } else {
+            binding?.apply {
+                childFragmentManager.beginTransaction().apply {
+                    add(fragmentContainerView.id, fragmentFactory.invoke())
+                }.commit()
 
-        binding?.apply {
-
-            childFragmentManager.beginTransaction().apply {
-                add(fragmentContainerView.id, fragmentFactory())
-            }.commit()
-
-            closeBtn.setOnClickListener {
-                dismiss()
+                closeBtn.setOnClickListener {
+                    dismiss()
+                }
             }
         }
+
     }
 
     fun setTitle(title: String) {

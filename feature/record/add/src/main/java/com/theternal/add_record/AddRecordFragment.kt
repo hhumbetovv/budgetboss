@@ -95,6 +95,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
 
     private fun initToolbar() {
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             showBackIcon()
             setTitle(getString(Strings.new_transaction))
         }
@@ -261,7 +262,7 @@ class AddRecordFragment : BaseStatefulFragment<FragmentAddRecordBinding,
     //! UI Effects
     override fun onEffectUpdate(effect: Effect) {
         when(effect) {
-            Effect.NavigateBack -> findNavController().popBackStack()
+            Effect.NavigateBack -> findNavController().navigateUp()
             Effect.CheckInternetNotify -> {
                 showToast(getString(Strings.check_internet))
             }

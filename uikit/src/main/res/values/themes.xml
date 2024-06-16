@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.BudgetBoss" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
         <item name="colorAccent">@color/primary</item>
         <item name="colorPrimary">@color/primary</item>
         <item name="android:statusBarColor">@color/background</item>
@@ -21,5 +20,4 @@
         <item name="materialCalendarTheme">@style/CalendarTheme</item>
         <item name="android:alertDialogTheme">@style/AlertDialogTheme</item>
     </style>
-    
 </resources>

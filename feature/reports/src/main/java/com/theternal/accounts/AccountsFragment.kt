@@ -8,6 +8,7 @@ import com.theternal.reports.databinding.FragmentAccountsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.accounts.AccountsContract.*
 import com.theternal.add_account.AddAccountFragment
+import com.theternal.common.extensions.safeNavigate
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEffect
 import com.theternal.domain.entities.local.AccountEntity
@@ -49,7 +50,7 @@ class AccountsFragment : BaseStatefulFragment<FragmentAccountsBinding, AccountsV
     }
 
     private fun navigateToDetails(account: AccountEntity) {
-        findNavController().navigate(
+        findNavController().safeNavigate(
             ReportsFragmentDirections.toAccountDetails(
                 account.id
             )

@@ -111,6 +111,7 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
 
     private fun initToolbar() {
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             showBackIcon()
             setTitle(getString(Strings.account_details))
         }

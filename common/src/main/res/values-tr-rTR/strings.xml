@@ -61,4 +61,10 @@
     <string name="amount">Tutar</string>
     <string name="transfer">TRANSFER</string>
     <string name="categories">Kategoriler</string>
+    <string name="settings">Ayarlar</string>
+    <string name="language">Dil</string>
+    <string name="dark_mode">Karanlık mod</string>
+    <string name="theme">Tema</string>
+    <string name="exiting_title">Uygulamadan çıkış yapılıyor</string>
+    <string name="exit">Çık</string>
 </resources>

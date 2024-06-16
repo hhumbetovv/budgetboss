@@ -61,4 +61,10 @@
     <string name="amount">Сумма</string>
     <string name="transfer">ТРАНСФЕР</string>
     <string name="categories">Категории</string>
+    <string name="settings">Настройки</string>
+    <string name="language">Язык</string>
+    <string name="theme">Тема</string>
+    <string name="dark_mode">Тёмный режим</string>
+    <string name="exiting_title">Выход из приложения</string>
+    <string name="exit">Выход</string>
 </resources>

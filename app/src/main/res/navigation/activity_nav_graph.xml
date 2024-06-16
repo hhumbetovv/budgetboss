@@ -9,4 +9,5 @@
         android:name="com.theternal.budgetboss.fragments.MainFragment"
         android:label="MainFragment" />
     <include app:graph="@navigation/add_nav_graph" />
+    <include app:graph="@navigation/settings_nav_graph" />
 </navigation>
