@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.extensions.Colors
+import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
@@ -23,6 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class RecordAdapter(
+    private val isCategoryRecord: Boolean = false,
     private val onItemClickListener: ((RecordEntity) -> Unit)?,
 ) : BaseAdapter<RecordEntity, ViewRecordItemBinding>(
     object : DiffUtil.ItemCallback<RecordEntity>() {
@@ -57,7 +59,13 @@ class RecordAdapter(
                 icon.context, getIcon(type, item.title)
             ))
 
-            title.text = getName(type, item.title, title.context)
+            title.text = if(isCategoryRecord) {
+                if(item.note.isNullOrBlank()) {
+                    title.context.getString(Strings.empty_note)
+                } else item.note
+            } else {
+                getName(type, item.title, title.context)
+            }
 
             date.text = SimpleDateFormat(
                 "dd.MM.yyyy", Locale.getDefault()

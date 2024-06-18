@@ -66,7 +66,6 @@
     <string name="theme">Theme</string>
     <string name="dark_mode">Dark mode</string>
     <string name="exiting_title">Exiting the application</string>
-    <string name="exit">Exit</string>
     <string name="az" translatable="false">Azərbaycanca</string>
     <string name="en" translatable="false">English</string>
     <string name="tr" translatable="false">Türkçe</string>

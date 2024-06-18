@@ -57,13 +57,17 @@ class CategoriesFragment : BaseStatefulFragment<FragmentCategoriesBinding,
                 totalIncomes.text = "$PLUS${totalIncome.format(true)}"
                 totalExpenses.text = "$MINUS${totalExpense.format(true)}"
 
-                if(state.incomeCategories.isEmpty() && state.expenseCategories.isEmpty()) {
+                if(state.incomeCategories.isEmpty()) {
                     incomeContainer.hide(false)
+                } else incomeContainer.show(false)
+
+                if(state.expenseCategories.isEmpty()) {
                     expenseContainer.hide(false)
+                } else expenseContainer.show(false)
+
+                if(state.incomeCategories.isEmpty() && state.expenseCategories.isEmpty()) {
                     emptyListTitle.show(false)
                 } else {
-                    incomeContainer.show(false)
-                    expenseContainer.show(false)
                     emptyListTitle.hide(false)
                 }
             }

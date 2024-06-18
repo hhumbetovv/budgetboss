@@ -51,7 +51,7 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     private val recordDetailsFragment = RecordDetailsFragment()
     private val recordDetailsSheet = AppBottomSheetFragment { recordDetailsFragment }
 
-    private var recordAdapter = RecordAdapter { record ->
+    private var recordAdapter = RecordAdapter(true) { record ->
         recordDetailsFragment.setProperties(record.id, record is TransferEntity)
 
         if(!recordDetailsSheet.isAdded) {
