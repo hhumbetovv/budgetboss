@@ -12,6 +12,7 @@ import androidx.viewbinding.ViewBinding
 import com.theternal.common.constants.PrefKeys
 import com.theternal.common.extensions.getSavedBoolean
 import com.theternal.common.extensions.getSavedString
+import com.theternal.common.extensions.saveBoolean
 import java.util.Locale
 
 typealias ActivityInflater<T> = (LayoutInflater) -> T
@@ -68,6 +69,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
                 } else {
                     AppCompatDelegate.MODE_NIGHT_NO
                 }
+            )
+        } else {
+            saveBoolean(
+                PrefKeys.IS_DARK_MODE,
+                AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES
             )
         }
     }
