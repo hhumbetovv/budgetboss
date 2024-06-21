@@ -29,7 +29,7 @@ class ReportsFragment : BaseStatelessFragment<FragmentReportsBinding>() {
     //! UI Properties
     private var pagerAdapter: ReportsPagerAdapter? = null
     private val tabTitles = listOf(
-        Strings.financial_records,
+        Strings.categories,
         Strings.accounts
     )
 
