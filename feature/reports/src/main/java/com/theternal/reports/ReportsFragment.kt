@@ -29,13 +29,14 @@ class ReportsFragment : BaseStatelessFragment<FragmentReportsBinding>() {
     //! UI Properties
     private var pagerAdapter: ReportsPagerAdapter? = null
     private val tabTitles = listOf(
-        Strings.financial_records,
+        Strings.categories,
         Strings.accounts
     )
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentReportsBinding> = {
         (requireActivity() as ToolbarManager).apply {
+            showSettingsIcon()
             hideBackIcon()
             setTitle(getString(Strings.reports))
         }

@@ -29,7 +29,7 @@ class CreateRecordUseCase @Inject constructor(
             val value = if(record.isExpense) RecordType.EXPENSE else RecordType.INCOME
             loggers.forEach { logger ->
                 logger.log(
-                    "create_account",
+                    "create_record",
                     "category" to record.title,
                     "record_type" to value.name
                 )

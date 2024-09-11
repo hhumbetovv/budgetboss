@@ -5,50 +5,53 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 
-fun View.hide() {
-    if(visibility == View.GONE) return
+fun View.hide(withLayoutAnimation: Boolean = true) {
+    if(visibility == View.GONE) {
+        if(withLayoutAnimation) setLayoutAnimation()
+        return
+    }
     animate()
         .alpha(0f)
         .setDuration(300)
-        .withEndAction{
+        .withEndAction {
             visibility = View.GONE
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+            if(withLayoutAnimation) setLayoutAnimation()
         }
 }
 
-fun View.fadeOut() {
-    if(visibility == View.INVISIBLE) return
+fun View.fadeOut(withLayoutAnimation: Boolean = true) {
+    if(visibility == View.INVISIBLE) {
+        if(withLayoutAnimation) setLayoutAnimation()
+        return
+    }
     animate()
         .alpha(0f)
         .setDuration(300)
-        .withEndAction{
+        .withEndAction {
             visibility = View.INVISIBLE
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+            if(withLayoutAnimation) setLayoutAnimation()
         }
 }
 
-fun View.show() {
-    if(visibility == View.VISIBLE) return
+fun View.show(withLayoutAnimation: Boolean = true) {
+    if(visibility == View.VISIBLE) {
+        if(withLayoutAnimation) setLayoutAnimation()
+        return
+    }
     alpha = 0f
     visibility = View.VISIBLE
     animate()
         .alpha(1f)
         .setDuration(300)
-        .setListener(null).withEndAction {
-            (parent as? ViewGroup)?.apply {
-                layoutTransition = LayoutTransition().apply {
-                    enableTransitionType(LayoutTransition.CHANGING)
-                }
-            }
+        .withEndAction { if(withLayoutAnimation) setLayoutAnimation() }
+}
+
+private fun View.setLayoutAnimation() {
+    (parent as? ViewGroup)?.apply {
+        layoutTransition = LayoutTransition().apply {
+            enableTransitionType(LayoutTransition.CHANGING)
         }
+    }
 }
 
 fun View.getColor(id: Int): Int {

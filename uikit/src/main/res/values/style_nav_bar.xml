@@ -12,6 +12,8 @@
         <item name="elevation">0dp</item>
         <item name="itemRippleColor">@null</item>
         <item name="itemIconSize">28dp</item>
+        <item name="itemIconTint">@color/nav_bar_item</item>
+        <item name="itemTextColor">@color/nav_bar_item</item>
         <item name="android:background">@color/transparent</item>
         <item name="itemTextAppearanceInactive">@style/BottomNavBarItemLabel</item>
         <item name="itemTextAppearanceActive">@style/BottomNavBarItemLabel</item>
@@ -24,6 +26,6 @@
     </style>
     <style name="BottomNavBarItemLabel">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/text</item>
     </style>
 </resources>

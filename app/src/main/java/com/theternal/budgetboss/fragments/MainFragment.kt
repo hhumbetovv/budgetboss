@@ -10,7 +10,7 @@ import com.theternal.budgetboss.databinding.FragmentMainBinding
 import com.theternal.core.base.BaseStatelessFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
-import com.theternal.core.managers.NavigationManager
+import com.theternal.core.managers.ActivityNavManager
 
 class MainFragment : BaseStatelessFragment<FragmentMainBinding>() {
 
@@ -27,7 +27,7 @@ class MainFragment : BaseStatelessFragment<FragmentMainBinding>() {
         bottomNavBar.setupWithNavController(navController!!)
 
         addBtn.setOnClickListener {
-            (requireActivity() as NavigationManager).navigateToAdd()
+            (requireActivity() as ActivityNavManager).navigateToAdd()
         }
     }
 

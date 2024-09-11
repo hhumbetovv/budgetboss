@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="android:backgroundTint">@color/frame</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:textColorSecondary">@color/text</item>
+
+        <item name="android:windowIsFloating">true</item>
+
+        <item name="android:buttonBarPositiveButtonStyle">
+            @style/AlertDialogTheme.ButtonStyle
+        </item>
+
+        <item name="android:buttonBarNeutralButtonStyle">
+            @style/AlertDialogTheme.ButtonStyle
+        </item>
+
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/AlertDialogTheme.ButtonStyle
+        </item>
+    </style>
+
+    <style name="AlertDialogTheme.ButtonStyle">
+        <item name="backgroundTint">@null</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textColor">@color/text</item>
+    </style>
+</resources>

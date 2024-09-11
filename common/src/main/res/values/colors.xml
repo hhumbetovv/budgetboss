@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text">#FFFFFF</color>
     <color name="ripple">#40FFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="background">#121212</color>
@@ -12,5 +13,6 @@
     <color name="danger">#FF1515</color>
     <color name="hint">#ABABAB</color>
     <color name="subtitle">#D0D0D0</color>
+    <color name="balance">#A4A2A2</color>
     <color name="divider">#A4A2A2</color>
 </resources>

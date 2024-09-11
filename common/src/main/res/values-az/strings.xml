@@ -59,5 +59,11 @@
     <string name="gift">Hədiyyə</string>
     <string name="others">Digərləri</string>
     <string name="amount">Məbləğ</string>
-    <string name="transfer">TRANZAKSİYA</string>
+    <string name="transfer">Tranzaksiya</string>
+    <string name="categories">Kateqoriyalar</string>
+    <string name="settings">Sazlamalar</string>
+    <string name="language">Dil</string>
+    <string name="dark_mode">Qaranlıq rejim</string>
+    <string name="theme">Tema</string>
+    <string name="exiting_title">Tətbiqdən çıxış edilir</string>
 </resources>

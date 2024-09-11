@@ -15,8 +15,8 @@ android {
         applicationId = "com.theternal.budgetboss"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +46,7 @@ android {
 dependencies {
     //! Versions
     val hiltVersion = "2.49"
+    val navigationVersion = "2.7.7"
 
     //! Modules
     implementation(project(":common"))
@@ -53,8 +54,9 @@ dependencies {
     implementation(project(":core"))
 
     implementation(project(":feature:home"))
-    implementation(project(":feature:add_record"))
+    implementation(project(":feature:record:add"))
     implementation(project(":feature:reports"))
+    implementation(project(":feature:settings"))
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
@@ -65,8 +67,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     //? Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
 
     //? Dependency Injection
     implementation("com.google.dagger:hilt-android:$hiltVersion")

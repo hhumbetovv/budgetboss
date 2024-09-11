@@ -50,8 +50,9 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
-    implementation(project(":feature:add_account"))
-    implementation(project(":feature:record_details"))
+    implementation(project(":feature:account:add"))
+    implementation(project(":feature:account:details"))
+    implementation(project(":feature:category_details"))
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")

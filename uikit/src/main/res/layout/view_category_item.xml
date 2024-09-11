@@ -23,9 +23,7 @@
             android:background="@drawable/bg_icon_wrapper"
             android:contentDescription="@null"
             tools:src="@drawable/ic_dollar"
-            tools:tint="@color/white"
             android:padding="4dp"
-            app:tint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

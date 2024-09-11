@@ -1,5 +1,6 @@
 package com.theternal.accounts
 
+import androidx.navigation.fragment.findNavController
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.interfaces.ViewEvent
@@ -7,8 +8,12 @@ import com.theternal.reports.databinding.FragmentAccountsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.accounts.AccountsContract.*
 import com.theternal.add_account.AddAccountFragment
+import com.theternal.common.extensions.safeNavigate
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEffect
+import com.theternal.domain.entities.local.AccountEntity
+import com.theternal.reports.ReportsFragmentDirections
+import com.theternal.uikit.adapters.AccountAdapter
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 
 @AndroidEntryPoint
@@ -24,8 +29,10 @@ class AccountsFragment : BaseStatefulFragment<FragmentAccountsBinding, AccountsV
     }
 
     //! UI Properties
-    private val accountAdapter = AccountAdapter()
     private val addAccountSheet = AppBottomSheetFragment { AddAccountFragment() }
+    private val accountAdapter = AccountAdapter { account ->
+        navigateToDetails(account)
+    }
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentAccountsBinding> = {
@@ -40,5 +47,13 @@ class AccountsFragment : BaseStatefulFragment<FragmentAccountsBinding, AccountsV
     //!  UI Updates
     override fun onStateUpdate(state: State) {
         accountAdapter.submitList(state.accounts)
+    }
+
+    private fun navigateToDetails(account: AccountEntity) {
+        findNavController().safeNavigate(
+            ReportsFragmentDirections.toAccountDetails(
+                account.id
+            )
+        )
     }
 }

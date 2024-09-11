@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:paddingHorizontal="16dp"
+    android:paddingBottom="16dp"
+    tools:theme="@style/Theme.BudgetBoss">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_rounded_container"
+        android:backgroundTint="@color/container"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingRight="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/positiveBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:paddingHorizontal="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Debit" />
+
+            <EditText
+                android:id="@+id/nameField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:autofillHints="@null"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:paddingHorizontal="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="10dp"
+                android:backgroundTint="@color/primary"
+                android:visibility="invisible"
+                android:minEms="3"
+                android:inputType="text"
+                android:hint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/name"
+                tools:text="Debit" />
+
+            <TextView
+                android:id="@+id/note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:paddingHorizontal="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="10dp"
+                android:textSize="16sp"
+                android:textColor="@color/subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                tools:text="Lorem ipsum" />
+
+            <EditText
+                android:id="@+id/noteField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintHorizontal_bias="0.0"
+                android:inputType="text"
+                android:textSize="16sp"
+                android:paddingHorizontal="0dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="10dp"
+                android:backgroundTint="@color/primary"
+                android:visibility="invisible"
+                android:minEms="3"
+                android:textColor="@color/subtitle"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:autofillHints="@null"
+                android:hint="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/note"
+                tools:text="Lorem ipsum" />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingTop="0dp"
+                android:textColor="@color/danger"
+                android:textSize="16sp"
+                android:paddingHorizontal="0dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/note"
+                tools:text="-200 EURO / -200 USD" />
+
+            <EditText
+                android:id="@+id/balanceField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autofillHints="@null"
+                android:backgroundTint="@color/primary"
+                android:includeFontPadding="true"
+                android:fontFamily="@font/montserrat_medium"
+                android:paddingTop="0dp"
+                android:textColor="@color/danger"
+                android:textSize="16sp"
+                android:paddingHorizontal="0dp"
+                android:paddingBottom="10dp"
+                android:visibility="gone"
+                android:maxLength="20"
+                android:inputType="numberDecimal|numberSigned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="@+id/balance" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/emoji"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_emoji_neutral"
+            android:contentDescription="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/positiveBtn"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/positiveBtn"
+            android:contentDescription="@null"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_edit"
+            android:layout_marginRight="16dp"
+            app:tint="@color/primary"
+            tools:tint="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@+id/negativeBtn"
+            app:layout_constraintEnd_toStartOf="@+id/negativeBtn"
+            app:layout_constraintTop_toTopOf="@+id/negativeBtn" />
+
+        <ImageView
+            android:id="@+id/negativeBtn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_trash"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/danger"
+            tools:tint="@color/danger" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/emptyListTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/empty_transfer_list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/details">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/incomeContainer"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/incomesTitle"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:textSize="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
+                    android:text="@string/incomes"
+                    app:layout_constraintEnd_toStartOf="@+id/incomes"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/incomes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="@+id/incomesTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/incomesTitle"
+                    tools:text="20 EURO / 34 USD" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/incomeList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/incomesTitle"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/view_record_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/expenseContainer"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:visibility="visible">
+
+                <TextView
+                    android:id="@+id/expensesTitle"
+                    android:textColor="@color/danger"
+                    android:layout_marginTop="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:text="@string/expenses"
+                    app:layout_constraintEnd_toStartOf="@+id/expenses"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/expenses"
+                    android:textColor="@color/danger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/montserrat_medium"
+                    tools:text="34 EURO / 40 USD"
+                    app:layout_constraintBottom_toBottomOf="@+id/expensesTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/expensesTitle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/expenseList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_marginTop="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/expensesTitle"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/view_record_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
