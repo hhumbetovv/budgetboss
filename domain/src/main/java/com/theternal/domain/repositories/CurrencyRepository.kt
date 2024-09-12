@@ -11,6 +11,6 @@ interface CurrencyRepository {
     fun getCurrencyListAsync(): List<CurrencyEntity>
     fun getCurrencyValueAsync(label: String): BigDecimal
 
-    suspend fun fetchCurrencyList(): List<String>
+    suspend fun fetchCodes(): List<Pair<String, String>>
     suspend fun exchange(from: String, to: String?): BigDecimal
 }

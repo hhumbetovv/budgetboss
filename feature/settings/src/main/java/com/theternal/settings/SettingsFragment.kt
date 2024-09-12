@@ -9,7 +9,7 @@ import com.theternal.common.extensions.saveString
 import com.theternal.core.base.BaseStatelessFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
-import com.theternal.core.managers.ToolbarManager
+import com.theternal.core.managers.LayoutManager
 import com.theternal.settings.databinding.FragmentSettingsBinding
 import java.util.Locale
 
@@ -30,9 +30,10 @@ class SettingsFragment : BaseStatelessFragment<FragmentSettingsBinding>() {
     }
 
     override val initViews: Initializer<FragmentSettingsBinding> = {
-        (requireActivity() as ToolbarManager).apply {
-            hideSettingsIcon()
-            showBackIcon()
+        (requireActivity() as LayoutManager).apply {
+            hideSettingsBtn()
+            showBackBtn()
+            hideNavBar()
             setTitle(getString(Strings.settings))
         }
 

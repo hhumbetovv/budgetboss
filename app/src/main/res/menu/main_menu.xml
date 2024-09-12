@@ -4,9 +4,12 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home"/>
 
-    <item android:enabled="false" android:title=""/>
+    <item
+        android:id="@+id/create_record_nav_graph"
+        android:icon="@drawable/ic_square_add"
+        android:title="@string/create"/>
 
     <item android:id="@+id/reports_nav_graph"
-        android:icon="@drawable/ic_reports"
+        android:icon="@drawable/ic_search_receipts"
         android:title="@string/reports"/>
 </menu>

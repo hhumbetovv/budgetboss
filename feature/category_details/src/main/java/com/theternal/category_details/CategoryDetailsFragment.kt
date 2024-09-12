@@ -18,7 +18,7 @@ import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getColor
-import com.theternal.core.managers.ToolbarManager
+import com.theternal.core.managers.LayoutManager
 import com.theternal.domain.entities.base.ExpenseCategory
 import com.theternal.domain.entities.base.IncomeCategory
 import com.theternal.domain.entities.local.TransferEntity
@@ -71,9 +71,10 @@ class CategoryDetailsFragment : BaseStatefulFragment<FragmentCategoryDetailsBind
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentCategoryDetailsBinding> = {
 
-        (requireActivity() as ToolbarManager).apply {
-            showSettingsIcon()
-            showBackIcon()
+        (requireActivity() as LayoutManager).apply {
+            showSettingsBtn()
+            showBackBtn()
+            showNavBar()
             setTitle(getString(Strings.category_details))
         }
 

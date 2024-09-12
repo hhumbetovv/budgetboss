@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
+    app:layoutDescription="@xml/scene_activity"
     tools:context=".MainActivity"
     tools:theme="@style/Theme.BudgetBoss">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/AppBarHeight"
         android:padding="16dp"
+        android:animateLayoutChanges="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,15 +26,13 @@
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:contentDescription="@null"
-            android:src="@drawable/ic_chevron_left"
             android:visibility="gone"
+            android:src="@drawable/ic_chevron_left"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/pageTitle"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
             tools:visibility="visible" />
 
         <TextView
@@ -39,44 +40,58 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_medium"
-            android:gravity="start"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/settingsBtn"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintEnd_toStartOf="@+id/settingsBtnWrapper"
             app:layout_constraintStart_toEndOf="@+id/goBackBtn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            tools:gravity="center"
             tools:text="Home" />
 
-        <ImageView
-            android:contentDescription="@null"
-            android:id="@+id/settingsBtn"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/ic_settings"
-            android:visibility="invisible"
+        <RelativeLayout
+            android:id="@+id/settingsBtnWrapper"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toEndOf="@+id/pageTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:contentDescription="@null"
+                android:id="@+id/settingsBtn"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_settings"
+                android:visibility="invisible"/>
+
+        </RelativeLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/activityContainerView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
         app:navGraph="@navigation/activity_nav_graph" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/frame"
+        style="@style/BottomNavBar"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="@dimen/AppBarHeight"
+        app:itemTextAppearanceInactive="@style/BottomNavBarItemLabel"
+        app:menu="@menu/main_menu"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

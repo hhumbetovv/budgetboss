@@ -18,12 +18,10 @@
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/bg_icon_wrapper"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:contentDescription="@null"
-            tools:src="@drawable/ic_dollar"
-            android:padding="4dp"
+            tools:src="@drawable/ic_circle_dollar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +52,7 @@
             android:contentDescription="@null"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_check"
+            android:src="@drawable/ic_circle_tick"
             android:visibility="gone"
             tools:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            tools:text="@string/add_account"
+            tools:text="@string/create_account"
             android:textSize="24sp" />
 
         <ImageView
@@ -29,7 +29,7 @@
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_close" />
+            android:src="@drawable/ic_circle_close" />
 
     </LinearLayout>
 

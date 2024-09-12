@@ -4,20 +4,21 @@ import android.graphics.drawable.Animatable
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.graphics.drawable.Drawable
 import android.view.Gravity
+import android.view.View
 import androidx.transition.Transition
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.SlideDistanceProvider
 import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.format
 import com.theternal.common.extensions.getDrawable
-import com.theternal.common.extensions.hide
+import com.theternal.common.extensions.gone
 import com.theternal.common.extensions.show
 import com.theternal.common.extensions.showToast
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEvent
-import com.theternal.core.managers.ToolbarManager
+import com.theternal.core.managers.LayoutManager
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.home.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,9 +67,10 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentHomeBinding> = {
-        (requireActivity() as ToolbarManager).apply {
-            showSettingsIcon()
-            hideBackIcon()
+        (requireActivity() as LayoutManager).apply {
+            showSettingsBtn()
+            hideBackBtn()
+            showNavBar()
             setTitle(getString(Strings.home))
         }
 
@@ -105,7 +107,7 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
             if(state.records.isEmpty()) {
                 emptyListTitle.show()
             } else {
-                emptyListTitle.hide()
+                emptyListTitle.gone()
             }
 
             recordList.scrollToPosition(0)

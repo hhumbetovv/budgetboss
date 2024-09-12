@@ -49,8 +49,8 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":feature:account:create"))
 
-    implementation(project(":feature:account:add"))
     implementation(project(":feature:account:details"))
     implementation(project(":feature:category_details"))
 

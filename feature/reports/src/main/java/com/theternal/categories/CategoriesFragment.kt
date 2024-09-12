@@ -6,7 +6,7 @@ import com.theternal.common.constants.MINUS
 import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.capitalize
 import com.theternal.common.extensions.format
-import com.theternal.common.extensions.hide
+import com.theternal.common.extensions.gone
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
@@ -58,17 +58,17 @@ class CategoriesFragment : BaseStatefulFragment<FragmentCategoriesBinding,
                 totalExpenses.text = "$MINUS${totalExpense.format(true)}"
 
                 if(state.incomeCategories.isEmpty()) {
-                    incomeContainer.hide(false)
-                } else incomeContainer.show(false)
+                    incomeContainer.gone()
+                } else incomeContainer.show()
 
                 if(state.expenseCategories.isEmpty()) {
-                    expenseContainer.hide(false)
-                } else expenseContainer.show(false)
+                    expenseContainer.gone()
+                } else expenseContainer.show()
 
                 if(state.incomeCategories.isEmpty() && state.expenseCategories.isEmpty()) {
-                    emptyListTitle.show(false)
+                    emptyListTitle.show()
                 } else {
-                    emptyListTitle.hide(false)
+                    emptyListTitle.gone()
                 }
             }
         }

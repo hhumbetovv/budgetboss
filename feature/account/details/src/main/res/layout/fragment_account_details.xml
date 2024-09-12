@@ -167,7 +167,7 @@
             android:contentDescription="@null"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_candle"
             android:layout_marginRight="16dp"
             app:tint="@color/primary"
             tools:tint="@color/primary"

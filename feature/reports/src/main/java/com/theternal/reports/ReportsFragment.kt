@@ -8,7 +8,7 @@ import com.google.android.material.transition.SlideDistanceProvider
 import com.theternal.core.base.BaseStatelessFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
-import com.theternal.core.managers.ToolbarManager
+import com.theternal.core.managers.LayoutManager
 import com.theternal.reports.databinding.FragmentReportsBinding
 import com.theternal.common.R.string as Strings
 
@@ -35,9 +35,10 @@ class ReportsFragment : BaseStatelessFragment<FragmentReportsBinding>() {
 
     //! UI Listeners and Initialization
     override val initViews: Initializer<FragmentReportsBinding> = {
-        (requireActivity() as ToolbarManager).apply {
-            showSettingsIcon()
-            hideBackIcon()
+        (requireActivity() as LayoutManager).apply {
+            showSettingsBtn()
+            hideBackBtn()
+            showNavBar()
             setTitle(getString(Strings.reports))
         }
 

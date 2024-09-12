@@ -28,8 +28,6 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
 
     private var _binding: VB? = null
 
-    private var isRecreating = false
-
     val binding: VB
         get() = _binding!!
 

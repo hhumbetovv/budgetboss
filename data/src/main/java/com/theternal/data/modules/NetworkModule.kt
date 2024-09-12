@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://currency-exchange.p.rapidapi.com"
+    private const val BASE_URL = "https://v6.exchangerate-api.com/v6/your-api-key-here/"
     private const val TIMEOUT = 10L
 
     //! Interceptors
@@ -26,25 +26,6 @@ object NetworkModule {
     @IntoSet
     fun provideHttpLogger(): Interceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
-    }
-
-    @Provides
-    @IntoSet
-    fun provideApiInterceptor(): Interceptor = Interceptor { chain ->
-        val request = chain.request()
-
-        val newRequest = request.newBuilder()
-            .addHeader(
-                "X-RapidAPI-Key",
-                "fdb57825demsha9f52e197bdc9e4p12a2f6jsn43e509a5d5a5"
-            )
-            .addHeader(
-                "X-RapidAPI-Host",
-                "currency-exchange.p.rapidapi.com"
-            )
-            .build()
-
-        chain.proceed(newRequest)
     }
 
     @Provides

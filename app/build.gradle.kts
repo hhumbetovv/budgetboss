@@ -54,7 +54,7 @@ dependencies {
     implementation(project(":core"))
 
     implementation(project(":feature:home"))
-    implementation(project(":feature:record:add"))
+    implementation(project(":feature:record:create"))
     implementation(project(":feature:reports"))
     implementation(project(":feature:settings"))
 

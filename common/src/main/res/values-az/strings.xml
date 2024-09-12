@@ -24,8 +24,7 @@
     <string name="financial_record">Maliyə Tranzaksiyası</string>
     <string name="transfer_from">Hesabdan çıxar:</string>
     <string name="transfer_to">Hesaba əlavə et:</string>
-    <string name="add_account">Hesab əlavə et</string>
-    <string name="add_account_name">Hesab adını daxil et</string>
+    <string name="create_account">Hesab əlavə et</string>
     <string name="account_name">Hesab adı</string>
     <string name="balance">Balans</string>
     <string name="note">Qeyd</string>
@@ -66,4 +65,5 @@
     <string name="dark_mode">Qaranlıq rejim</string>
     <string name="theme">Tema</string>
     <string name="exiting_title">Tətbiqdən çıxış edilir</string>
+    <string name="create">Yarat</string>
 </resources>

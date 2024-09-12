@@ -26,7 +26,7 @@ import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.Initializer
-import com.theternal.core.managers.ToolbarManager
+import com.theternal.core.managers.LayoutManager
 import com.theternal.domain.entities.local.AccountEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
@@ -110,9 +110,10 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     }
 
     private fun initToolbar() {
-        (requireActivity() as ToolbarManager).apply {
-            showSettingsIcon()
-            showBackIcon()
+        (requireActivity() as LayoutManager).apply {
+            showSettingsBtn()
+            showBackBtn()
+            showNavBar()
             setTitle(getString(Strings.account_details))
         }
     }
@@ -260,11 +261,11 @@ class AccountDetailsFragment : BaseStatefulFragment<FragmentAccountDetailsBindin
     private fun updateActionButtons(editMode: Boolean) {
         binding {
             positiveBtn.setImageDrawable(getDrawable(
-                if(editMode) Drawables.ic_check
-                else Drawables.ic_edit
+                if(editMode) Drawables.ic_circle_tick
+                else Drawables.ic_candle
             ))
             negativeBtn.setImageDrawable(getDrawable(
-                if(editMode) Drawables.ic_close
+                if(editMode) Drawables.ic_circle_close
                 else Drawables.ic_trash
             ))
         }

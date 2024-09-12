@@ -5,7 +5,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.extensions.Colors
 import com.theternal.common.extensions.Strings
-import com.theternal.common.extensions.hide
+import com.theternal.common.extensions.gone
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -74,12 +74,12 @@ class RecordAdapter(
             if(item is TransferEntity) {
                 sent.text = item.sentAmount
                 received.text = item.receivedAmount
-                sent.show(false)
-                received.show(false)
-                amount.hide(false)
+                sent.show()
+                received.show()
+                amount.gone()
             } else {
-                sent.hide(false)
-                received.hide(false)
+                sent.gone()
+                received.gone()
                 amount.text = (item as FinancialRecordEntity).amountText
                 amount.setTextColor(ContextCompat.getColor(
                     amount.context,
@@ -88,7 +88,7 @@ class RecordAdapter(
                         else -> Colors.danger
                     }
                 ))
-                amount.show(false)
+                amount.show()
             }
         }
 

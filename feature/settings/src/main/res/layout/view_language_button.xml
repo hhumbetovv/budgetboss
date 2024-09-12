@@ -26,7 +26,7 @@
         android:id="@+id/checkedIcon"
         android:visibility="invisible"
         android:contentDescription="@null"
-        android:src="@drawable/ic_check"
+        android:src="@drawable/ic_circle_tick"
         android:layout_width="28dp"
         android:layout_height="28dp"
         app:layout_constraintBottom_toBottomOf="parent"

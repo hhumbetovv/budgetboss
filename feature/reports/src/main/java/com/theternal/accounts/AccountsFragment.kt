@@ -7,7 +7,7 @@ import com.theternal.core.base.interfaces.ViewEvent
 import com.theternal.reports.databinding.FragmentAccountsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.theternal.accounts.AccountsContract.*
-import com.theternal.add_account.AddAccountFragment
+import com.theternal.create_account.CreateAccountFragment
 import com.theternal.common.extensions.safeNavigate
 import com.theternal.core.base.Initializer
 import com.theternal.core.base.interfaces.ViewEffect
@@ -29,7 +29,7 @@ class AccountsFragment : BaseStatefulFragment<FragmentAccountsBinding, AccountsV
     }
 
     //! UI Properties
-    private val addAccountSheet = AppBottomSheetFragment { AddAccountFragment() }
+    private val addAccountSheet = AppBottomSheetFragment { CreateAccountFragment() }
     private val accountAdapter = AccountAdapter { account ->
         navigateToDetails(account)
     }

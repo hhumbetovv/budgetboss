@@ -28,7 +28,7 @@
                 style="@style/PrimaryBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_account" />
+                android:text="@string/create_account" />
 
         </LinearLayout>
 

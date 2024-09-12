@@ -24,8 +24,7 @@
     <string name="financial_record">Financial Record</string>
     <string name="transfer_from">Transfer From:</string>
     <string name="transfer_to">Transfer To:</string>
-    <string name="add_account">Add Account</string>
-    <string name="add_account_name">Add account name</string>
+    <string name="create_account">Create Account</string>
     <string name="account_name">Account name</string>
     <string name="balance">Balance</string>
     <string name="note">Note</string>
@@ -70,4 +69,5 @@
     <string name="en" translatable="false">English</string>
     <string name="tr" translatable="false">Türkçe</string>
     <string name="ru" translatable="false">Русский</string>
+    <string name="create">Create</string>
 </resources>

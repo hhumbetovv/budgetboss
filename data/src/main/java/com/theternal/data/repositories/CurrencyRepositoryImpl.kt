@@ -34,14 +34,16 @@ class CurrencyRepositoryImpl @Inject constructor(
         return currencyDao.getCurrencyValueAsync(label)
     }
 
-    override suspend fun fetchCurrencyList(): List<String> {
-        return currencyService.getCurrencyList()
+    override suspend fun fetchCodes(): List<Pair<String, String>> {
+        return currencyService.getCodes().supportedCodes.map {
+            Pair(it.first(), it.last())
+        }
     }
 
     override suspend fun exchange(from: String, to: String?): BigDecimal {
         if(from == to || (from == "USD" && to == null)) {
             return BigDecimal.ONE
         }
-        return currencyService.exchange(from, to ?: "USD")
+        return currencyService.exchange(from, to ?: "USD").conversionRate
     }
 }

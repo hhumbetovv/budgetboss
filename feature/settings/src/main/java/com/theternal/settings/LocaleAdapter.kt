@@ -1,7 +1,7 @@
 package com.theternal.settings
 
 import androidx.recyclerview.widget.DiffUtil
-import com.theternal.common.extensions.fadeOut
+import com.theternal.common.extensions.hide
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -40,7 +40,7 @@ class LocaleAdapter(
             if (locale.third) {
                 checkedIcon.show()
             } else {
-                checkedIcon.fadeOut()
+                checkedIcon.hide()
             }
         }
 }

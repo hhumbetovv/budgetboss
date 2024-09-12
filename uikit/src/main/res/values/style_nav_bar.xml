@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="AppBarHeight">60dp</dimen>
-    <style name="BottomAppBar">
-        <item name="fabCradleMargin">8dp</item>
-        <item name="backgroundTint">@color/frame</item>
-        <item name="fabCradleRoundedCornerRadius">16dp</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
     <style name="BottomNavBar">
-        <item name="android:layout_marginHorizontal">30dp</item>
+        <item name="android:background">@color/frame</item>
+        <item name="android:paddingHorizontal">30dp</item>
         <item name="elevation">0dp</item>
         <item name="itemRippleColor">@null</item>
-        <item name="itemIconSize">28dp</item>
+        <item name="itemIconSize">24dp</item>
         <item name="itemIconTint">@color/nav_bar_item</item>
         <item name="itemTextColor">@color/nav_bar_item</item>
-        <item name="android:background">@color/transparent</item>
         <item name="itemTextAppearanceInactive">@style/BottomNavBarItemLabel</item>
         <item name="itemTextAppearanceActive">@style/BottomNavBarItemLabel</item>
     </style>
     <style name="FABButton">
-        <item name="android:src">@drawable/ic_plus</item>
+        <item name="android:src">@drawable/ic_square_add</item>
         <item name="backgroundTint">@color/primary</item>
         <item name="tint">@color/white</item>
+        <item name="fabSize">normal</item>
         <item name="rippleColor">@color/ripple</item>
     </style>
     <style name="BottomNavBarItemLabel">

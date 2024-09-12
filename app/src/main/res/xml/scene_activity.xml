@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/navBarHiding">
+        <Constraint android:id="@+id/bottomNavBar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/navBarShowing">
+        <Constraint android:id="@+id/bottomNavBar"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </ConstraintSet>
+
+    <Transition
+        android:id="@+id/showNavBar"
+        app:constraintSetStart="@id/navBarHiding"
+        app:constraintSetEnd="@id/navBarShowing"
+        app:duration="300" />
+
+</MotionScene>

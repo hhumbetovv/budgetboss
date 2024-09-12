@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.theternal.common.constants.MINUS
 import com.theternal.common.constants.PLUS
 import com.theternal.common.extensions.format
-import com.theternal.common.extensions.hide
+import com.theternal.common.extensions.gone
 import com.theternal.common.extensions.show
 import com.theternal.core.base.BaseAdapter
 import com.theternal.core.base.Binder
@@ -64,6 +64,6 @@ class CategoryAdapter(
                 amount.show()
             }
 
-            if(item.isSelected) checkIcon.show() else checkIcon.hide()
+            if(item.isSelected) checkIcon.show() else checkIcon.gone()
         }
 }
