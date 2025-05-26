@@ -156,10 +156,9 @@ class RecordDetailsFragment : BaseStatefulFragment<FragmentRecordDetailsBinding,
     }
 
     private fun updateNote(recordNote: String?, note: String?) {
-        if(note == null && recordNote != null) {
-            binding.noteField.setText(
-                recordNote
-            )
+        val newNote = note ?: recordNote
+        if (newNote != null && binding.noteField.text.toString() != newNote) {
+            binding.noteField.setText(newNote)
         }
     }
 
