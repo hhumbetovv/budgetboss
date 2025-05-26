@@ -9,6 +9,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
+import com.theternal.alltransactions.AllTransactionsContract.* // Added wildcard
 import com.theternal.alltransactions.databinding.FragmentAllTransactionsBinding
 import com.theternal.uikit.adapters.RecordAdapter
 import com.theternal.domain.entities.local.TransferEntity
@@ -25,9 +26,9 @@ import java.util.TimeZone
 class AllTransactionsFragment : BaseStatefulFragment<
         FragmentAllTransactionsBinding,
         AllTransactionsViewModel,
-        AllTransactionsContract.Event,
-        AllTransactionsContract.State,
-        AllTransactionsContract.Effect>() {
+        Event, // Changed
+        State, // Changed
+        Effect>() { // Changed
 
     override val inflateBinding: Inflater<FragmentAllTransactionsBinding> =
         FragmentAllTransactionsBinding::inflate
@@ -41,32 +42,32 @@ class AllTransactionsFragment : BaseStatefulFragment<
     }
 
     override val initViews: Initializer<FragmentAllTransactionsBinding> = {
-        binding.transactionsRecyclerView.apply {
+        transactionsRecyclerView.apply { // Removed binding.
             layoutManager = LinearLayoutManager(context)
             adapter = recordAdapter
         }
 
         // Search Input Listener
-        binding.searchInputEditText.doAfterTextChanged { text ->
+        searchInputEditText.doAfterTextChanged { text -> // Removed binding.
             postEvent(AllTransactionsContract.Event.SearchQueryChanged(text.toString()))
         }
 
         // Filter Button Listeners
-        binding.filterByMonthButton.setOnClickListener {
+        filterByMonthButton.setOnClickListener { // Removed binding.
             postEvent(AllTransactionsContract.Event.FilterByMonthClicked)
         }
-        binding.filterByPeriodButton.setOnClickListener {
+        filterByPeriodButton.setOnClickListener { // Removed binding.
             postEvent(AllTransactionsContract.Event.FilterByPeriodClicked)
         }
-        binding.clearFiltersButton.setOnClickListener {
-            binding.searchInputEditText.setText("") // Clear search text
+        clearFiltersButton.setOnClickListener { // Removed binding.
+            searchInputEditText.setText("") // Clear search text - Removed binding.
             postEvent(AllTransactionsContract.Event.ClearSearchAndFilters)
         }
 
         // Initial load is handled by ViewModel's init block
     }
 
-    override fun onStateUpdate(state: AllTransactionsContract.State) {
+    override fun onStateUpdate(state: State) { // Changed type
         binding.loadingIndicator.visibility = if (state.isLoading) View.VISIBLE else View.GONE
 
         val noFiltersApplied = state.searchQuery.isNullOrBlank() &&
@@ -108,10 +109,10 @@ class AllTransactionsFragment : BaseStatefulFragment<
         }
     }
 
-    override fun onEffectUpdate(effect: AllTransactionsContract.Effect) {
+    override fun onEffectUpdate(effect: Effect) { // Changed type
         when (effect) {
-            is AllTransactionsContract.Effect.ShowMonthPicker -> showMonthPicker()
-            is AllTransactionsContract.Effect.ShowDateRangePicker -> showDateRangePicker()
+            is Effect.ShowMonthPicker -> showMonthPicker() // Changed type
+            is Effect.ShowDateRangePicker -> showDateRangePicker() // Changed type
         }
     }
 
