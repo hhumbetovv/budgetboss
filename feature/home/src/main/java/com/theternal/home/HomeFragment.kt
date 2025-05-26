@@ -29,6 +29,15 @@ import com.theternal.record_details.RecordDetailsFragment
 import com.theternal.uikit.adapters.RecordAdapter
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 
+// MPAndroidChart imports
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.components.XAxis
+import android.graphics.Color
+// com.theternal.uikit.R will be used directly via requireContext().getColor(com.theternal.uikit.R.color.some_color)
+
 @AndroidEntryPoint
 class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
         ViewEvent.Empty, State, Effect>() {
@@ -95,13 +104,14 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
 
         binding {
             recordAdapter.apply {
-                currentList.size < state.records.size
+                // currentList.size < state.records.size // Removed problematic line
                 submitList(state.records)
-                recordList.scrollToPosition(0)
+                if (state.records.isNotEmpty()) { // Scroll only if list is not empty
+                    recordList.scrollToPosition(0)
+                }
             }
 
             total.text = state.balance.format(true)
-
             updateEmoji(state.balance)
 
             if(state.records.isEmpty()) {
@@ -110,8 +120,67 @@ class HomeFragment : BaseStatefulFragment<FragmentHomeBinding, HomeViewModel,
                 emptyListTitle.gone()
             }
 
-            recordList.scrollToPosition(0)
+            // New: Update Monthly Chart
+            updateMonthlyChart(state.monthlySummary)
         }
+    }
+
+    private fun updateMonthlyChart(summary: com.theternal.domain.entities.aggregations.MonthlySummary) {
+        val chart = binding.monthlyChartView ?: return // Or handle if null differently
+
+        // 1. Create BarEntries
+        val entries = ArrayList<BarEntry>()
+        entries.add(BarEntry(0f, summary.totalIncome.toFloat(), "Income"))
+        entries.add(BarEntry(1f, summary.totalExpense.toFloat(), "Expense"))
+
+        // 2. Create BarDataSet
+        val dataSet = BarDataSet(entries, "Monthly Overview")
+        
+        // 3. Configure colors for Income and Expense bars
+        dataSet.colors = listOf(
+            requireContext().getColor(com.theternal.uikit.R.color.primary), // Income color
+            requireContext().getColor(com.theternal.uikit.R.color.danger)    // Expense color
+        )
+        dataSet.valueTextColor = Color.BLACK // Or use a color from resources
+        dataSet.valueTextSize = 12f
+
+        // 4. Create BarData object
+        val barData = BarData(dataSet)
+        barData.barWidth = 0.4f // Adjust bar width
+
+        // 5. Configure Chart appearance
+        chart.data = barData
+        chart.description.isEnabled = false // No description text
+        chart.setFitBars(true) // make the x-axis fit exactly all bars
+
+        // X-Axis configuration
+        val xAxis = chart.xAxis
+        xAxis.position = XAxis.XAxisPosition.BOTTOM
+        xAxis.setDrawGridLines(false) // No grid lines
+        xAxis.granularity = 1f // only intervals of 1 unit
+        xAxis.valueFormatter = object : ValueFormatter() {
+            private val labels = arrayOf("Income", "Expense")
+            override fun getFormattedValue(value: Float): String {
+                return if (value >= 0 && value < labels.size) labels[value.toInt()] else ""
+            }
+        }
+
+        // Y-Axis configuration (Left)
+        val leftAxis = chart.axisLeft
+        leftAxis.setDrawGridLines(true) // Horizontal grid lines
+        leftAxis.axisMinimum = 0f // start at zero
+
+        // Y-Axis configuration (Right) - Disable
+        chart.axisRight.isEnabled = false
+
+        // Legend configuration
+        chart.legend.isEnabled = false // Hide legend as colors and X-axis labels are descriptive enough
+
+        // Animation (optional)
+        chart.animateY(1000)
+
+        // Refresh the chart
+        chart.invalidate()
     }
 
     private fun updateEmoji(balance: BigDecimal) {

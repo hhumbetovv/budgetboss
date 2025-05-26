@@ -79,4 +79,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
 
+    //? MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
 }

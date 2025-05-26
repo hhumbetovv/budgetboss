@@ -9,6 +9,7 @@ import com.theternal.domain.interfaces.RecordEntity
 import com.theternal.domain.usecases.FetchCurrencyValuesUseCase
 import com.theternal.domain.usecases.GetAllBalancesUseCase
 import com.theternal.domain.usecases.GetAllRecordsUseCase
+import com.theternal.domain.usecases.GetMonthlyIncomeExpenseUseCase // Add this import
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
@@ -24,7 +25,10 @@ class HomeViewModel @Inject constructor(
     private val fetchCurrencyValuesUseCase: FetchCurrencyValuesUseCase,
     private val getAllRecordsUseCase: GetAllRecordsUseCase,
     private val getAllBalancesUseCase: GetAllBalancesUseCase,
+    private val getMonthlyIncomeExpenseUseCase: GetMonthlyIncomeExpenseUseCase // Add this
 ) : BaseViewModel<ViewEvent.Empty, State, Effect>() {
+
+    private const val LATEST_TRANSACTIONS_LIMIT = 10
 
     override fun createState(): State {
         return State()
@@ -32,14 +36,20 @@ class HomeViewModel @Inject constructor(
 
     init {
         updateCurrencyList()
-        getRecordsAndBalances()
+        fetchData() // Changed from getRecordsAndBalances()
     }
 
-    private fun getRecordsAndBalances() {
-        combine(getAllRecordsUseCase(), getAllBalancesUseCase()) { records, balance ->
+    private fun fetchData() {
+        combine(
+            getAllRecordsUseCase(),
+            getAllBalancesUseCase(),
+            getMonthlyIncomeExpenseUseCase() // Add the new use case here
+        ) { allRecords, balance, monthlySummary -> // Add monthlySummary to lambda params
+            val sortedRecords = allRecords.sortedByDescending { it.date }
             State(
-                balance = balance + getAmounts(records),
-                records = records.sortedByDescending { it.date }
+                balance = balance + getAmounts(allRecords),
+                records = sortedRecords.take(LATEST_TRANSACTIONS_LIMIT),
+                monthlySummary = monthlySummary // Populate the new state field
             )
         }.onEach { state ->
             setState { state }
