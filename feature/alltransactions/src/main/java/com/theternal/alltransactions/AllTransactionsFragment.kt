@@ -78,7 +78,7 @@ class AllTransactionsFragment : BaseStatefulFragment<
             binding.emptyStateTextView.text = if (state.error != null) {
                 state.error
             } else if (!noFiltersApplied) {
-                "No transactions found matching your filters." // TODO: Use string resource
+                getString(R.string.empty_state_no_matching_filters) // Changed
             } else {
                 getString(R.string.no_transactions_found) // Use existing string
             }
@@ -124,7 +124,7 @@ class AllTransactionsFragment : BaseStatefulFragment<
         } ?: calendar.timeInMillis
 
         val monthPicker = MaterialDatePicker.Builder.datePicker()
-            .setTitleText("Select month") // TODO: Use string resource
+            .setTitleText(getString(R.string.month_picker_title)) // Changed
             .setSelection(currentSelection)
             .build()
 
@@ -146,7 +146,7 @@ class AllTransactionsFragment : BaseStatefulFragment<
 
 
         val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
-            .setTitleText("Select period") // TODO: Use string resource
+            .setTitleText(getString(R.string.date_range_picker_title)) // Changed
             .setSelection(
                 androidx.core.util.Pair(currentStart, currentEnd)
             )

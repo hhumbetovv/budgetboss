@@ -1,9 +1,10 @@
 package com.theternal.alltransactions
 
+import android.app.Application // Added import
 import androidx.lifecycle.viewModelScope
 import com.theternal.core.base.BaseViewModel
 import com.theternal.alltransactions.AllTransactionsContract.*
-import com.theternal.domain.usecases.GetFilteredRecordsUseCase // Changed from GetAllRecordsUseCase
+import com.theternal.domain.usecases.GetFilteredRecordsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -17,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AllTransactionsViewModel @Inject constructor(
-    private val getFilteredRecordsUseCase: GetFilteredRecordsUseCase // Changed
+    private val application: Application, // Added application
+    private val getFilteredRecordsUseCase: GetFilteredRecordsUseCase
 ) : BaseViewModel<Event, State, Effect>() {
 
     private var searchJob: Job? = null
@@ -29,8 +31,7 @@ class AllTransactionsViewModel @Inject constructor(
 
     override fun onEventUpdate(event: Event) {
         when (event) {
-            is Event.LoadTransactions -> { // Initial load or refresh
-                // Ensure current filters are applied even on a manual LoadTransactions event
+            is Event.LoadTransactions -> {
                 loadTransactions(
                     currentState.searchQuery,
                     currentState.filterMonthYear,
@@ -38,7 +39,7 @@ class AllTransactionsViewModel @Inject constructor(
                 )
             }
             is Event.SearchQueryChanged -> {
-                searchJob?.cancel() // Cancel previous job
+                searchJob?.cancel()
                 val query = event.query.ifBlank { null }
                 setState { it.copy(searchQuery = query) }
                 searchJob = viewModelScope.launch {
@@ -61,11 +62,10 @@ class AllTransactionsViewModel @Inject constructor(
                 loadTransactions(currentState.searchQuery, null, currentState.filterPeriod)
             }
             is Event.ClearSearchAndFilters -> {
-                setState { State() } // Reset to initial state (or keep isLoading if needed for immediate reload)
-                loadTransactions(null, null, null) // Load all transactions
+                setState { State() } 
+                loadTransactions(null, null, null)
             }
         }
-        // Update active filter description after any state change that might affect it
         updateActiveFilterDescription()
     }
 
@@ -81,7 +81,6 @@ class AllTransactionsViewModel @Inject constructor(
                     setState { it.copy(isLoading = false, error = throwable.message ?: "An unknown error occurred") }
                 }
                 .collect { records ->
-                    // ViewModel should not sort, use case already sorts
                     setState { it.copy(isLoading = false, transactions = records) }
                 }
         }
@@ -92,27 +91,29 @@ class AllTransactionsViewModel @Inject constructor(
         val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
         val monthYearFormat = SimpleDateFormat("MMM yyyy", Locale.getDefault())
 
-        currentState.searchQuery?.let {
-            descriptions.add("Search: \"$it\"") // TODO: Use string resource
+        currentState.searchQuery?.let { query ->
+            descriptions.add(application.getString(R.string.active_filters_label_search_term, query))
         }
         currentState.filterMonthYear?.let { (year, month) ->
             val calendar = Calendar.getInstance().apply { set(year, month, 1) }
-            descriptions.add("Month: ${monthYearFormat.format(calendar.time)}") // TODO: Use string resource
+            descriptions.add(application.getString(R.string.active_filters_label_month, monthYearFormat.format(calendar.time)))
         }
         currentState.filterPeriod?.let { (start, end) ->
-            descriptions.add("Period: ${dateFormat.format(start)} - ${dateFormat.format(end)}") // TODO: Use string resource
+            val startDateFormatted = dateFormat.format(start)
+            val endDateFormatted = dateFormat.format(end)
+            descriptions.add(application.getString(R.string.active_filters_label_period, startDateFormatted, endDateFormatted))
         }
 
         if (descriptions.isNotEmpty()) {
-            setState { it.copy(activeFilterDescription = descriptions.joinToString("; ")) }
+            val separator = application.getString(R.string.active_filters_separator)
+            setState { it.copy(activeFilterDescription = descriptions.joinToString(separator)) }
         } else {
             setState { it.copy(activeFilterDescription = null) }
         }
     }
 
-    // Call this when ViewModel is initialized if you want to load data immediately
     init {
-        loadTransactions(null, null, null) // Load all initially
-        updateActiveFilterDescription() // Ensure description is set based on initial state
+        loadTransactions(null, null, null)
+        updateActiveFilterDescription()
     }
 }

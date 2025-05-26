@@ -7,4 +7,8 @@
     <string name="active_filters_label_search_term">Search: "%1$s"</string>
     <string name="active_filters_label_month">Month: %1$s</string>
     <string name="active_filters_label_period">Period: %1$s - %2$s</string>
+    <string name="active_filters_separator">, </string>
+    <string name="empty_state_no_matching_filters">No transactions found matching your filters.</string>
+    <string name="month_picker_title">Select month</string>
+    <string name="date_range_picker_title">Select period</string>
 </resources>
