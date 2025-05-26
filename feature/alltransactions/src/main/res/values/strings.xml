@@ -1,0 +1,10 @@
+<resources>
+    <string name="search_transactions_hint">Search transactions</string>
+    <string name="filter_by_month_button">Month</string>
+    <string name="filter_by_period_button">Period</string>
+    <string name="clear_filters_button">Clear</string>
+    <string name="no_transactions_found">No transactions found.</string>
+    <string name="active_filters_label_search_term">Search: "%1$s"</string>
+    <string name="active_filters_label_month">Month: %1$s</string>
+    <string name="active_filters_label_period">Period: %1$s - %2$s</string>
+</resources>

@@ -29,3 +29,4 @@ include(":feature:account:create")
 include(":feature:account:details")
 include(":feature:category_details")
 include(":feature:settings")
+include(":feature:alltransactions") // Added new module
