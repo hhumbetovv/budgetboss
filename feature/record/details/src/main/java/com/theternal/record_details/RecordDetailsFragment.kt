@@ -6,7 +6,6 @@ import com.theternal.common.extensions.Strings
 import com.theternal.common.extensions.getColor
 import com.theternal.common.extensions.getDrawable
 import com.theternal.common.extensions.setOnChangeListener
-import com.theternal.record_details.RecordDetailsContract.*
 import com.theternal.core.base.BaseStatefulFragment
 import com.theternal.core.base.Inflater
 import com.theternal.core.base.Initializer
@@ -16,6 +15,9 @@ import com.theternal.domain.entities.base.RecordType
 import com.theternal.domain.entities.local.FinancialRecordEntity
 import com.theternal.domain.entities.local.TransferEntity
 import com.theternal.domain.interfaces.RecordEntity
+import com.theternal.record_details.RecordDetailsContract.Effect
+import com.theternal.record_details.RecordDetailsContract.Event
+import com.theternal.record_details.RecordDetailsContract.State
 import com.theternal.record_details.databinding.FragmentRecordDetailsBinding
 import com.theternal.uikit.fragments.AppBottomSheetFragment
 import com.theternal.uikit.utility.getCategoryIcon
@@ -156,10 +158,9 @@ class RecordDetailsFragment : BaseStatefulFragment<FragmentRecordDetailsBinding,
     }
 
     private fun updateNote(recordNote: String?, note: String?) {
-        if(note == null && recordNote != null) {
-            binding.noteField.setText(
-                recordNote
-            )
+        val newNote = note ?: recordNote
+        if (newNote != null && binding.noteField.text.toString() != newNote) {
+            binding.noteField.setText(newNote)
         }
     }
 

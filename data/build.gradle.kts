@@ -1,75 +1,40 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
-    id("com.google.gms.google-services")
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
 }
+
+apply(from = "$rootDir/base-build.gradle")
 
 android {
     namespace = "com.theternal.data"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {
-    //! Versions
-    val hiltVersion = "2.49"
-    val roomVersion = "2.6.1"
-    val retrofitVersion = "2.9.0"
-    val okHttpVersion = "4.12.0"
-
     //! Modules
-    implementation(project(":common"))
-    implementation(project(":domain"))
-
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(projects.common)
+    implementation(projects.domain)
 
     //? Room Database
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor(libs.androidx.room.compiler)
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.androidx.room.compiler)
 
     //? Network
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:okhttp:$okHttpVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:$okHttpVersion")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
 
     //? Dependency Injection
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     //? Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.google.firebase.analytics)
 }

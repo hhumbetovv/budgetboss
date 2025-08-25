@@ -1,68 +1,34 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
 }
+
+apply(from = "$rootDir/base-build.gradle")
 
 android {
     namespace = "com.theternal.create_record"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
-    //! Versions
-    val hiltVersion = "2.49"
-    val navigationVersion = "2.7.7"
-
     //! Modules
-    implementation(project(":common"))
-    implementation(project(":uikit"))
-    implementation(project(":core"))
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(projects.common)
+    implementation(projects.uikit)
+    implementation(projects.core)
+    implementation(projects.domain)
+    implementation(projects.data)
 
-    implementation(project(":feature:account:create"))
+    implementation(projects.feature.account.create)
 
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //? Bundles
+    implementation(libs.bundles.android.core)
 
     //? Navigation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     //? Dependency Injection
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }

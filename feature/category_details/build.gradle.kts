@@ -1,66 +1,32 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
 }
+
+apply(from = "$rootDir/base-build.gradle")
 
 android {
     namespace = "com.theternal.category_details"
-    compileSdk = 34
-
-    defaultConfig {
-        minSdk = 26
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
-    //! Versions
-    val hiltVersion = "2.49"
-
     //! Modules
-    implementation(project(":common"))
-    implementation(project(":uikit"))
-    implementation(project(":core"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(projects.common)
+    implementation(projects.uikit)
+    implementation(projects.core)
+    implementation(projects.data)
+    implementation(projects.domain)
 
-    implementation(project(":feature:record:details"))
+    implementation(projects.feature.record.details)
 
+    //? Bundles
+    implementation(libs.bundles.android.core)
 
-    implementation("androidx.core:core-ktx:1.13.1")
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    implementation("androidx.fragment:fragment-ktx:1.8.0")
+    implementation(libs.androidx.fragment.ktx)
 
     //? Dependency Injection
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }
