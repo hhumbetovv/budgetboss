@@ -4,11 +4,11 @@ A comprehensive expense tracking Android application built with Android developm
 
 ## Screenshots
 
-|Home|Accounts|Categories|
+|Settings|Accounts|Categories|
 |:---:|:---:|:---:|
 |![Settings](screenshots/settings.png)|![Accounts](screenshots/accounts.png)|![Categories](screenshots/categories.png)|
 
-|Home|Accounts|Categories|
+|Income|Transfer|Home|
 |:---:|:---:|:---:|
 |![Income](screenshots/income.png)|![Transfer](screenshots/transfer.png)|![Home](screenshots/home.png)|
 
