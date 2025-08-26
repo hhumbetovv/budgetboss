@@ -2,6 +2,16 @@
 
 A comprehensive expense tracking Android application built with Android development practices, featuring multi-currency support, account management, and financial reporting.
 
+## Screenshots
+
+|Home|Accounts|Categories|
+|:---:|:---:|:---:|
+|![Settings](screenshots/settings.png)|![Accounts](screenshots/accounts.png)|![Categories](screenshots/categories.png)|
+
+|Home|Accounts|Categories|
+|:---:|:---:|:---:|
+|![Income](screenshots/income.png)|![Transfer](screenshots/transfer.png)|![Home](screenshots/home.png)|
+
 ## Features
 
 ### Core Functionality
